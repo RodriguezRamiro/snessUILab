@@ -1,10 +1,11 @@
+/* snesUILab/script.js */
 
-// Keyboard Tracking
 const keys = {};
 
 const STATES = {
   BOOT: "boot",
   MENU: "menu",
+  LOADING: "loading",
   GAME: "game",
   GAME_OVER: "gameOver"
 }
@@ -16,37 +17,32 @@ const cartidge = {
   destroy() {}
 }
 
-const canvas = document.getElementById("gameScreen");
-const ctx = canvas.getContext("2d");
-
-// Internal retro resolution
-canvas.width = 320;
-canvas.height = 180;
-
-// Game loop control
-let lastTime = 0;
-
-let currentStates = STATES.BOOT
-
-// Konami Code Sequence
-const konami = ['w','w','s','s','a','d','a','d','k','l','enter'];
-let konamiIndex = 0;
-
-// Display Boot Logic
-const display = document.querySelector('.display');
-const bootText = document.querySelector('.boot-text');
-
-const bootLines = [
-  "SNES UI LAB BIOS v1.0",
-  "RodriguezTech Studios",
-  "",
-  "Copyright 1991 Nintendo",
-  "Initializing Controllers...",
-  "Loading Assets...",
-  "Ready"
+const games = [
+  "Survival Arena",
+  "Snake",
+  "Pong"
 ];
 
-let lineIndex = 0;
+// temporary cartridge objects
+const survivalArena = {
+  init() { console.log( "Survival Arena starting..." ); }
+};
+
+const snakeGame = {
+  init() { console.log( "Snake starting" ); }
+};
+
+const pongGame = {
+  init() { console.log( "Pong starting "); }
+};
+
+const gameCartridges = {
+  "Survival Arena": survivalArena,
+  "Snake": snakeGame,
+  "Pong": pongGame
+};
+
+let selectedGame = 0;
 
 const player = {
   x: 160,
@@ -61,17 +57,78 @@ const player = {
 };
 
 
+const canvas = document.getElementById("gameScreen");
+const ctx = canvas.getContext("2d");
+ctx.imageSmoothingEnabled = false
+
+// Internal retro resolution
+canvas.width = 320;
+canvas.height = 180;
+
+// Game loop control
+let lastTime = 0;
+
+let currentState = STATES.BOOT
+
+// Konami Code Sequence
+const konami = ['w','w','s','s','a','d','a','d','k','l','enter'];
+let konamiIndex = 0;
+
+// Display Boot Logic
+const display = document.querySelector('.display');
+const bootText = document.querySelector('.boot-text');
+
+const bootLines = [
+  "████████████████████████",
+  " SNES DEV BIOS v1.2",
+  " RodriguezTech Studios",
+  "████████████████████████",
+  "",
+  "Memory Check........OK",
+  "Video Interface.....OK",
+  "Controller Port 1...OK",
+  "Controller Port 2...OK",
+  "",
+  "Loading Console OS...",
+  ""
+];
+
+let lineIndex = 0;
+
+
+// Menu Screen
+function startMenu() {
+  currentState = STATES.MENU;
+  bootText.innerHTML = "";
+  renderMenu();
+}
+
 function typeLine() {
   if (lineIndex < bootLines.length) {
+
     const line = document.createElement("div");
     line.textContent = bootLines[lineIndex];
+
     bootText.appendChild(line);
+
     lineIndex++;
-    setTimeout(typeLine, 600);
+
+    //Random delay for "retro" nostalgia
+    const delay = 200 + Math.random() * 200;
+
+    setTimeout(typeLine, delay);
+
   } else {
+
     setTimeout(() => {
-      bootText.innerHTML = "PRESS START";
-    }, 1000);
+
+      const startPrompt = document.createElement("div");
+      startPrompt.textContent = "> PRESS START";
+
+      startPrompt.classList.add("blink");
+
+      bootText.appendChild(startPrompt);
+    }, 2000);
   }
 }
 
@@ -89,9 +146,92 @@ function gameLoop(timestamp) {
   requestAnimationFrame(gameLoop)
 }
 
+// Render Game List
+function renderMenu() {
+  bootText.innerHTML = "<div>SELECT GAME</div><br>"
+
+  games.forEach((game, index) => {
+    const line = document.createElement("div");
+
+    if (index === selectedGame) {
+      line.textContent = `> ${game}`;
+      line.style.color = "#00ff88";
+    } else {
+      line.textContent = ` ${game}`
+    }
+
+    bootText.appendChild(line);
+    });
+}
+
+// Select BUttons Cycle Games
+function cycleGame() {
+  selectedGame++;
+
+  if(selectedGame >= games.length) {
+    selectedGame = 0;
+  }
+  renderMenu();
+}
+
+// Start Button Launches Game
+function launchGame() {
+  currentState = STATES.LOADING;
+  bootText.innerHTML = `INSERTING CARTRIDGE...`;
+  setTimeout(startLoader, 800);
+}
+
+// Exit Game
+function exitGame() {
+  currentState = STATES.MENU;
+  renderMenu();
+}
+
+// Loader Animation
+function startLoader() {
+
+  let progress = 0;
+
+  const loader = setInterval(() => {
+    progress += 10;
+
+    const barLength = 14;
+    const filled = Math.floor((progress / 100) * barLength);
+
+    const bar =
+          "[" +
+          "█".repeat(filled) +
+          "░".repeat(barLength - filled) +
+          "]";
+    bootText.innerHTML =
+      `LOADING ${games[selectedGame]}<br><br>${bar}`;
+
+      if (progress >= 100) {
+        clearInterval(loader);
+
+        setTimeout(() => {
+          startSelectedGame();
+        }, 400);
+      }
+  }, 120);
+}
+
+// Start Selected Game
+function startSelectedGame() {
+  currentState = STATES.GAME;
+
+  const gameName = games[selectedGame];
+  const game = gameCartridges[gameName]
+  if (game && game.init) {
+    game.init();
+  }
+}
+
 function update(dt) {
+  if(currentState === STATES.GAME) {
+
   // Horizsontal movement
-  if (keys["ArrowLeft"]) player.vx -= player.accel * dt
+  if(keys["ArrowLeft"]) player.vx -= player.accel * dt
   if(keys["ArrowRight"]) player.vx += player.accel * dt;
 
   // Vertical movement
@@ -113,9 +253,9 @@ function update(dt) {
   player.x = clamp(player.x, 0, canvas.width - player.size);
   player.y = clamp(player.y, 0, canvas.height - player.size);
   }
+}
 
 // Utility Functions
-
 function clamp(value, min, max) {
   return Math.max(min, Math.min(max, value));
 }
@@ -140,23 +280,16 @@ function render() {
   ctx.fillStyle = "#0c0c0c";
   ctx.fillRect(0,0, canvas.width, canvas.height);
 
+  if(currentState === STATES.GAME) {
   ctx.fillStyle = "#00ff88";
   ctx.fillRect(player.x, player.y, player.size, player.size)
+  }
 }
 
 requestAnimationFrame(gameLoop);
 
 
 // Keybaord events
-
-window.addEventListener("keydown", (e) => {
-  keys[e.key] = true;
-});
-
-window.addEventListener("keyup", (e) => {
-  keys[e.key] = false;
-});
-
 document.addEventListener('keydown', e => {
   const key = e.key.toLowerCase();
   if(keys[key]) return;
@@ -164,6 +297,7 @@ document.addEventListener('keydown', e => {
   keys[key] = true;
 
   handleKonami(key);
+  handleSystemInput(key);
 
   const btn = document.querySelector(`[data-key="${key}"]`);
   if (btn) press(btn);
@@ -179,11 +313,28 @@ document.addEventListener('keyup', e => {
 
 // Mouse Events
 document.addEventListener("mousemove", (e) => {
+
   const controller = document.querySelector(".controller");
+
   const x = (window.innerWidth /2 - e.clientX) / 80;
   const y = (window.innerHeight /2 - e.clientY) / 80;
 
   controller.style.transform = `rotateX(${y}deg) rotateY(${x}deg)`;
+
+  // dynamic lighting
+  const lightX = (e.clientX / window.innerWidth) * 100;
+  const lightY = (e.clientY / window.innerHeight) * 100;
+
+  controller.style.background = `
+  radial-gradient(circle at ${lightX}% ${lightY}%,
+  rgba(255, 255, 255, 0.25),
+  transparent 40%),
+  linear-gradient(
+  to bottom,
+  #f2f2f2 0%,
+  #d9d9d9 45%,
+  #bfbfbf 100%)
+  `;
 });
 
 // Konami Code
@@ -211,23 +362,62 @@ function activateKonami() {
   }, 3000);
 }
 
-// Button Animation
+// Console OS Behavior
+function handleSystemInput(key){
+  switch(currentState) {
+    case STATES.BOOT:
+      if(key === "enter") {
 
+        bootText.innerHTML = "INSERTING CARTRIDGE...";
+
+        setTimeout(() => {
+          startMenu();
+        }, 800);
+      }
+      break;
+
+    case STATES.MENU:
+      if(key === "shift") {
+        cycleGame();
+      }
+      if(key === "enter") {
+        launchGame();
+      }
+      break;
+
+    case STATES.GAME:
+      if(key === "shift") {
+        exitGame();
+      }
+      break;
+
+    case STATES.GAME_OVER:
+      if(key === "enter") {
+        startMenu()
+      }
+      break;
+  }
+}
+
+// Button Animation
 function press(btn) {
   btn.classList.add('active');
 
-  if (display) {
+  if (currentState === STATES.GAME && display ) {
     display.textContent = `INPUT: ${btn.dataset.key.toUpperCase()}`;
   }
 }
 
 function release(btn) {
   btn.classList.remove('active');
-  if (display) display.textContent = 'READY';
+
+  if (currentState === STATES.GAME && display) {
+     display.textContent = 'READY';
+}
 }
 
-// Gamepad Suppourt
 
+// Gamepad Suppourt
 let gamepadIndex = null;
 
 window.addEventListener("gamepadconnected", e => {
@@ -262,7 +452,6 @@ function pollGamepad() {
 }
 
 // Toggle Handler
-
 function toggle(key, pressed) {
   const el = document.querySelector(`[data-key="${key}"]`);
   if (!el) return;
@@ -273,3 +462,19 @@ function toggle(key, pressed) {
     display.textContent = `INPUT: ${key.toUpperCase()}`;
   }
 }
+
+// Clickable Start / Select buttons (mouse suppourt)
+  const startBtn = document.querySelector('[data-key="enter"]');
+  const selectBtn = document.querySelector('[data-key="shift"]');
+
+  if (startBtn) {
+    startBtn.addEventListener('click', () => {
+      handleSystemInput('enter');
+    });
+  }
+
+  if (selectBtn) {
+    selectBtn.addEventListener('click', () => {
+      handleSystemInput('shift')
+    });
+  }

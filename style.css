@@ -1,3 +1,4 @@
+/* snesUILab/style.css */
 * {
   box-sizing: border-box;
   font-family: system-ui, sans-serif;
@@ -10,6 +11,7 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
+    perspective: 900px;
   }
 
   nav {
@@ -25,7 +27,7 @@
     color: white;
     z-index: 1000;
     box-shadow: 0 6px 20px rgba(0,0,0,0.8);
-    border: 1px solid rgba(193, 0, 18, 31);
+    border: 1px solid rgba(193, 0, 18, 0.31);
   }
 
   .logo {
@@ -43,7 +45,7 @@
   .nav-links a {
     color: #ddd;
     text-decoration: none;
-    font-size: 0.95 rem;
+    font-size: 0.95rem;
     transition: 0.2s ease;
   }
 
@@ -74,16 +76,17 @@
 
   .center-zone {
     flex-direction: column;
-    gap: 14px;
-    box-shadow:
-      0 0 12px rgba(255, 0, 60, 0.35)
-      inset 0 0 6px rgba(255, 0, 60, 0.2);
+    gap: 15px;
+
   }
 
   .boot-text {
     position: absolute;
-    top: 50%;
-    left: 50%;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     transform: translate(-50%, -50%);
     color: #00ffd5;
     font-family: monospace;
@@ -93,16 +96,32 @@
     animation: powerOn 0.6s ease-out forwards;
   }
 
+  .display:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255,255, 0.02);
+    animation: ctrFlicker .1s infinite;
+    pointer-events: none;
+  }
+
+  @keyframes crtFlicker {
+    0% { opacity: .95; }
+    50% { opacity: 1; }
+    100% { opacity: .92; }
+  }
+
   .display {
     position: relative;
     width: 250px;
     height: 150px;
     background: #000;
-    border: 1px solid rgba(193, 0, 18, 31);
+    border: 1px solid rgba(193, 0, 18, 0.31);
     border-radius: 10px;
     box-shadow:
-      inset 0 4px 8px rgba(255, 255, 255, .15)
-      inset 0 -6px 12px rgba(0,0,0, .9),
+      inset 0 0 30px rgba(0,255,150,0.15),
+      inset 0 4px 8px rgba(255,255,255,0.15),
+      inset 0 -6 12px rgba(0,0,0,.9),
       0 6px 14px rgba(0,0,0,.8);
     overflow: hidden;
     display: flex;
@@ -133,7 +152,7 @@
       opacity: 1;
     }
     40% {
-      transform: scaleY (1.2);
+      transform: scaleY(1.2);
       opacity: 1;
     }
     60% {
@@ -145,22 +164,81 @@
     }
   }
 
-  /* blinking key frames
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% {opacity: 0.3;}
+  .blink {
+    animation: blink 1s steps(2, start) infinite;
   }
-  */
+
+  @keyframes blink {
+    to {
+      visibility: hidden;
+    }
+  }
 
   #gameScreen {
-    border: 1px solid rgba(193, 0, 18, 31);
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(193, 0, 18, 0.31);
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
     width: 100%;
     height: 100%;
     image-rendering: pixelated;
-    display: block
+    display: block;
+    transform: scale(1.02);
+  }
+
+  /* Curveture + glow */
+  .crt:before {
+    content: "";
+    position: abolute;
+    inset: 0;
+    background: radial-gradient(
+    ellipse at center,
+    rgba(255,255,255,0.08) 0%,
+    rgba(0,0,0,0.25) 70%
+    );
+    mix-blend-mode: overlay;
+    animation: crtFlicker 0.15 infinite;
+  }
+
+  @keyframes crtFlicker {
+    0% { opacity: .95 }
+    50% { opacity: 1 }
+    100% {opacity: .97}
+
+  }
+
+  .crt {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+
+  }
+
+  /* Scanlines */
+  .ctr:after {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background: repeating-linear-gradient(
+    to bottom,
+    rgba (255,255,255, 0.06),
+    rgba(255,255,255, 0.06) 1px,
+    transparent 1px,
+    transparent 3px
+    );
+    animation: scanlineMove 6s linear infinite;
+  }
+
+  @keyframes scanlinesMove {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(6px);
+    }
   }
 
   .controller {
+    animation: consoleIdle 9s ease-in-out infinite;
     width: 700px;
     height: 260px;
     background: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.06) 0%,
@@ -185,6 +263,14 @@
     transition: transform 0.1s ease-out;
   }
 
+  @keyframes consoleIdle {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-2px); }
+  }
+
+
+
+
   .controller-shadow {
     position: absolute;
     bottom: -30px;
@@ -194,9 +280,9 @@
     height: 40px;
     background: radial-gradient( ellipse at center,
     rgba(0,0,0,0.6),
-    transparant 70%
+    transparent 70%
     );
-    filter: blur;
+    filter: blur(20px);
     z-index: -2;
   }
 
@@ -222,7 +308,7 @@
     height: 40%;
     background: radial-gradient(ellipse at center,
       rgba(255,255,255,0.25),
-      transparant 70%);
+      transparent 70%);
     border-radius: 10px;
     transform: translateX(-50%);
   }
@@ -252,7 +338,7 @@
     box-shadow: inset 0 5px 10px rgba(255,255,255,0.2),
                 inset 0 -6px 10px rgba(0,0,0,0.7),
                 0 10px 20px rgba(0,0,0,0.7);
-    border: 1px solid rgba(193, 0, 18, 31);
+    border: 1px solid rgba(193, 0, 18, 0.31);
 
   }
 
@@ -266,8 +352,10 @@
   .btn.center {
     background: #111;
     box-shadow: none;
+  }
 
-
+  .btn:hover {
+    filter: brightness(1.5);
   }
 
   .dup { top: 0; left: 45px; width: 40px; height: 40px; }
@@ -284,7 +372,6 @@
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     place-items: start;
-
   }
 
   /* Shared Action Button Styles */
@@ -302,8 +389,9 @@
       inset 0 -6px 10px rgba(0,0,0,0.55),
     0, 6px 12px rgba(0,0,0,0.6);
     transition: 0.08s ease;
-    border: 1px solid rgba(193, 0, 18, 31);
+    border: 1px solid rgba(193, 0, 18, 0.31);
   }
+
 
   /* Diamond Placement */
   .action-y { grid-column: 1; grid-row: 2; background: linear-gradient(#5b54ff, #3b35d6); }
@@ -360,7 +448,7 @@
     align-items: center;
     justify-content: center;
     color: #aaa;
-    font-size: 0.85 rem;
+    font-size: 0.85rem;
     letter-spacing: 0.5px;
     box-shadow: 0 -6px 20px rgba(0,0,0,0.6);
   }
