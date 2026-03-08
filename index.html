@@ -1,75 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>SNES UI LAB</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+<title>SNES UI LAB</title>
 </head>
+
+<body>
 
 <!-- Nav Bar -->
 <nav class="navbar">
-    <div class="logo">SNES UI LAB</div>
-    <ul class="nav-links">
-      <li><a href="#">Home</a></li>
-      <li><a href="#">Build</a></li>
-      <li><a href="#">Controls</a></li>
-      <li><a href="#">About</a></li>
-    </ul>
-  </nav>
-<body>
+  <div class="logo">SNES UI LAB</div>
+  <ul class="nav-links">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Build</a></li>
+    <li><a href="#">Controls</a></li>
+    <li><a href="#">About</a></li>
+  </ul>
+</nav>
 
-    <!-- Main Content -->
+<!-- Main Content -->
 <main class="main-content">
 
-    <div class="controller">
-      <div class="cable"></div>
+  <div class="controller">
+    <div class="cable"></div>
 
-      <!-- LEFT ZONE -->
-      <div class="left-zone">
-        <div class="d-pad">
-          <div class="btn dup" data-key="w">W</div>
-          <div class="btn dleft" data-key="a">A</div>
-          <div class="btn center"></div>
-          <div class="btn dright" data-key="d">D</div>
-          <div class="btn ddown" data-key="s">S</div>
-        </div>
+    <!-- LEFT ZONE -->
+    <div class="left-zone">
+      <div class="d-pad">
+        <div class="btn dup" data-key="w">W</div>
+        <div class="btn dleft" data-key="a">A</div>
+        <div class="btn center"></div>
+        <div class="btn dright" data-key="d">D</div>
+        <div class="btn ddown" data-key="s">S</div>
       </div>
-
-      <!-- CENTER ZONE -->
-      <div class="center-zone">
-        <div class="display">
-          <canvas id="gameScreen">
-          </canvas>
-            <div class="boot-text"></div>
-        </div>
-        <div class="center-buttons">
-          <button class="small-btn" data-key="shift">SELECT</button>
-          <button class="small-btn" data-key="enter">START</button>
-        </div>
-      </div>
-
-      <!-- RIGHT ZONE -->
-      <div class="right-zone">
-        <div class="a-btns">
-          <div class="action-y btn" data-key="j">Y</div>
-          <div class="action-x btn" data-key="i">X</div>
-          <div class="action-b btn" data-key="k">B</div>
-          <div class="action-a btn" data-key="l">A</div>
-        </div>
-      </div>
-
     </div>
 
-  </main>
+    <!-- CENTER ZONE -->
+    <div class="center-zone">
+      <div class="display">
 
-  <!-- Footer -->
-  <footer class="footer">
-    <p>RodriguezTech Studios © 2026 RamTech LLC • SNES UI Lab
-      </p>
-  </footer>
+        <canvas id="gameScreen">
+          Your browser does not support the HTML5 canvas.
+        </canvas>
 
-  <script src="./script.js"></script>
+        <div class="boot-text"></div>
+
+      </div>
+
+      <div class="center-buttons">
+        <button class="small-btn" data-key="shift">SELECT</button>
+        <button class="small-btn" data-key="enter">START</button>
+      </div>
+    </div>
+
+    <!-- RIGHT ZONE -->
+    <div class="right-zone">
+      <div class="a-btns">
+        <div class="action-y btn" data-key="j">Y</div>
+        <div class="action-x btn" data-key="i">X</div>
+        <div class="action-b btn" data-key="k">B</div>
+        <div class="action-a btn" data-key="l">A</div>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <p>RodriguezTech Studios © 2026 RamTech LLC • SNES UI Lab</p>
+</footer>
+
+<script src="./script.js"></script>
 
 </body>
 </html>

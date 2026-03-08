@@ -10,7 +10,7 @@ const STATES = {
   GAME_OVER: "gameOver"
 }
 
-const cartidge = {
+const cartridge = {
   init() {},
   update() {},
   render() {},
@@ -231,12 +231,12 @@ function update(dt) {
   if(currentState === STATES.GAME) {
 
   // Horizsontal movement
-  if(keys["ArrowLeft"]) player.vx -= player.accel * dt
-  if(keys["ArrowRight"]) player.vx += player.accel * dt;
+  if(keys["a"]) player.vx -= player.accel * dt
+  if(keys["d"]) player.vx += player.accel * dt;
 
   // Vertical movement
-  if (keys["ArrowUp"]) player.vy -= player.accel * dt;
-  if (keys["ArrowDown"]) player.vy += player.accel * dt;
+  if (keys["w"]) player.vy -= player.accel * dt;
+  if (keys["s"]) player.vy += player.accel * dt;
 
   // Apply friction
   applyFriction(player, dt)
@@ -261,14 +261,14 @@ function clamp(value, min, max) {
 }
 
 function applyFriction(obj, dt) {
-  if (!keys["ArrowLeft"] && !keys["ArrowRight"]) {
+  if (!keys["a"] && !keys["d"]) {
     if (obj.vx > 0) obj.vx -= obj.friction * dt;
     if (obj.vx < 0) obj.vx += obj.friction * dt;
     if (Math.abs(obj.vx) < 5) obj.vx = 0;
 
   }
 
-  if (!keys["ArrowUp"] && !keys["ArrowDown"]) {
+  if (!keys["w"] && !keys["s"]) {
     if (obj.vy > 0) obj.vy -= obj.friction * dt;
     if (obj.vy < 0) obj.vy += obj.friction * dt;
     if (Math.abs(obj.vy) < 5) obj.vy = 0;
@@ -404,7 +404,7 @@ function press(btn) {
   btn.classList.add('active');
 
   if (currentState === STATES.GAME && display ) {
-    display.textContent = `INPUT: ${btn.dataset.key.toUpperCase()}`;
+    bootText.textContent = `INPUT: ${btn.dataset.key.toUpperCase()}`;
   }
 }
 
@@ -412,7 +412,7 @@ function release(btn) {
   btn.classList.remove('active');
 
   if (currentState === STATES.GAME && display) {
-     display.textContent = 'READY';
+     bootText.textContent = 'READY';
 }
 }
 
@@ -458,8 +458,8 @@ function toggle(key, pressed) {
 
   el.classList.toggle('active', pressed);
 
-  if (pressed && display) {
-    display.textContent = `INPUT: ${key.toUpperCase()}`;
+  if (pressed && bootTExt) {
+    bootText.textContent = `INPUT: ${key.toUpperCase()}`;
   }
 }
 
