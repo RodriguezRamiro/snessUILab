@@ -1,6 +1,8 @@
 /* snesUILab/script.js */
 
-import { ctx, canvas, startLoop } from "./module/engine.js";
+import { ctx, canvas, startLoop } from "./modules/engine.js";
+import { innitInput, keys } from "./modules/input.js";
+
 
 const keys = {};
 
@@ -145,7 +147,7 @@ function renderMenu() {
     });
 }
 
-// Select BUttons Cycle Games
+// Select Buttons Cycle Games
 function cycleGame() {
   selectedGame++;
 
@@ -269,28 +271,6 @@ function render() {
 
 requestAnimationFrame(gameLoop);
 
-
-// Keybaord events
-document.addEventListener('keydown', e => {
-  const key = e.key.toLowerCase();
-  if(keys[key]) return;
-
-  keys[key] = true;
-
-  handleKonami(key);
-  handleSystemInput(key);
-
-  const btn = document.querySelector(`[data-key="${key}"]`);
-  if (btn) press(btn);
-});
-
-document.addEventListener('keyup', e => {
-  const key = e.key.toLowerCase();
-  keys[key] = false;
-
-  const btn = document.querySelector(`[data-key="${key}"]`);
-  if (btn) release(btn);
-});
 
 // Mouse Events
 document.addEventListener("mousemove", (e) => {
@@ -439,7 +419,7 @@ function toggle(key, pressed) {
 
   el.classList.toggle('active', pressed);
 
-  if (pressed && bootTExt) {
+  if (pressed && bootText) {
     bootText.textContent = `INPUT: ${key.toUpperCase()}`;
   }
 }
@@ -459,3 +439,13 @@ function toggle(key, pressed) {
       handleSystemInput('shift')
     });
   }
+
+
+  initInput({
+    handleSystemInput,
+    handleKonami,
+    press,
+    release
+  });
+
+  startLoop(update, render);  //run update() and render() everyframe

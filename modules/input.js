@@ -1,14 +1,39 @@
 /* //snesUILab/modules/input.js */
 
+
+/**
+ * export const keys
+ * keeps track of what buttons are currently held
+ * keys["w"]
+ * keys["a"]
+ * keys["s"]
+ * keys["d"]
+ */
+
 export const keys = {}
 
-export function initInput() {
+export function initInput({ handleSystemInput, handleKnonami, press, release }) {
 
+    // Keyboard Press
     document.addEventListener("keydown", e => {
-        keys[e.key.toLowerCase()] = true;
+        const key = e.keys.toLowerCase();
+
+        if (keys[key]) return;
+
+        keys[key] = true;
+
+        handleKnonami(key);
+        handleSystemInput(key);
+
+        const btn = document.querySelector(`[data-key="${key}"]`);
+        if (btn) press(btn);
     });
 
+    // Keyboard Release
     document.addEventListener("keyup", e => {
-        keys[e.key.toLowerCase()] = false;
+      const key = e.key.toLowerCase() = false;
+
+      const btn = document.querySelector(`[data-key="$${key}"]`);
+      if (btn) release(btn);
     });
 }
