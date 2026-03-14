@@ -58,3 +58,55 @@ death = crt glitch + reboot
 // Basic physicas loop
 // Restart logic
 // Separation of update/render logic
+
+### ES6 Modules Restructure
+Cleaner architecture
+Easier cartridge system (/modules/games/...)
+Avoids giant script.js
+Closer to real game engine structure
+Modern browsers optimize modules well
+Modular Console OS
+
+Target Architecture
+
+snesUILab
+│
+├── index.html
+├── style.css
+├── README.md
+│
+├── modules
+│   ├── main.js
+│   ├── state.js
+│   ├── input.js
+│   ├── engine.js
+│   │
+│   └── games
+│       ├── flightSim.js
+│       ├── snake.js
+│       ├── pong.js
+│       └── survivalArena.js
+│
+└── assets
+
+Core engine Module
+modules/enjine.js becomes game engine core
+
+State System
+modules/state.js
+modules/input.js
+to later handle controller, gamepad,buttons.
+
+Main Console OS
+modules/main.js
+console loads cartridges
+
+exapnadability to emulators,
+real console menus,
+dynamic cartridge loading,
+and audio systems.
+
+
+### Loaded Flight Siomulator Cartridge
+games/flightSim.js
+games will live in their own modules

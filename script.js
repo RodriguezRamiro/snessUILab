@@ -1,5 +1,7 @@
 /* snesUILab/script.js */
 
+import { ctx, canvas, startLoop } from "./module/engine.js";
+
 const keys = {};
 
 const STATES = {
@@ -56,17 +58,6 @@ const player = {
   vy: 0
 };
 
-
-const canvas = document.getElementById("gameScreen");
-const ctx = canvas.getContext("2d");
-ctx.imageSmoothingEnabled = false
-
-// Internal retro resolution
-canvas.width = 320;
-canvas.height = 180;
-
-// Game loop control
-let lastTime = 0;
 
 let currentState = STATES.BOOT
 
@@ -135,16 +126,6 @@ function typeLine() {
 window.addEventListener("load", () => {
   setTimeout(typeLine, 600);
 });
-
-function gameLoop(timestamp) {
-  const deltaTime = (timestamp - lastTime) / 1000
-  lastTime = timestamp;
-
-  update(deltaTime);
-  render();
-
-  requestAnimationFrame(gameLoop)
-}
 
 // Render Game List
 function renderMenu() {

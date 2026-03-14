@@ -1,7 +1,7 @@
 /* //snesUILab/games/flightSim.js */
 
-import { ctx } from "../modules/engine.js";
-import { keys } from "../modules/input.js";
+import { ctx } from "../engine.js";
+import { keys } from "../input.js";
 
 export const flightSim = {
 
