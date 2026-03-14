@@ -17,8 +17,8 @@ export const flightSim = {
 
     update(dt) {
 
-        if(keys[j]) this.plane.speed += 40 * dt;
-        if(keys[k]) this.plane.speed -+ 40 * dt;
+        if(keys["j"]) this.plane.speed += 40 * dt;
+        if(keys["k"]) this.plane.speed -+ 40 * dt;
 
         if(keys["w"]) this.plane.altitude += 30 * dt;
         if(keys["s"]) this.plane.altitude -= 30 * dt;
