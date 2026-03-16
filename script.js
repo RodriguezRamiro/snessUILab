@@ -1,7 +1,7 @@
 /* snesUILab/script.js */
 
 import { ctx, canvas, startLoop } from "./modules/engine.js";
-import { innitInput, keys } from "./modules/input.js";
+import { initInput, keys } from "./modules/input.js";
 
 
 const keys = {};
