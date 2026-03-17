@@ -2,6 +2,7 @@
 
 import { ctx, canvas, startLoop } from "./modules/engine.js";
 import { initInput, keys } from "./modules/input.js";
+import { getGameList, loadGame, updateGame, renderGame } from "./modules/cartridgeManager.js";
 
 
 const keys = {};
@@ -21,11 +22,7 @@ const cartridge = {
   destroy() {}
 }
 
-const games = [
-  "Survival Arena",
-  "Snake",
-  "Pong"
-];
+let games = getGameList()
 
 // temporary cartridge objects
 const survivalArena = {
@@ -203,38 +200,12 @@ function startLoader() {
 function startSelectedGame() {
   currentState = STATES.GAME;
 
-  const gameName = games[selectedGame];
-  const game = gameCartridges[gameName]
-  if (game && game.init) {
-    game.init();
-  }
+  loadGame(selectedGame)
 }
 
 function update(dt) {
-  if(currentState === STATES.GAME) {
-
-  // Horizsontal movement
-  if(keys["a"]) player.vx -= player.accel * dt
-  if(keys["d"]) player.vx += player.accel * dt;
-
-  // Vertical movement
-  if (keys["w"]) player.vy -= player.accel * dt;
-  if (keys["s"]) player.vy += player.accel * dt;
-
-  // Apply friction
-  applyFriction(player, dt)
-
-  // Clamp max speed
-  player.vx = clamp(player.vx, -player.maxSpeed, player.maxSpeed);
-  player.vy = clamp(player.vy, -player.maxSpeed, player.maxSpeed);
-
-  // Move
-  player.x += player.vx * dt;
-  player.y += player.vy * dt;
-
-  // Screen bounds
-  player.x = clamp(player.x, 0, canvas.width - player.size);
-  player.y = clamp(player.y, 0, canvas.height - player.size);
+  if (currentState === STATES.GAME) {
+    updateGame(dt);
   }
 }
 
@@ -264,8 +235,7 @@ function render() {
   ctx.fillRect(0,0, canvas.width, canvas.height);
 
   if(currentState === STATES.GAME) {
-  ctx.fillStyle = "#00ff88";
-  ctx.fillRect(player.x, player.y, player.size, player.size)
+  renderGame(ctx);
   }
 }
 

@@ -110,3 +110,26 @@ and audio systems.
 ### Loaded Flight Siomulator Cartridge
 games/flightSim.js
 games will live in their own modules
+modules created
+snake
+flightSim
+pong
+surviavalArena
+
+### Cartridge API
+every cartridge contains
+name
+init()
+update()
+render()
+destroy()
+
+### Cartridge Manager
+Modular cartridges
+Game loader system
+Dynamic menu
+Clean architecture
+Game cartridge Slot System handles
+loading games
+switching games
+running games
