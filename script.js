@@ -239,7 +239,7 @@ function render() {
   }
 }
 
-requestAnimationFrame(gameLoop);
+
 
 
 // Mouse Events
