@@ -3,7 +3,8 @@
 import { ctx, canvas, startLoop } from "./modules/engine.js";
 import { initInput, keys } from "./modules/input.js";
 import { getGameList, loadGame, updateGame, renderGame } from "./modules/cartridgeManager.js";
-
+import { clamp, applyFriction } from "./modules/entitites/player.js";
+import { createPlayer } from "./modules/entities/player.js";
 
 const keys = {};
 
@@ -45,17 +46,7 @@ const gameCartridges = {
 
 let selectedGame = 0;
 
-const player = {
-  x: 160,
-  y: 90,
-  size: 8,
-  speed: 0,
-  maxSpeed: 120,
-  accel: 600,
-  friction: 800,
-  vx: 0,
-  vy: 0
-};
+const player = createPlayer();
 
 
 let currentState = STATES.BOOT
@@ -206,26 +197,6 @@ function startSelectedGame() {
 function update(dt) {
   if (currentState === STATES.GAME) {
     updateGame(dt);
-  }
-}
-
-// Utility Functions
-function clamp(value, min, max) {
-  return Math.max(min, Math.min(max, value));
-}
-
-function applyFriction(obj, dt) {
-  if (!keys["a"] && !keys["d"]) {
-    if (obj.vx > 0) obj.vx -= obj.friction * dt;
-    if (obj.vx < 0) obj.vx += obj.friction * dt;
-    if (Math.abs(obj.vx) < 5) obj.vx = 0;
-
-  }
-
-  if (!keys["w"] && !keys["s"]) {
-    if (obj.vy > 0) obj.vy -= obj.friction * dt;
-    if (obj.vy < 0) obj.vy += obj.friction * dt;
-    if (Math.abs(obj.vy) < 5) obj.vy = 0;
   }
 }
 
