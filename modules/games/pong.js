@@ -47,7 +47,7 @@ export const pong = {
         ctx.fillStyle = "white";
 
         ctx.fillRect(10, this.player.y, 6, 40);
-        ctx.fillRect(304, this.ai.y, 6 40);
+        ctx.fillRect(304, this.ai.y, 6, 40);
         ctx.fillRect(this.ball.x, this.ball.y, 6, 6);
     },
 
