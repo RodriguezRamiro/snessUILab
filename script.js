@@ -6,8 +6,6 @@ import { getGameList, loadGame, updateGame, renderGame } from "./modules/cartrid
 import { clamp, applyFriction } from "./modules/entitites/player.js";
 import { createPlayer } from "./modules/entities/player.js";
 
-const keys = {};
-
 const STATES = {
   BOOT: "boot",
   MENU: "menu",
@@ -25,24 +23,6 @@ const cartridge = {
 
 let games = getGameList()
 
-// temporary cartridge objects
-const survivalArena = {
-  init() { console.log( "Survival Arena starting..." ); }
-};
-
-const snakeGame = {
-  init() { console.log( "Snake starting" ); }
-};
-
-const pongGame = {
-  init() { console.log( "Pong starting "); }
-};
-
-const gameCartridges = {
-  "Survival Arena": survivalArena,
-  "Snake": snakeGame,
-  "Pong": pongGame
-};
 
 let selectedGame = 0;
 
@@ -350,7 +330,6 @@ function pollGamepad() {
   toggle('enter', gp.buttons[9].pressed);
   toggle('shift', gp.buttons[8].pressed);
 
-  requestAnimationFrame(pollGamepad);
 }
 
 // Toggle Handler

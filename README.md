@@ -133,3 +133,8 @@ Game cartridge Slot System handles
 loading games
 switching games
 running games
+
+### Enteties/Players
+allows for multiple players
+enemies
+AI Ships

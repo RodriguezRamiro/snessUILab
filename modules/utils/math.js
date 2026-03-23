@@ -7,7 +7,7 @@ export function clamp(value, min, max) {
 export function applyFriction(obj, dt, keys) {
 
     // Horizontal
-    If (!keys["a"] && !keys["d"]) {
+    if (!keys["a"] && !keys["d"]) {
         if(obj.vx > 0) obj.vx -= obj.friction * dt;
         if(obj.vx < 0) obj.vx += obj.friction * dt;
         if (Media.abs(obj.vx) < 5) obj.vx = 0;

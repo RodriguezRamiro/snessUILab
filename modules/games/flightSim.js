@@ -2,6 +2,7 @@
 
 import { ctx } from "../engine.js";
 import { keys } from "../input.js";
+import { clamp } from "./utils/math.js";
 
 export const flightSim = {
 
@@ -16,7 +17,7 @@ export const flightSim = {
 
     clouds: [
         {x: 40, y: 20, speed: 10},
-        {x: 120, Y: 30, speed: 15},
+        {x: 120, y: 30, speed: 15},
         {x:220, y:25, speed:8},
     ],
 
@@ -46,7 +47,7 @@ export const flightSim = {
 
         // Plane Speed
         if(keys["j"]) this.plane.speed += 40 * dt;
-        if(keys["k"]) this.plane.speed -+ 40 * dt;
+        if(keys["k"]) this.plane.speed -= 40 * dt;
 
         // Plane Altitude
         if(keys["w"]) this.plane.altitude += 30 * dt;
@@ -62,7 +63,7 @@ export const flightSim = {
         });
 
         // Update ground Offset
-        this.plane.groundOffSet += this.plane.speed * dt * 20;
+        this.plane.groundOffset += this.plane.speed * dt * 20;
 
         // Clamp plane Physics
         this.plane.speed = clamp(this.plane.speed, 0, 120);
@@ -114,7 +115,7 @@ export const flightSim = {
         }
 
         // Horizon Banking
-        const bank = this.pleane.headung * 0.2;
+        const bank = this.plane.heading * 0.2;
         ctx.strokeStyle = "#00ff88";
         ctx.beginPath();
         ctx.moveTo(0, 90 + bank);
@@ -134,19 +135,19 @@ export const flightSim = {
             ctx.fillText(`SPD
             ${Math.floor(this.plane.speed)}`, 10, 25);
         ctx.fillText(`HDG
-        ${MAth.floor(this.plane.heading)}`, 10, 35);
+        ${Math.floor(this.plane.heading)}`, 10, 35);
 
         ctx.save();
 
         // Clouds
-        ctx.translate(this.plane.heading * -0.5,, 0);
+        ctx.translate(this.plane.heading * -0.5, 0);
         ctx.fillStyle = "#ffffff";
 
         this.clouds.forEach(c => {
             const depth = c.y/40;
             const size = 6 + depth * 8;
 
-            ctx.fillREct(c.x, c.y,, size * 2, size);
+            ctx.fillRect(c.x, c.y, size * 2, size);
             ctx.fillRect(c.x + size, c.y - size/2, size * 1.5, size);
         });
 
@@ -174,8 +175,31 @@ export const flightSim = {
 
             ctx.beginPath();
             ctx.moveTo(x, 90);
-            ctx.lineto(x, 180);
+            ctx.lineTo(x, 180);
             ctx.stroke();
         }
+    },
+
+    destroy() {
+        this.lasers = [];
+        this.plane.speed = 0;
     }
 };
+
+function drawPlane(heading, altitude) {
+    ctx.save();
+
+    ctx.translate(160, 90);
+    ctx.rotate(heading * Math.PI / 180);
+
+    ctx.beginPAth();
+    ctx.moveTo(0, -6);
+    ctx.lineTo(4, 6);
+    ctx.lineTo(-4, 6);
+    ctx.closePath();
+
+    ctx.fil();
+
+    ctx.restore();
+
+}
