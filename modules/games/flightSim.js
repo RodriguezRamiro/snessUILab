@@ -22,6 +22,8 @@ export const flightSim = {
     ],
 
     lasers: [],
+    isCrashed: false,
+    explosionTimer: 0,
 
 
     init() {
@@ -29,6 +31,17 @@ export const flightSim = {
     },
 
     update(dt) {
+
+        // Stop movement after Crash
+        if (this.isCrashed) {
+            this.explosionTimer -= dt;
+
+            if (this.explosionTimer <=0) {
+                this.gameOver();
+            }
+
+            return
+        }
 
         //Shoot (a button = "l"
         if(keys["l"]) {
