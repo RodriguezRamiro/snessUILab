@@ -37,7 +37,9 @@ export const flightSim = {
                 y: 90,
                 speed: 200
             });
-        }
+            this.plane.speed *= 0.99;       // speed drag
+        };
+
         this.lasers.forEach(l => {
             l.y -= l.speed * dt;
         });
@@ -68,7 +70,18 @@ export const flightSim = {
         // Clamp plane Physics
         this.plane.speed = clamp(this.plane.speed, 0, 120);
         this.plane.altitude = clamp(this.plane.altitude, 10, 200);
+
+        // Ground collision detection
+        if (this.plane.altitude <= 10) {
+            this.plane.altitude = 10;
+
+            if (this.plane.speed > 20) {
+                this.crash();
+            }
+        }
     },
+
+
 
     render() {
 
@@ -178,6 +191,13 @@ export const flightSim = {
             ctx.lineTo(x, 180);
             ctx.stroke();
         }
+    },
+
+    crash() {
+        console.log("CRASH!");
+        this.plane.speed = 0;
+        this.explosionTimer = 2; // seconds
+        this.isCrashed = true;
     },
 
     destroy() {
