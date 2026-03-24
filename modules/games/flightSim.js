@@ -36,7 +36,7 @@ export const flightSim = {
         if (this.isCrashed) {
             this.explosionTimer -= dt;
 
-            if (this.explosionTimer <=0) {
+            if (this.explosionTimer <= 0) {
                 this.gameOver();
             }
 
@@ -91,6 +91,16 @@ export const flightSim = {
             if (this.plane.speed > 20) {
                 this.crash();
             }
+        }
+
+        // Game Over State
+        gameOver() {
+            console.log("GAME OVER");
+            this.isCrashed = false;
+
+            document.dispatchEvent(
+                new CustomEvent("GameOver")
+            );
         }
     },
 
