@@ -3,8 +3,8 @@
 import { ctx, canvas, startLoop } from "./modules/engine.js";
 import { initInput, keys } from "./modules/input.js";
 import { getGameList, loadGame, updateGame, renderGame } from "./modules/cartridgeManager.js";
-import { clamp, applyFriction } from "./modules/entitites/player.js";
-import { createPlayer } from "./modules/entities/player.js";
+import { clamp, applyFriction } from "./modules/enteties/player.js";
+import { createPlayer } from "./modules/enteties/player.js";
 
 const STATES = {
   BOOT: "boot",
@@ -285,9 +285,15 @@ function handleSystemInput(key){
 function press(btn) {
   btn.classList.add('active');
 
-  if (currentState === STATES.GAME && display ) {
-    bootText.textContent = `INPUT: ${btn.dataset.key.toUpperCase()}`;
-  }
+  if (currentState !== STATES.GAME)
+
+  if (!bootText) return;
+
+const key = btn.dataset.key.toUpperCase();
+
+bootText.InnerHTML = `
+<div> INPUT: ${key}</div>
+`;
 }
 
 function release(btn) {
@@ -335,12 +341,16 @@ function pollGamepad() {
 // Toggle Handler
 function toggle(key, pressed) {
   const el = document.querySelector(`[data-key="${key}"]`);
+
   if (!el) return;
 
   el.classList.toggle('active', pressed);
 
-  if (pressed && bootText) {
-    bootText.textContent = `INPUT: ${key.toUpperCase()}`;
+  if (pressed) {
+
+    handleSystemInput(key);
+
+    handleKonami(key);
   }
 }
 
@@ -375,7 +385,7 @@ function toggle(key, pressed) {
   document.addEventListener("gameOver", () => {
     currentState = STATES.GAME_OVER;
 
-    bootLines.Text.innerHTML = `
+    boot.Text.innerHTML = `
     <div>*** GAME OVER ***</div>
     <br>
     <div>PRESS START</div>
