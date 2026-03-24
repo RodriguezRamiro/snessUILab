@@ -134,7 +134,16 @@ loading games
 switching games
 running games
 
-### Enteties/Players
+### //Enteties/Players
 allows for multiple players
 enemies
 AI Ships
+
+### Current States
+Physical collision
+Crash detection
+State transition
+game over System
+Event communicaiton
+Explosion effect emminent.
+
