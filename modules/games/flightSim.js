@@ -158,6 +158,23 @@ export const flightSim = {
         ctx.lineTo(320, 90 - bank);
         ctx.stroke();
 
+        if (this.isCrashed) {
+            ctx.fillStyle = "orange";
+
+            ctx.beginPath();
+            ctx.arc(
+                160,
+                90,
+                10 + Math.random() * 8,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fill();
+
+        }
+        
+
         // Plane
         ctx.fillStyle = "#ffffff";
         drawPlane(this.plane.heading,
