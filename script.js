@@ -369,3 +369,15 @@ function toggle(key, pressed) {
   });
 
   startLoop(update, render);  //run update() and render() everyframe
+
+
+  // Game Over Trigger
+  document.addEventListener("gameOver", () => {
+    currentState = STATES.GAME_OVER;
+
+    bootLines.Text.innerHTML = `
+    <div>*** GAME OVER ***</div>
+    <br>
+    <div>PRESS START</div>
+    `;
+  });
