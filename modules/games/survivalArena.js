@@ -1,6 +1,6 @@
 /* //snesUILab/modules/games/survivalArena.js */
 
-export const survivalaArena = {
+export const survivalArena = {
     name: "Survival Arena",
 
     init() {

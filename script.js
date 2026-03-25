@@ -3,8 +3,8 @@
 import { ctx, canvas, startLoop } from "./modules/engine.js";
 import { initInput, keys } from "./modules/input.js";
 import { getGameList, loadGame, updateGame, renderGame } from "./modules/cartridgeManager.js";
-import { clamp, applyFriction } from "./modules/enteties/player.js";
-import { createPlayer } from "./modules/enteties/player.js";
+// import { clamp, applyFriction } from "./modules/entities/player.js";
+import { createPlayer } from "./modules/entities/player.js";
 
 const STATES = {
   BOOT: "boot",
@@ -52,6 +52,8 @@ let lineIndex = 0;
 
 // Menu Screen
 function startMenu() {
+
+  lineIndex = 0;
   currentState = STATES.MENU;
   bootText.innerHTML = "";
   renderMenu();
@@ -279,9 +281,10 @@ function handleSystemInput(key){
 
 // Button Animation
 function press(btn) {
+
   btn.classList.add('active');
 
-  if (currentState !== STATES.GAME)
+  if (currentState !== STATES.GAME) return;
 
   if (!bootText) return;
 
@@ -381,7 +384,7 @@ function toggle(key, pressed) {
   document.addEventListener("gameOver", () => {
     currentState = STATES.GAME_OVER;
 
-    boot.Text.innerHTML = `
+    bootText.innerHTML = `
     <div>*** GAME OVER ***</div>
     <br>
     <div>PRESS START</div>
