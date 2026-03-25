@@ -254,13 +254,13 @@ function drawPlane(heading, altitude) {
     ctx.translate(160, 90);
     ctx.rotate(heading * Math.PI / 180);
 
-    ctx.beginPAth();
+    ctx.beginPath();
     ctx.moveTo(0, -6);
     ctx.lineTo(4, 6);
     ctx.lineTo(-4, 6);
     ctx.closePath();
 
-    ctx.fil();
+    ctx.fill();
 
     ctx.restore();
 
