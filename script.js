@@ -14,13 +14,6 @@ const STATES = {
   GAME_OVER: "gameOver"
 }
 
-const cartridge = {
-  init() {},
-  update() {},
-  render() {},
-  destroy() {}
-}
-
 let games = getGameList()
 
 
@@ -175,6 +168,9 @@ function startSelectedGame() {
 }
 
 function update(dt) {
+
+  pollGamepad();
+
   if (currentState === STATES.GAME) {
     updateGame(dt);
   }

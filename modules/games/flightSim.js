@@ -2,7 +2,7 @@
 
 import { ctx } from "../engine.js";
 import { keys } from "../input.js";
-import { clamp } from "./utils/math.js";
+import { clamp } from "../utils/math.js";
 
 export const flightSim = {
 
@@ -50,6 +50,7 @@ export const flightSim = {
                 y: 90,
                 speed: 200
             });
+
             this.plane.speed *= 0.99;       // speed drag
         };
 
@@ -92,6 +93,7 @@ export const flightSim = {
                 this.crash();
             }
         }
+    },
 
         // Game Over State
         gameOver() {
@@ -101,8 +103,8 @@ export const flightSim = {
             document.dispatchEvent(
                 new CustomEvent("GameOver")
             );
-        }
-    },
+        },
+
 
 
 
@@ -173,7 +175,7 @@ export const flightSim = {
             ctx.fill();
 
         }
-        
+
 
         // Plane
         ctx.fillStyle = "#ffffff";

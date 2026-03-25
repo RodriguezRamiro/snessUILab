@@ -1,7 +1,7 @@
 /* //snesUILab/modules/engine.js */
 
-const canvas = document.getElementById("gameScreen");
-const ctx = canvas.getContext("2d");
+export const canvas = document.getElementById("gameScreen");
+export const ctx = canvas.getContext("2d");
 ctx.imageSmoothingEnabled = false
 
 // Internal retro resolution

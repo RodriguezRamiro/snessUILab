@@ -1,6 +1,6 @@
 /* //snesUILab/modules/main.js */
 
-import { startLoop, ctx } from "./engine";
+import { startLoop, ctx } from "./engine.js";
 import { initInput } from "./input.js";
 import { flightSim } from "./games/flightSim.js";
 
