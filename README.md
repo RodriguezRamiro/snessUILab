@@ -147,3 +147,10 @@ game over System
 Event communicaiton
 Explosion effect emminent.
 
+
+### migrating to ES6 modules
+Current phase moving
+BOOT
+MENU
+LOADING
+GAME OVER.
