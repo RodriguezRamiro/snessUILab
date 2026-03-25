@@ -5,17 +5,12 @@ import { initInput, keys } from "./modules/input.js";
 import { getGameList, loadGame, updateGame, renderGame } from "./modules/cartridgeManager.js";
 // import { clamp, applyFriction } from "./modules/entities/player.js";
 import { createPlayer } from "./modules/entities/player.js";
+import { initUI, handleSystemInput, getState, STATES, triggerGameOver } from "./modules/uiManager.js";
 
-const STATES = {
-  BOOT: "boot",
-  MENU: "menu",
-  LOADING: "loading",
-  GAME: "game",
-  GAME_OVER: "gameOver"
-}
 
-let games = getGameList()
+let games = getGameList();
 
+initUI(games, startSelectedGame);
 
 let selectedGame = 0;
 
@@ -32,20 +27,6 @@ let konamiIndex = 0;
 const display = document.querySelector('.display');
 const bootText = document.querySelector('.boot-text');
 
-const bootLines = [
-  "████████████████████████",
-  " SNES DEV BIOS v1.2",
-  " RodriguezTech Studios",
-  "████████████████████████",
-  "",
-  "Memory Check........OK",
-  "Video Interface.....OK",
-  "Controller Port 1...OK",
-  "Controller Port 2...OK",
-  "",
-  "Loading Console OS...",
-  ""
-];
 
 let lineIndex = 0;
 
@@ -173,7 +154,7 @@ function update(dt) {
 
   pollGamepad();
 
-  if (currentState === STATES.GAME) {
+  if (gameState() === STATES.GAME) {
     updateGame(dt);
   }
 }
@@ -284,7 +265,7 @@ function press(btn) {
 
   btn.classList.add('active');
 
-  if (currentState !== STATES.GAME) return;
+  if (getState() !== STATES.GAME) return;
 
   if (!bootText) return;
 
@@ -298,7 +279,7 @@ bootText.InnerHTML = `
 function release(btn) {
   btn.classList.remove('active');
 
-  if (currentState === STATES.GAME && display) {
+  if (getState() === STATES.GAME && display) {
      bootText.textContent = 'READY';
 }
 }
@@ -381,12 +362,7 @@ function toggle(key, pressed) {
 
 
   // Game Over Trigger
-  document.addEventListener("gameOver", () => {
-    currentState = STATES.GAME_OVER;
-
-    bootText.innerHTML = `
-    <div>*** GAME OVER ***</div>
-    <br>
-    <div>PRESS START</div>
-    `;
-  });
+  document.addEventListener(
+    "gameOver",
+    triggerGameOver
+    );
