@@ -7,6 +7,7 @@ import { getGameList, loadGame, updateGame, renderGame } from "./modules/cartrid
 import { createPlayer } from "./modules/entities/player.js";
 import { initUI, handleSystemInput, getState, STATES, triggerGameOver } from "./modules/uiManager.js";
 import { on } from "./modules/eventBus.js";
+import { resetGameState } from "./modules/gameState.js";
 
 
 let games = getGameList();
@@ -41,9 +42,11 @@ window.addEventListener("load", () => {
 
 
 // Start Selected Game
-function startSelectedGame() {
+function startSelectedGame(index) {
 
-  loadGame(selectedGame)
+  resetGameState();
+
+  loadGame(index)
 }
 
 function update(dt) {
