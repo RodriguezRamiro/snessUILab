@@ -6,6 +6,7 @@ import { getGameList, loadGame, updateGame, renderGame } from "./modules/cartrid
 // import { clamp, applyFriction } from "./modules/entities/player.js";
 import { createPlayer } from "./modules/entities/player.js";
 import { initUI, handleSystemInput, getState, STATES, triggerGameOver } from "./modules/uiManager.js";
+import { on } from "./modules/eventBus.js";
 
 
 let games = getGameList();
@@ -183,7 +184,4 @@ function release(btn) {
 
 
   // Game Over Trigger
-  document.addEventListener(
-    "gameOver",
-    triggerGameOver
-    );
+  on("gameOver", triggerGameOver);

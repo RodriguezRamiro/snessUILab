@@ -163,3 +163,34 @@ MOuse controller lighting
 Button visul toggles
 updateGamepad() is called every frame.
 import input to script
+
+
+### Technical architecture
+current working Structure
+snesUILab/
+
+script.js
+   orchestrator
+
+modules/
+
+engine.js
+   game loop
+
+uiManager.js
+   console OS
+
+input.js
+   device input
+
+eventBus.js
+   system messaging
+
+cartridgeManager.js
+   game loader
+
+entities/
+   player.js
+
+games/
+   flightSim.js

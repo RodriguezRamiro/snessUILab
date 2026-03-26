@@ -3,6 +3,7 @@
 import { ctx } from "../engine.js";
 import { keys } from "../input.js";
 import { clamp } from "../utils/math.js";
+import { emit } from "../eventBus.js";
 
 export const flightSim = {
 
@@ -100,9 +101,7 @@ export const flightSim = {
             console.log("GAME OVER");
             this.isCrashed = false;
 
-            document.dispatchEvent(
-                new CustomEvent("GameOver")
-            );
+            emit("gameOver");
         },
 
 
