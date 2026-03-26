@@ -154,3 +154,12 @@ BOOT
 MENU
 LOADING
 GAME OVER.
+
+### Input manager Specifications
+it owns:
+keyboard input
+Gamepad input,
+MOuse controller lighting
+Button visul toggles
+updateGamepad() is called every frame.
+import input to script
