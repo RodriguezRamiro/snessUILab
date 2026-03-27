@@ -104,12 +104,6 @@
     pointer-events: none;
   }
 
-  @keyframes crtFlicker {
-    0% { opacity: .95; }
-    50% { opacity: 1; }
-    100% { opacity: .92; }
-  }
-
   .display {
     position: relative;
     width: 250px;
