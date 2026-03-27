@@ -114,8 +114,22 @@ export const flightSim = {
 
 
         // Plane Heading
-        if(keys["a"]) this.plane.heading -= 60 * dt;
-        if(keys["d"]) this.plane.heading += 60 * dt;
+        let turnRate = 0;
+
+        if (keys["a"])
+        turnRate = -80;
+
+        if (keys["d"])
+        turnRate = 80;
+
+        // Speed affects turning
+        turnRate *=
+        this.plane.speed / 60;
+
+        this.plane.heading +=
+        turnRate * dt;
+
+
 
         // Move Clouds
         this.clouds.forEach(c => {
@@ -128,6 +142,7 @@ export const flightSim = {
         // Clamp plane Physics
         this.plane.speed = clamp(this.plane.speed, 0, 120);
         this.plane.altitude = clamp(this.plane.altitude, 10, 200);
+        this.plane.verticalSpeed = clamp(this.plane.verticalSpeed, -80, 80)
 
         // Ground collision detection
         if (this.plane.altitude <= 10) {
