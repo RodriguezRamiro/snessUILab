@@ -90,9 +90,28 @@ export const flightSim = {
         this.plane.speed *= 0.995;
 
 
-        // Plane Altitude
-        if(keys["w"]) this.plane.altitude += 30 * dt;
-        if(keys["s"]) this.plane.altitude -= 30 * dt;
+        // Gravity
+        this.plane.verticalSpeed -= 20 * dt;
+
+        // Lift from Speed
+        const lift =
+        this.plane.speed * 0.08;
+
+        this.plane.verticalSpeed +=
+        lift * dt;
+
+        // Player Pitch control
+        if (keys["w"])
+        this.plane.verticalSpeed += 40 * dt;
+
+        if (keys["s"])
+        this.plane.verticalSpeed -= 40 * dt;
+
+        // Apply vertical motion
+        this.plane.altitude +=
+        this.plane.verticalSpeed * dt;
+
+
 
         // Plane Heading
         if(keys["a"]) this.plane.heading -= 60 * dt;
