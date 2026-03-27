@@ -2,7 +2,7 @@
 
 const listeners = {};
 
-export default function on(event, handler) {
+export function on(event, handler) {
     if (!listeners[event]) {
         listeners[event] = [];
     }

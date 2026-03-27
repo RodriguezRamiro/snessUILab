@@ -31,15 +31,9 @@ const bootText = document.querySelector('.boot-text');
 
 
 
-
-
-
-
 window.addEventListener("load", () => {
   setTimeout(typeLine, 600);
 });
-
-
 
 
 
@@ -57,13 +51,13 @@ function update(dt) {
 
   if (getState() !== STATES.GAME) {
     return;
+  }
 
-  if (getStateValue("paused"))
-    return;
-
+  if (getStateValue("paused")) {
+  return;
+  }
     updateGame(dt);
   }
-}
 
 // Render
 function render() {
@@ -74,8 +68,6 @@ function render() {
   renderGame(ctx);
   }
 }
-
-
 
 
 // Konami Code
@@ -103,47 +95,6 @@ function activateKonami() {
   }, 3000);
 }
 
-// Console OS Behavior
-function handleSystemInput(key){
-  switch(currentState) {
-    case STATES.BOOT:
-      if(key === "enter") {
-
-        bootText.innerHTML = "INSERTING CARTRIDGE...";
-
-        setTimeout(() => {
-        }, 800);
-      }
-      break;
-
-    case STATES.MENU:
-      if(key === "shift") {
-
-      }
-      if(key === "enter") {
-
-      }
-      break;
-
-    case STATES.GAME:
-      if(key === "shift") {
-
-        exitGame();
-      }
-
-      if (key === "p") {
-        togglePause();
-      }
-
-      break;
-
-    case STATES.GAME_OVER:
-      if(key === "enter") {
-      }
-      break;
-  }
-}
-
 // Button Animation
 function press(btn) {
 
@@ -167,9 +118,6 @@ function release(btn) {
      bootText.textContent = 'READY';
 }
 }
-
-
-
 
 
 // Clickable Start / Select buttons (mouse suppourt)

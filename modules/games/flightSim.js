@@ -4,7 +4,7 @@ import { ctx } from "../engine.js";
 import { keys } from "../input.js";
 import { clamp } from "../utils/math.js";
 import { emit } from "../eventBus.js";
-import { updateScore, damagePlayer } from "../modules/gameState.js";
+import { updateScore, damagePlayer } from "../gameState.js";
 
 
 export const flightSim = {
@@ -30,6 +30,9 @@ export const flightSim = {
     ],
 
     lasers: [],
+    obstacles: [],
+    spawnTimer: 0,
+
     isCrashed: false,
     explosionTimer: 0,
 
@@ -89,7 +92,6 @@ export const flightSim = {
         // Drag
         this.plane.speed *= 0.995;
 
-
         // Gravity
         this.plane.verticalSpeed -= 20 * dt;
 
@@ -111,8 +113,6 @@ export const flightSim = {
         this.plane.altitude +=
         this.plane.verticalSpeed * dt;
 
-
-
         // Plane Heading
         let turnRate = 0;
 
@@ -128,8 +128,6 @@ export const flightSim = {
 
         this.plane.heading +=
         turnRate * dt;
-
-
 
         // Move Clouds
         this.clouds.forEach(c => {

@@ -52,54 +52,52 @@ export const STATES = {
   }
 
   export function handleSystemInput(key) {
-
     switch (currentState) {
 
       case STATES.BOOT:
 
-        if (key === "enter") {
+      if (key === "enter") {
 
-          bootText.innerHTML =
-            "INSERTING CARTRIDGE...";
+        bootText.innerHTML =
+        "INSERTING CARTRIDGE...";
 
-          setTimeout(() => {
-            startMenu();
-          }, 800);
+        setTimeout(() => {
+          startMenu();
+        }, 800);
+      }
 
-        }
-
-        break;
+      break;
 
       case STATES.MENU:
 
-        if (key === "shift") {
-          cycleGame();
-        }
+      if (key === "shift") {
+        cycleGame();
+      }
 
-        if (key === "enter") {
-          launchGame();
-        }
+      if (key === "enter") {
+        launchGame();
+      }
 
-        break;
+      break;
 
-      case STATES.GAME:
+    case STATES.GAME:
 
-        if (key === "shift") {
-          startMenu();
-        }
+      if (key === "shift") {
+        startMenu();
+      }
 
-        break;
+      break;
 
-      case STATES.GAME_OVER:
+    case STATES.GAME_OVER:
 
-        if (key === "enter") {
-          startMenu();
-        }
+      if (key === "enter") {
+        startMenu();
+      }
 
-        break;
-    }
-
+      break;
   }
+
+}
 
   function startMenu() {
 
