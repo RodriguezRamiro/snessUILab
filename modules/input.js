@@ -16,7 +16,7 @@ let gamepadIndex = null;
 let handleSystemInput = () => {};
 let handleKonami = () => {};
 let press = () => {};
-release = () => {};
+let release = () => {};
 
 export function initInput({
     handleSystemInput: sys = () => {},
@@ -93,7 +93,7 @@ export function updateGamepad() {
     if (gamepadIndex === null)
     return;
 
-    const go =
+    const gp =
     navigator.getGamepads()
     [gamepadIndex];
 
@@ -112,14 +112,14 @@ export function updateGamepad() {
     toggleEvent("i", gp.buttons[3].pressed);
 
     // Start / Select
-    toggle("enter",
+    toggleEvent("enter",
     gp.buttons[9].pressed);
 
-    toggle("shift",
+    toggleEvent("shift",
     gp.buttons[8].pressed);
 }
 
-function toggle(key, pressed) {
+function toggleEvent(key, pressed) {
 
     const el =
         document.querySelector(

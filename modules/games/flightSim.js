@@ -9,6 +9,8 @@ import { updateScore, damagePlayer } from "../gameState.js";
 
 export const flightSim = {
 
+    name: "Flight Simulator",
+    
     plane: {
         x: 160,
         y: 90,

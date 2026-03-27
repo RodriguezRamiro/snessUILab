@@ -29,14 +29,6 @@ let konamiIndex = 0;
 const display = document.querySelector('.display');
 const bootText = document.querySelector('.boot-text');
 
-
-
-window.addEventListener("load", () => {
-  setTimeout(typeLine, 600);
-});
-
-
-
 // Start Selected Game
 function startSelectedGame(index) {
 
