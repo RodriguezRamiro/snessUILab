@@ -9,6 +9,7 @@ import { initUI, handleSystemInput, getState, STATES, triggerGameOver } from "./
 import { on } from "./modules/eventBus.js";
 import { resetGameState } from "./modules/gameState.js";
 import { togglePause } from "./modules/gameState.js";
+import { getStateValue } from "./modules/gameState.js";
 
 
 let games = getGameList();
@@ -54,7 +55,12 @@ function update(dt) {
 
   updateGamepad();
 
-  if (getState() === STATES.GAME) {
+  if (getState() !== STATES.GAME) {
+    return;
+
+  if (getStateValue("paused"))
+    return;
+
     updateGame(dt);
   }
 }

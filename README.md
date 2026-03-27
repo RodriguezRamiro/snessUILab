@@ -194,3 +194,13 @@ entities/
 
 games/
    flightSim.js
+
+
+### Modular Engine system
+Tracks score
+Tracks lives
+Track Health
+Pause gameplay
+Trigger gameover
+Reset between games
+Notify UI automatically

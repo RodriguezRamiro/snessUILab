@@ -4,6 +4,11 @@ import { ctx } from "../engine.js";
 import { keys } from "../input.js";
 import { clamp } from "../utils/math.js";
 import { emit } from "../eventBus.js";
+import { updateScore, damagePlayer } from "../modules/gameState.js";
+
+updateScore(100);
+
+damagePlayer(25);
 
 export const flightSim = {
 
