@@ -1,5 +1,17 @@
 /* //snesUILab/modules/gameState.js */
 
+
+/* Module Controls
+* Score
+* Lives
+* Health
+* Level
+* Pause State
+* Game reset
+* Game over Trigger
+*/
+
+
 import { emit } from "./eventBus.js";
 
 const DEFAULT_STATE = {
@@ -46,7 +58,7 @@ export function loseLife() {
     }
 }
 
-export function damagePlayer(amout) {
+export function damagePlayer(amount) {
     state.health -= amount;
 
     emit("healthChanged", state.health);

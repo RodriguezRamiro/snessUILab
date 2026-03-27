@@ -8,6 +8,7 @@ import { createPlayer } from "./modules/entities/player.js";
 import { initUI, handleSystemInput, getState, STATES, triggerGameOver } from "./modules/uiManager.js";
 import { on } from "./modules/eventBus.js";
 import { resetGameState } from "./modules/gameState.js";
+import { togglePause } from "./modules/gameState.js";
 
 
 let games = getGameList();
@@ -121,7 +122,13 @@ function handleSystemInput(key){
     case STATES.GAME:
       if(key === "shift") {
 
+        exitGame();
       }
+
+      if (key === "p") {
+        togglePause();
+      }
+
       break;
 
     case STATES.GAME_OVER:
