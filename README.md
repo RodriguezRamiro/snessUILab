@@ -204,3 +204,25 @@ Pause gameplay
 Trigger gameover
 Reset between games
 Notify UI automatically
+
+### Next implementation
+/Games/flightSim
+Ship acceleration
+Ship rotation
+Ship velocity
+Friction
+Screen boundaries
+Current Behavior:
+Speed control
+Altitude control
+Heading control
+Ground collision
+Explosion timer
+Cloud parallax
+Building:
+Throttle → speed increases gradually
+Drag → speed slows naturally
+Lift → altitude depends on speed
+Gravity → altitude slowly drops
+Banking → heading changes smoothly
+Crash → if altitude too low at speed

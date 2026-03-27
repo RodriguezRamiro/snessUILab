@@ -6,17 +6,19 @@ import { clamp } from "../utils/math.js";
 import { emit } from "../eventBus.js";
 import { updateScore, damagePlayer } from "../modules/gameState.js";
 
-updateScore(100);
-
-damagePlayer(25);
 
 export const flightSim = {
 
     plane: {
         x: 160,
         y: 90,
+
         speed: 0,
+        acceleration: 0,
+
         altitude: 60,
+        verticalSpeed: 0,
+
         heading: 0,
         groundOffset: 0,
     },
@@ -34,6 +36,8 @@ export const flightSim = {
 
     init() {
         console.log("FlightSim Starting....");
+        updateScore(100);
+        damagePlayer(25);
     },
 
     update(dt) {
@@ -67,9 +71,24 @@ export const flightSim = {
         // Clean up offScreen lasers
         this.lasers = this.lasers.filter(l => l.y > 0)
 
-        // Plane Speed
-        if(keys["j"]) this.plane.speed += 40 * dt;
-        if(keys["k"]) this.plane.speed -= 40 * dt;
+        // Throttle input
+        if(keys["j"]) {
+            this.plane.acceleration = 60;
+        }
+        else if (keys["k"]) {
+            this.plane.acceleration = -60;
+        }
+        else {
+            this.plane.acceleration = 0;
+        }
+
+        // Apply acceleration
+        this.plane.speed +=
+        this.plane.acceleration * dt;
+
+        // Drag
+        this.plane.speed *= 0.995;
+
 
         // Plane Altitude
         if(keys["w"]) this.plane.altitude += 30 * dt;
