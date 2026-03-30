@@ -10,7 +10,7 @@ import { updateScore, damagePlayer } from "../gameState.js";
 export const flightSim = {
 
     name: "Flight Simulator",
-    
+
     plane: {
         x: 160,
         y: 90,
@@ -46,6 +46,17 @@ export const flightSim = {
     },
 
     update(dt) {
+
+        // Spawn Obstacles
+
+        this.spawnTime -= dt;
+
+        if (this.spawnTime <= 0) {
+
+            this.spawnObstacle();
+
+            this.spawnTimer = 2 + Math.random() * 2;
+        }
 
         // Stop movement after Crash
         if (this.isCrashed) {
@@ -152,7 +163,31 @@ export const flightSim = {
                 this.crash();
             }
         }
+
+        // Move obstacles
+
+        this.obstacles.forEach(o => {
+        o.x -=
+        (this.plane.speed + o.speed) * dt;
+    });
+
+    this.obstacles = this.obstacles.filter(o => o.x > -20);
+
+    this.obstacles.forEach(o => {
+
+        const planeX = 160;
+        const planeAlt = this.plane.altitude;
+
+        const hitX =
+            Math.abs(o.altitude - planeAlt) < 12;
+
+        if (hitX && hitY) {
+
+            this.crash();
+        }
+    });
     },
+
 
         // Game Over State
         gameOver() {
@@ -304,6 +339,21 @@ export const flightSim = {
         this.plane.speed = 0;
     }
 };
+
+spawnObstacle() {
+    const altitude = 20 + Math.random() * 150;
+
+    this.obstacle.push({
+
+        x: 340,
+        altitude: altitude,
+
+        width: 10,
+        height: 20,
+
+        speed: 40
+    });
+},
 
 function drawPlane(heading, altitude) {
     ctx.save();
