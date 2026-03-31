@@ -35,6 +35,9 @@ export const flightSim = {
     obstacles: [],
     spawnTimer: 0,
 
+    difficulty: 1,
+    survivaltime: 0,
+
     isCrashed: false,
     explosionTimer: 0,
 
@@ -47,15 +50,22 @@ export const flightSim = {
 
     update(dt) {
 
+        // Survival Time Tracker
+        this.survival += dt;
+
+        // Incremental difficulty
+        this.difficulty =
+        1 + this.survivalTime * 0.1; // increased every 10s
+
         // Spawn Obstacles
 
-        this.spawnTime -= dt;
+        this.spawnTimer -= dt;
 
-        if (this.spawnTime <= 0) {
+        if (this.spawnTimer <= 0) {
 
-            this.spawnObstacle();
+            this.spawnObstacles();
 
-            this.spawnTimer = 2 + Math.random() * 2;
+            this.spawnTimer = (2 + Math.random() * 2) / this.difficulty;
         }
 
         // Stop movement after Crash
@@ -179,6 +189,9 @@ export const flightSim = {
         const planeAlt = this.plane.altitude;
 
         const hitX =
+            Math.abs(o.x - planeX) < 10;
+
+        const hitY =
             Math.abs(o.altitude - planeAlt) < 12;
 
         if (hitX && hitY) {
@@ -298,6 +311,28 @@ export const flightSim = {
             ctx.fillRect(c.x + size, c.y - size/2, size * 1.5, size);
         });
 
+        // Obstacles
+        ctx.fillStyle = "#ff4444";
+
+        this.obstacles.forEach(o => {
+
+            const screenY =
+                180 - o.altitude;
+
+            ctx.fillRect(
+                o.x,
+                screenY,
+                o.width,
+                o.height
+            );
+        });
+
+        ctx.fillText(
+            `LVL ${this.difficulty.toFixed(1)}`,
+            10,
+            45
+        );
+
         ctx.restore();
 
         // Pseudo 3d_ ground lines
@@ -337,23 +372,24 @@ export const flightSim = {
     destroy() {
         this.lasers = [];
         this.plane.speed = 0;
+    },
+
+    spawnObstacles() {
+        const altitude = 20 + Math.random() * 150;
+
+        this.obstacles.push({
+
+            x: 340,
+            altitude: altitude,
+
+            width: 10,
+            height: 20,
+
+            speed: 40 * this.difficulty
+        });
     }
 };
 
-spawnObstacle() {
-    const altitude = 20 + Math.random() * 150;
-
-    this.obstacle.push({
-
-        x: 340,
-        altitude: altitude,
-
-        width: 10,
-        height: 20,
-
-        speed: 40
-    });
-},
 
 function drawPlane(heading, altitude) {
     ctx.save();
