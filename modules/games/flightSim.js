@@ -36,7 +36,7 @@ export const flightSim = {
     spawnTimer: 0,
 
     difficulty: 1,
-    survivaltime: 0,
+    survivalTime: 0,
 
     isCrashed: false,
     explosionTimer: 0,
@@ -51,11 +51,8 @@ export const flightSim = {
     update(dt) {
 
         // Survival Time Tracker
-        this.survival += dt;
+        this.survivalTime += dt;
 
-        // Incremental difficulty
-        this.difficulty =
-        1 + this.survivalTime * 0.1; // increased every 10s
 
         // Spawn Obstacles
 
@@ -68,13 +65,22 @@ export const flightSim = {
             this.spawnTimer = (2 + Math.random() * 2) / this.difficulty;
         }
 
-        // Stop movement after Crash
-        if (this.isCrashed) {
-            this.explosionTimer -= dt;
+        updateScore(
+            Math.floor(dt * 10)
+            );
 
-            if (this.explosionTimer <= 0) {
-                this.gameOver();
-            }
+            // Stop movement after Crash
+            if (this.isCrashed) {
+                this.explosionTimer -= dt;
+
+
+                if (this.explosionTimer <= 0) {
+                    this.gameOver();
+                }
+
+            // Incremental difficulty
+            this.difficulty =
+            1 + this.survivalTime * 0.1; // increased every 10s
 
             return
         }
@@ -198,7 +204,36 @@ export const flightSim = {
 
             this.crash();
         }
+
+    // Lasers vs Obstacle collsion
+
+    this.lasers.forEach(laser => {
+        this.obstacles.forEach(obstacle => {
+
+            const hitX =
+                Math.abs(laser.x - obstacle.x) < obstacle.width;
+
+                const hitY = Math.abs(
+                    (180 - obstacle.altitude) - laser.y
+                ) < obstacle.height;
+
+                if (hitX && hitY)  {
+
+                    obstacle.destroyer = true;
+                    laser.hit = true;
+
+                    updateScore(50);
+                }
+        });
     });
+
+    // Clean destroyed objects
+    this.obstacles = this.obstacles.filter(o => !o.destroyed);
+
+    this.lasers =
+    this.lasers.filter(l => !l.hit);
+    });
+
     },
 
 
@@ -375,6 +410,8 @@ export const flightSim = {
     },
 
     spawnObstacles() {
+        destroyed = false;
+
         const altitude = 20 + Math.random() * 150;
 
         this.obstacles.push({
