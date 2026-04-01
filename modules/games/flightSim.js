@@ -35,7 +35,7 @@ export const flightSim = {
         // World movemenr
         groundOffset: 0,
     },
-    
+
 
     clouds: [
         {x: 40, y: 20, speed: 10},
@@ -61,6 +61,8 @@ export const flightSim = {
     },
 
     update(dt) {
+
+        det = Math.min(dt, 0.033);
 
         // Survival Time Tracker
         this.survivalTime += dt;
