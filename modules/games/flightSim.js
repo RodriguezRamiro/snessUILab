@@ -23,6 +23,8 @@ export const flightSim = {
 
         heading: 0,
         groundOffset: 0,
+
+
     },
 
     clouds: [
@@ -183,7 +185,7 @@ export const flightSim = {
 
         // Move obstacles
         this.obstacles.forEach(o => {
-        o.x -=
+        o.depth -=
         (this.plane.speed + o.speed) * dt;
     });
 
@@ -436,7 +438,6 @@ export const flightSim = {
     },
 
     spawnObstacles() {
-        destroyed = false;
 
         const altitude = 20 + Math.random() * 150;
 
