@@ -379,15 +379,24 @@ export const flightSim = {
 
         this.obstacles.forEach(o => {
 
-            const screenY =
-                180 - o.altitude;
+            const perspective =
+            1 - o.depth;
 
-            ctx.fillRect(
-                o.x,
+            const screenY =
+                90 + perspective * 90;
+
+            const screenX =
+                160 + o.lane * perspective * 140;
+
+            const size =
+                perspective * 12;
+
+            ctx.fillrect(
+                screenX,
                 screenY,
-                o.width,
-                o.height
-            );
+                size,
+                size * 2,
+            )
         });
 
         ctx.fillText(
@@ -445,7 +454,7 @@ export const flightSim = {
 
             depth: 1,               // far away
             lane: Math.random() * 2 - 1, // left/right
-            
+
             altitude: altitude,
 
             width: 10,
