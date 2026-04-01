@@ -483,9 +483,19 @@ function drawPlane(heading, altitude) {
     ctx.rotate(heading * Math.PI / 180);
 
     ctx.beginPath();
-    ctx.moveTo(0, -6);
-    ctx.lineTo(4, 6);
-    ctx.lineTo(-4, 6);
+
+    // Nose
+    ctx.moveTo(0, -8);
+
+    // Right Wing
+    ctx.lineTo(6, 6);
+
+    // Tail
+    ctx.lineTo(0, 3);
+
+    // Left wing
+    ctx.lineTo(-6, 6);
+
     ctx.closePath();
 
     ctx.fill();
