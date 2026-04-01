@@ -163,7 +163,9 @@ export const flightSim = {
 
         // Move Clouds
         this.clouds.forEach(c => {
-            c.x -= (this.plane.speed * 0.2 + c.speed) * dt * (this.plane.altitude /50);
+            c.depth -=
+            (this.plane.speed * 0.3 + c.speed)
+            * dt * 0.002;
         });
 
         // Update ground Offset
@@ -185,15 +187,20 @@ export const flightSim = {
 
         // Move obstacles
         this.obstacles.forEach(o => {
+
         o.depth -=
-        (this.plane.speed + o.speed) * dt;
+        (this.plane.speed + o.speed)
+        * dt * 0.002;
+
+        this.obstacles =
+            this.obstacles.filter(o => o.depth > 0);
     });
 
     this.obstacles = this.obstacles.filter(o => o.x > -20);
 
     this.obstacles.forEach(o => {
 
-        const planeX = 160;
+        const planeDepth = 0;
         const planeAlt = this.plane.altitude;
 
         const hitX =
