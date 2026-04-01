@@ -226,3 +226,9 @@ Lift → altitude depends on speed
 Gravity → altitude slowly drops
 Banking → heading changes smoothly
 Crash → if altitude too low at speed
+
+
+### Architectural Principal
+3d projected world
+simulation space
+camera model world projection

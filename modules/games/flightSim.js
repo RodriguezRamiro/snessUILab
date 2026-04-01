@@ -15,17 +15,27 @@ export const flightSim = {
         x: 160,
         y: 90,
 
+        // Core motion
         speed: 0,
-        acceleration: 0,
+        thrust: 0,
 
+
+        // Direciton
+        heading: 0,
+        turnVelocity: 0,
+
+        //Vertical physics
         altitude: 60,
         verticalSpeed: 0,
 
-        heading: 0,
+
+        // Visual / physics feedback
+        bankAngle: 0,
+
+        // World movemenr
         groundOffset: 0,
-
-
     },
+    
 
     clouds: [
         {x: 40, y: 20, speed: 10},
@@ -399,7 +409,7 @@ export const flightSim = {
             const size =
                 perspective * 12;
 
-            ctx.fillrect(
+            ctx.fillRect(
                 screenX,
                 screenY,
                 size,
