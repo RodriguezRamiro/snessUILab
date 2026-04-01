@@ -69,6 +69,10 @@ export const flightSim = {
             Math.floor(dt * 10)
             );
 
+            // Incremental difficulty
+            this.difficulty =
+            1 + this.survivalTime * 0.1; // increased every 10s
+
             // Stop movement after Crash
             if (this.isCrashed) {
                 this.explosionTimer -= dt;
@@ -78,9 +82,6 @@ export const flightSim = {
                     this.gameOver();
                 }
 
-            // Incremental difficulty
-            this.difficulty =
-            1 + this.survivalTime * 0.1; // increased every 10s
 
             return
         }
@@ -181,7 +182,6 @@ export const flightSim = {
         }
 
         // Move obstacles
-
         this.obstacles.forEach(o => {
         o.x -=
         (this.plane.speed + o.speed) * dt;
@@ -202,6 +202,8 @@ export const flightSim = {
 
         if (hitX && hitY) {
 
+            console.log("Obstacle Collision Detected")
+
             this.crash();
         }
 
@@ -213,13 +215,16 @@ export const flightSim = {
             const hitX =
                 Math.abs(laser.x - obstacle.x) < obstacle.width;
 
-                const hitY = Math.abs(
+                const hitY =
+                Math.abs(
                     (180 - obstacle.altitude) - laser.y
                 ) < obstacle.height;
 
                 if (hitX && hitY)  {
 
-                    obstacle.destroyer = true;
+                    console.log("Obstacle Avoided");
+
+                    obstacle.destroyed = true;
                     laser.hit = true;
 
                     updateScore(50);
@@ -334,6 +339,27 @@ export const flightSim = {
 
         ctx.save();
 
+        ctx.strokeStyle = "#00ffff";
+
+        const length = 20;
+
+        const radians =
+        this.plane.heading * Math.PI / 180;
+
+        const dx = Math.sin(radians) * length;
+        const dy = -Math.cos(radians) * length;
+
+        ctx.beginPath();
+
+        ctx.moveTo(160, 90);
+
+        ctx.lineTo(
+            160 + dx,
+            90 + dy
+        );
+
+        ctx.stroke();
+
         // Clouds
         ctx.translate(this.plane.heading * -0.5, 0);
         ctx.fillStyle = "#ffffff";
@@ -422,7 +448,10 @@ export const flightSim = {
             width: 10,
             height: 20,
 
-            speed: 40 * this.difficulty
+            speed: 40 * this.difficulty,
+
+            destroyed: false
+
         });
     }
 };
