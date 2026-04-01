@@ -100,7 +100,8 @@ export const flightSim = {
         };
 
         this.lasers.forEach(l => {
-            l.y -= l.speed * dt;
+            l.depth -=
+            l.speed * dt * 0.002;
         });
 
         // Clean up offScreen lasers
