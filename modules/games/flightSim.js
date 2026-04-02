@@ -62,6 +62,15 @@ export const flightSim = {
 
     update(dt) {
 
+        this.accumulator += dt;
+
+        const FIXED_STEP = 1 / 60;
+
+        while (this.accumulator >= FIXED_STEP) {
+            this.physicsStep(FIXED_STEP);
+            this.accumulator -= FIXED_STEP;
+        }
+
         dt = Math.min(dt, 0.033);
 
         // Survival Time Tracker
