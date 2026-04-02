@@ -520,30 +520,39 @@ export const flightSim = {
 };
 
 
-function drawPlane(heading, altitude) {
+function drawPlane(heading, altitude, bank) {
     ctx.save();
 
     ctx.translate(160, 90);
+
     ctx.rotate(heading * Math.PI / 180);
+
+    ctx.rotate(bank * Math.PI / 180);
 
     ctx.beginPath();
 
     // Nose
-    ctx.moveTo(0, -8);
+    ctx.moveTo(0, -10);
 
     // Right Wing
-    ctx.lineTo(6, 6);
+    ctx.lineTo(8, 6);
 
     // Tail
     ctx.lineTo(0, 3);
 
     // Left wing
-    ctx.lineTo(-6, 6);
+    ctx.lineTo(-8, 6);
 
     ctx.closePath();
 
     ctx.fill();
 
     ctx.restore();
+
+    drawPlane(
+        this.plane.heading,
+        this.plane.altitude,
+        this.plane.bankAngle
+    );
 
 }
