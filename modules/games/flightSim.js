@@ -185,11 +185,15 @@ export const flightSim = {
         this.plane.turnVelocity *=
         TURN_DAMPING
 
-        this.plane.heding +=
+        this.plane.heading +=
         this.plane.turnVelocity
         * dt;
 
-        
+        // Banking Angle
+        this.plane.bankAngle =
+        this.plane.turnVelocity * 0.25;
+
+
         // Move Clouds
         this.clouds.forEach(c => {
             c.depth -=
@@ -336,7 +340,7 @@ export const flightSim = {
         }
 
         // Horizon Banking
-        const bank = this.plane.heading * 0.2;
+        const bank = this.plane.bankAngle;
         ctx.strokeStyle = "#00ff88";
         ctx.beginPath();
         ctx.moveTo(0, 90 + bank);
