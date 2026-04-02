@@ -147,11 +147,22 @@ export const flightSim = {
         this.plane.verticalSpeed -= 20 * dt;
 
         // Lift from Speed
+        const LIFT_FACTOR = 0.06;
+        const GRAVITY = 28;
+
         const lift =
-        this.plane.speed * 0.08;
+        this.plane.speed * LIFT_FACTOR;
 
         this.plane.verticalSpeed +=
         lift * dt;
+
+        this.plane.verticalSpeed -=
+        GRAVITY * dt;
+
+        if (this.plane.speed < 25) {
+            this.plane.verticalSpeed -=
+            40 * dt;
+        }
 
         // Player Pitch control
         if (keys["w"])
