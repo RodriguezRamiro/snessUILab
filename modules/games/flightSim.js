@@ -165,21 +165,31 @@ export const flightSim = {
         this.plane.verticalSpeed * dt;
 
         // Plane Heading
-        let turnRate = 0;
+        let turnInput = 0;
 
         if (keys["a"])
-        turnRate = -80;
+        turnInput = -1;
 
         if (keys["d"])
-        turnRate = 80;
+        turnInput = 1;
+
+        const TURN_ACCEL = 220;
+        const TURN_DAMPING = 0.92;
 
         // Speed affects turning
-        turnRate *=
-        this.plane.speed / 60;
+        this.plane.turnVelocity +=
+        turnInput
+        * TURN_ACCEL
+        * dt;
 
-        this.plane.heading +=
-        turnRate * dt;
+        this.plane.turnVelocity *=
+        TURN_DAMPING
 
+        this.plane.heding +=
+        this.plane.turnVelocity
+        * dt;
+
+        
         // Move Clouds
         this.clouds.forEach(c => {
             c.depth -=
