@@ -62,7 +62,7 @@ export const flightSim = {
 
     update(dt) {
 
-        det = Math.min(dt, 0.033);
+        dt = Math.min(dt, 0.033);
 
         // Survival Time Tracker
         this.survivalTime += dt;
@@ -121,21 +121,27 @@ export const flightSim = {
 
         // Throttle input
         if(keys["j"]) {
-            this.plane.acceleration = 60;
+            this.plane.thrust = 1;
         }
         else if (keys["k"]) {
-            this.plane.acceleration = -60;
+            this.plane.thrust = -1;
         }
         else {
-            this.plane.acceleration = 0;
+            this.plane.thrust = 0;
         }
+
+        const MAX_SPEED = 120;
+        const THRUST_POWER = 80;
+        const DRAG = 0.98;
 
         // Apply acceleration
         this.plane.speed +=
-        this.plane.acceleration * dt;
+        this.plane.thrust
+        * THRUST_POWER
+        * dt;
 
         // Drag
-        this.plane.speed *= 0.995;
+        this.plane.speed *= DRAG;
 
         // Gravity
         this.plane.verticalSpeed -= 20 * dt;
@@ -185,7 +191,7 @@ export const flightSim = {
         this.plane.groundOffset += this.plane.speed * dt * 20;
 
         // Clamp plane Physics
-        this.plane.speed = clamp(this.plane.speed, 0, 120);
+        this.plane.speed = clamp(this.plane.speed, 0, MAX_SPEED);
         this.plane.altitude = clamp(this.plane.altitude, 10, 200);
         this.plane.verticalSpeed = clamp(this.plane.verticalSpeed, -80, 80)
 
