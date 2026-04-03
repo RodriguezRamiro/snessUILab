@@ -214,7 +214,7 @@ export const flightSim = {
         // Plane collision
         this.obstacles.forEach(o => {
 
-            const hitDepth = o.depth < 0.08;
+            const hitDepth = o.depth < 0.04;
 
             const hitAlt = Math.abs(
                 o.altitude - this.plane.altitude
