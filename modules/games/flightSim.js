@@ -353,6 +353,17 @@ export const flightSim = {
             );
         });
 
+        this.obstacles.forEach(o => {
+            const p = this.project(o.lane, o.altitude, o.depth);
+
+            // Only  draw if tis in front of the camera
+
+        if (o.depth > 0 && o.depth < 2 ) {
+            ctx.fillStyle = o.destroyed ? "white" : "red";
+            ctx.fillREct(p/x - p.size/2, p.y - p.size/2, p.size, p.size);
+        }
+        });
+
         // Obstacles
         ctx.fillStyle = "#ff4444";
 
@@ -419,29 +430,50 @@ function drawPlane(heading, altitude, bank) {
 
     ctx.save();
 
-    ctx.translate(160, 90);
+    const xPos = 160 + (bank * 0.5);
+    const yPos = 180 - (altitude * 0.4)
+    ctx.translate(xPos, yPos);
 
-    ctx.rotate(heading * Math.PI / 180);
-
+    // Apply rotations
     ctx.rotate(bank * Math.PI / 180);
 
+    // Draw shadow for depth
+    ctx.fillStyle = "rgba(0,0,0,0.03)";
     ctx.beginPath();
-
-    // Nose
-    ctx.moveTo(0, -10);
-
-    // Right Wing
-    ctx.lineTo(8, 6);
-
-    // Tail
-    ctx.lineTo(0, 3);
-
-    // Left Wing
-    ctx.lineTo(-8, 6);
-
-    ctx.closePath();
+    ctx.moveTo(0, -20);
+    ctx.lineTo(12, 30);
+    ctx.lineTo(0, 25);
+    ctx.lineTo(-12, 30);
 
     ctx.fill();
+
+    // Draw Delta Wing
+    const wingStretch = Math.cos(bank * Math.PI / 180);
+    const wingWidth = 15 * Math.abs(wingStretch);
+    ctx.fillStyle = "#ffffff";
+    ctx.strokeStyle = "#00ff88";
+    ctx.lineWidth = 2;
+
+    ctx.beginPath();
+    // Nose (Top point)
+    ctx.moveTo(0, -12);
+
+    // Right Wing
+    ctx.lineTo(wingWidth, 8);
+
+    // Rear Notch (Star Fox Arwing style)
+    ctx.lineTo(0, 2);
+
+    // Left Wing
+    ctx.lineTo(-wingWidth, 8);
+
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+
+    // 5. Add a simple "Engine Glow"
+    ctx.fillStyle = "#00ffff";
+    ctx.fillRect(-2, 2, 4, 3);
 
     ctx.restore();
 }
