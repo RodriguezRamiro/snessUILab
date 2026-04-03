@@ -205,7 +205,8 @@ export const flightSim = {
 
         // Move obstacles
         this.obstacles.forEach(o => {
-            o.depth -= (this.plane.speed + o.speed) * dt * 0.002;
+            const worldSpeed = 60;
+            o.depth -= (worldSpeed + o.speed) * dt * 0.002;
         });
 
         this.obstacles = this.obstacles.filter(o => o.depth > 0);
