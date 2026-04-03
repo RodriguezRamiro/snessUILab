@@ -400,7 +400,7 @@ export const flightSim = {
 
         this.obstacles.push({
 
-            depth: 1,
+            depth: 2.0,
             lane: Math.random() * 2 - 1,
 
             altitude: altitude,
