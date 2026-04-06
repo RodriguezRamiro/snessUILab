@@ -228,7 +228,24 @@ Banking → heading changes smoothly
 Crash → if altitude too low at speed
 
 
-### Architectural Principal
+### Flight Sim Architectural Principal
 3d projected world
 simulation space
 camera model world projection
+
+### Game Loop Flow
+Calculate delta time
+Update game state
+Render frame
+Schedule next frame
+Variable Time-Step Game Loop
+Frame Rate Independent Motion
+Stable Physics Timing
+Retro Rendering Pipeline
+Decoupled
+Reusable
+Game-agnostic
+Modular
+Perfect first-frame timing
+No initial spike
+More deterministic startup

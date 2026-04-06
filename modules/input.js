@@ -9,6 +9,11 @@
  * keys["d"]
  */
 
+/** Continuous input
+ * Key state tracking
+ * Smooth movement
+ * Multiple simultaneous controls */
+
 export const keys = {};
 
 let gamepadIndex = null;

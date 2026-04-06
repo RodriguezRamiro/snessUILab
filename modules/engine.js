@@ -1,5 +1,14 @@
 /* //snesUILab/modules/engine.js */
 
+/**
+ * Rendering Engine
+ * Frame Scheduler
+ * Timing System
+ * Display Driver
+ * Video Output Device
+ * Pixel Renderer
+ * Retro Rendering Mode
+ */
 export const canvas = document.getElementById("gameScreen");
 export const ctx = canvas.getContext("2d");
 ctx.imageSmoothingEnabled = false
@@ -19,7 +28,7 @@ export function startLoop(update, render) {
             (timestamp - lastTime) / 1000,
             0.1
             );
-            
+
         lastTime = timestamp;
 
         update(deltaTime);
