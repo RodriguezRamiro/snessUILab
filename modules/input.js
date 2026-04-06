@@ -51,6 +51,10 @@ function initKeyboard() {
 
         keys[key] = true;
 
+        if (["w", "a", "s", "d", " "]. includes(key)) {
+          e.preventDefault();
+        }
+
         handleKonami(key);
         handleSystemInput(key);
 

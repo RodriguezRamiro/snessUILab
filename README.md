@@ -249,3 +249,15 @@ Modular
 Perfect first-frame timing
 No initial spike
 More deterministic startup
+
+###  Architectural Snapshot — Input Layer
+Full input pipeline.
+Input Hardware
+    ↓
+Keyboard / Gamepad / Mouse
+Input Driver
+    input.js
+Input State
+    keys[]
+Game Logic
+    flightSim.update()
