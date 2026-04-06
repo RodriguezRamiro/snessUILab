@@ -282,6 +282,26 @@ Perfect first-frame timing
 No initial spike
 More deterministic startup
 
+### Gameplay Systems
+Flight physics
+Stall mechanics
+Turning physics
+Banking animation
+Altitude control
+Ground collision
+Weapon firing
+5 shots per second
+Stable weapon behavior
+Obstacle spawning
+Enemy destruction
+Difficulty scaling
+Crash detection
+Explosion timer
+Game over event
+HUD display
+Parallax clouds
+Perspective ground
+
 ###  Architectural Snapshot — Input Layer
 Full input pipeline.
 Input Hardware

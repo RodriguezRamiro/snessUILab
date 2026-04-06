@@ -135,7 +135,8 @@ export const flightSim = {
         }
 
         // Shoot
-        if (keys["l"]) {
+        this.fireCooldown -= dt;
+        if (keys["l"] && this.fireCooldown <= 0) {
             this.lasers.push({
                 depth: 0.1,
                 lane: 0,
@@ -143,6 +144,7 @@ export const flightSim = {
                 speed: 200
             });
 
+            this.fireCooldown = 0.2;
             this.plane.speed *= 0.99;
         }
 
