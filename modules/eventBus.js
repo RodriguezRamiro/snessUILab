@@ -1,5 +1,12 @@
 /* //snesUILab/modules/eventBus.js */
 
+/**
+ * Game over signals
+ * UI updates
+ * Cartridge communication
+ * System events
+ */
+
 const listeners = {};
 
 export function on(event, handler) {

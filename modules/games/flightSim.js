@@ -2,17 +2,17 @@
 
 
 /**
- * game lifecycle
- * entity updates
- * render pipeline
- * flight mechanics
- * Cartridge Runtime
- * Game Logic Controller
- * Physics Model
- * Combat System
- * Rendering Pipeline
- * Difficulty Engine
+ * Game lifecycle
+ * Physics model
+ * Combat system
+ * Difficulty scaling
+ * Collision detection
+ * Rendering pipeline
+ * Game over logic
+ * Object cleanup
+ * Fixed timestep support
  */
+
 import { ctx } from "../engine.js";
 import { keys } from "../input.js";
 import { clamp } from "../utils/math.js";

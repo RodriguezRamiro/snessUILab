@@ -313,3 +313,45 @@ Input State
     keys[]
 Game Logic
     flightSim.update()
+
+### Scalable Engine
+Lets cartridges, UI, and system services talk without knowing about each other
+System Message Bus
+Signal Dispatcher
+Event Router
+Decoupling Layer
+Loose coupling
+Modular cartridges
+System-level messaging
+UI synchronization
+Event System
+Message Queue
+Observer Pattern
+Publish/Subscribe System
+
+### Funciton 1 - on()
+Registers a listener.
+System behavior:
+Subscribe to an event
+Meaning:
+When gameOver happens → run showGameOverScreen
+
+### Function 2 — off()
+Removes a listener.
+System behavior:
+Unsubscribe from an event
+Critical for:
+Scene switching
+Cartridge unloading
+Memory safety
+
+### Function 3 — emit()
+triggers an event.
+System behavior:
+Broadcast message
+Flow:
+Cartridge emits event
+↓
+EventBus receives event
+↓
+All listeners execute
