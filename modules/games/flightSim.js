@@ -1,5 +1,18 @@
 /* //snesUILab/games/flightSim.js */
 
+
+/**
+ * game lifecycle
+ * entity updates
+ * render pipeline
+ * flight mechanics
+ * Cartridge Runtime
+ * Game Logic Controller
+ * Physics Model
+ * Combat System
+ * Rendering Pipeline
+ * Difficulty Engine
+ */
 import { ctx } from "../engine.js";
 import { keys } from "../input.js";
 import { clamp } from "../utils/math.js";
@@ -60,6 +73,24 @@ export const flightSim = {
     physicsStep(dt) {
         // Reserved for future fixed physics logic
     },
+
+    priject(lane, altitude, depth) {
+        const perspective = 1 - depth;
+
+        const x =
+        160 + * perspective * 140;
+
+        const y =
+        90 + perspective * 90;
+
+        const size = perspective * 12;
+
+        return {
+            x,
+            y,
+            size
+        };
+    }
 
     update(dt) {
 
@@ -360,7 +391,7 @@ export const flightSim = {
 
         if (o.depth > 0 && o.depth < 2 ) {
             ctx.fillStyle = o.destroyed ? "white" : "red";
-            ctx.fillREct(p/x - p.size/2, p.y - p.size/2, p.size, p.size);
+            ctx.fillRect(p.x - p.size/2, p.y - p.size/2, p.size, p.size);
         }
         });
 

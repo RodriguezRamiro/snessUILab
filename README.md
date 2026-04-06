@@ -232,6 +232,38 @@ Crash → if altitude too low at speed
 3d projected world
 simulation space
 camera model world projection
+Cartridge Runtime
+Game Logic Controller
+Physics Model
+Combat System
+Rendering Pipeline
+Difficulty Engine
+init
+update
+physics
+collision
+render
+crash
+gameOver
+destroy
+spawn
+
+### Combat Loop
+Fully Functional
+Weapons
+Targets
+Hit detection
+Score reward
+Cleanup
+Pipeline
+Fire laser
+Move laser
+Detect collision
+Destroy obstacle
+Award score
+Remove objects
+
+
 
 ### Game Loop Flow
 Calculate delta time
