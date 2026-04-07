@@ -1,6 +1,15 @@
 /* //snesUILab/modules/uiManager.js */
 
 
+/**
+ * HUD
+ * Menus
+ * Game Over Screen
+ * Pause Screen
+ * Score Display
+ * Lives Display
+ */
+
 export const STATES = {
     BOOT: "boot",
     MENU: "menu",
@@ -16,6 +25,12 @@ export const STATES = {
 
   const display = document.querySelector(".display");
   const bootText = document.querySelector(".boot-text");
+
+  // Silent Runtime crashes safeguard
+  if (!display || !bootText) {
+    console.error("UI element missing");
+    return;
+  }
 
   const bootLines = [
     "████████████████████████",

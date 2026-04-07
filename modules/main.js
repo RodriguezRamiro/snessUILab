@@ -16,11 +16,7 @@ let currentGame = null;
 function update(dt){
     if(currentGame) {
         currentGame.update(dt);
-
-        if(currentGame) {
-            currentGame.update(dt);
         }
-    }
 }
 
 function render() {

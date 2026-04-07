@@ -355,3 +355,22 @@ Cartridge emits event
 EventBus receives event
 ↓
 All listeners execute
+
+### Console OS Interface Layer
+Boot sequence
+System menu
+Cartridge loading
+Game state transitions
+Game over screen
+Input routing
+Engine        → runs the loop
+Game State    → stores memory
+UI Manager    → controls system flow
+
+### Loader — Real Cartridge Simulation
+Progress bar
+Timed loading
+Transition state
+█ and ░
+UI signals the system
+System launches the cartridge
