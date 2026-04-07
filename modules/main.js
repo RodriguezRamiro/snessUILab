@@ -11,29 +11,51 @@ import { startLoop, ctx } from "./engine.js";
 import { initInput, updateGamepad } from "./input.js";
 import { flightSim } from "./games/flightSim.js";
 
+import { initInput } from "./input.js";
+import { on } from "./eventBus.js";
+import { triggerGameOver } from "./uiManager.js";
+
+import {
+    getGameList,
+    loadGame,
+    updateGame,
+    renderGame
+} from "./cartridgeManager.js";
+
 let currentGame = null;
 
+// Engine Loop
 function update(dt){
-    if(currentGame) {
-        currentGame.update(dt);
-        }
+    updateGame(dt);
 }
 
 function render() {
     ctx.fillStyle = "#000";
     ctx.fillRect(0,0,320,180);
 
-    if (currentGame){
-        currentGame.render();
-    }
+    renderGame(ctx);
 }
 
-function startGame() {
-    currentGame = flightSim;
-    currentGame.init();
-}
+// System Initialization
 
 initInput();
-startGame();
 
-startLoop(update, render);
+initUI(
+    getGameList(),
+    loadGame
+);
+
+// System Events
+
+on(
+    "gameOver",
+    triggerGameOver
+);
+
+
+
+// Start Engine
+startLoop(
+    update,
+    render
+);
