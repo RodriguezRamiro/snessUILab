@@ -1,5 +1,13 @@
 /* //snesUILab/modules/cartridgeManager.js */
 
+/**
+ * Game registry
+ * Game loading
+ * Game switching
+ * Game lifecycle
+ * Game update/render delegation
+ */
+
 import { snake } from "./games/snake.js";
 import { flightSim } from "./games/flightSim.js";
 import { pong } from "./games/pong.js";
@@ -21,6 +29,11 @@ export function getGameList() {
 export function loadGame(index) {
     if (currentGame && currentGame.destroy) {
         currentGame.destroy();
+    }
+
+    if (!cartridges[index]) {
+        console.error("Invalid cartridge index:", index);
+        return;
     }
 
     currentGame = cartridges[index];
