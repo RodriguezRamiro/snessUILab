@@ -18,7 +18,7 @@ const DEFAULT_STATE = {
     score: 0,
     lives: 3,
     level: 1,
-    hitpoints: 100,
+    health: 100,
     paused: false,
 };
 

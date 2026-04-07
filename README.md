@@ -346,7 +346,7 @@ Cartridge unloading
 Memory safety
 
 ### Function 3 — emit()
-triggers an event.
+Triggers an event.
 System behavior:
 Broadcast message
 Flow:
