@@ -21,11 +21,17 @@ import {
     updateGame,
     renderGame
 } from "./cartridgeManager.js";
+import { getStateValue } from "./gameState.js";
+
 
 let currentGame = null;
 
 // Engine Loop
 function update(dt){
+
+    if (getStateValue("paused")) {
+        return;
+    }
     updateGame(dt);
 }
 
