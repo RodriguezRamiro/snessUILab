@@ -49,7 +49,10 @@ export function updateScore(amount) {
 }
 
 export function loseLife() {
+    state.lives = Math.max(0, state.lives);
+    
     state.lives--;
+
 
     emit("livesChanged", state.lives);
 
