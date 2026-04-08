@@ -24,6 +24,8 @@ export function startLoop(update, render) {
 
     function gameLoop(timestamp) {
 
+        if (!lastTime) lastTime = timestamp;
+
         const deltaTime = Math.min(
             (timestamp - lastTime) / 1000,
             0.1
