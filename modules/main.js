@@ -9,7 +9,7 @@
 
 import { startLoop, ctx } from "./engine.js";
 import { initInput, updateGamepad } from "./input.js";
-import { initSystem } from "./systemManage.js";
+import { initSystem } from "./systemManager.js";
 import { flightSim } from "./games/flightSim.js";
 
 import { initInput } from "./input.js";

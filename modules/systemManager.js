@@ -30,4 +30,13 @@ export function initSystem() {
             loadGame(currentIndex);
         }, 2000);
     });
+
+    on("pausedChanged", paused => {
+
+        console.log(
+            paused
+            ? "SYSTEM: paused"
+            : "SYSTEM: Resumed"
+        );
+    });
 }
