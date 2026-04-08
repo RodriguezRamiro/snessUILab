@@ -1,5 +1,8 @@
 /* //snesUILab/modules/engine.js */
 
+import { getStateValue } from "./gameState.js";
+
+
 /**
  * Rendering Engine
  * Frame Scheduler
@@ -9,6 +12,8 @@
  * Pixel Renderer
  * Retro Rendering Mode
  */
+
+
 export const canvas = document.getElementById("gameScreen");
 export const ctx = canvas.getContext("2d");
 ctx.imageSmoothingEnabled = false
@@ -33,7 +38,10 @@ export function startLoop(update, render) {
 
         lastTime = timestamp;
 
-        update(deltaTime);
+        if (!getStateValue("paused")) {
+            update(deltaTime);
+        }
+
         render();
 
         requestAnimationFrame(gameLoop);
