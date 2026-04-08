@@ -1,5 +1,7 @@
 /* //snesUILab/modules/input.js */
 
+import { togglePause } from "./gameState";
+
 /**
  * export const keys
  * keeps track of what buttons are currently held
@@ -51,7 +53,7 @@ function initKeyboard() {
 
         keys[key] = true;
 
-        if (["w", "a", "s", "d", " "]. includes(key)) {
+        if (["w", "a", "s", "d", "p", " "]. includes(key)) {
           e.preventDefault();
         }
 
@@ -101,6 +103,10 @@ function initGamepad() {
 export function updateGamepad() {
     if (gamepadIndex === null)
     return;
+
+    if (key === "p") {
+      togglePause();
+    }
 
     const gp =
     navigator.getGamepads()
