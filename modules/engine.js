@@ -1,6 +1,7 @@
 /* //snesUILab/modules/engine.js */
 
 import { getStateValue } from "./gameState.js";
+import { updateGamepad } from "./input";
 
 
 /**
@@ -37,6 +38,8 @@ export function startLoop(update, render) {
             );
 
         lastTime = timestamp;
+
+        updateGamepad()
 
         if (!getStateValue("paused")) {
             update(deltaTime);
