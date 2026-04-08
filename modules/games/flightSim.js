@@ -57,6 +57,7 @@ export const flightSim = {
     lasers: [],
     obstacles: [],
     spawnTimer: 0,
+    fireCooldown: 0,
 
     difficulty: 1,
     survivalTime: 0,
@@ -66,19 +67,43 @@ export const flightSim = {
 
     init() {
         console.log("FlightSim Starting....");
-        updateScore(100);
-        damagePlayer(25);
+
+        this.lasers = [];
+    this.obstacles = [];
+
+    this.spawnTimer = 0;
+    this.survivalTime = 0;
+    this.difficulty = 1;
+
+    this.fireCooldown = 0;
+
+    this.isCrashed = false;
+    this.explosionTimer = 0;
+
+    this.plane = {
+        x: 160,
+        y: 90,
+        speed: 0,
+        thrust: 0,
+        heading: 0,
+        turnVelocity: 0,
+        altitude: 60,
+        verticalSpeed: 0,
+        bankAngle: 0,
+        groundOffset: 0,
+    };
+
     },
 
     physicsStep(dt) {
         // Reserved for future fixed physics logic
     },
 
-    priject(lane, altitude, depth) {
+    project(lane, altitude, depth) {
         const perspective = 1 - depth;
 
         const x =
-        160 + * perspective * 140;
+        160 + lane * perspective * 140;
 
         const y =
         90 + perspective * 90;
@@ -90,7 +115,7 @@ export const flightSim = {
             y,
             size
         };
-    }
+    },
 
     update(dt) {
 
@@ -397,28 +422,6 @@ export const flightSim = {
         }
         });
 
-        // Obstacles
-        ctx.fillStyle = "#ff4444";
-
-        this.obstacles.forEach(o => {
-
-            const perspective = 1 - o.depth;
-
-            const screenY = 90 + perspective * 90;
-
-            const screenX =
-                160 + o.lane * perspective * 140;
-
-            const size = perspective * 12;
-
-            ctx.fillRect(
-                screenX,
-                screenY,
-                size,
-                size * 2
-            );
-        });
-
         ctx.fillText(
             `LVL ${this.difficulty.toFixed(1)}`,
             10,
@@ -435,6 +438,11 @@ export const flightSim = {
 
     destroy() {
         this.lasers = [];
+        this.obstacles = [];
+
+        this.isCrashed = false;
+        this.explosionTimer = 0;
+
         this.plane.speed = 0;
     },
 
