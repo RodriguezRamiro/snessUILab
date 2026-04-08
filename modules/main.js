@@ -9,6 +9,7 @@
 
 import { startLoop, ctx } from "./engine.js";
 import { initInput, updateGamepad } from "./input.js";
+import { initSystem } from "./systemManage.js";
 import { flightSim } from "./games/flightSim.js";
 
 import { initInput } from "./input.js";
@@ -58,6 +59,8 @@ function render() {
 // System Initialization
 
 initInput();
+
+initSystem();
 
 initUI(
     getGameList(),

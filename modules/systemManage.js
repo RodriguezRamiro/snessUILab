@@ -4,6 +4,14 @@ import { on } from "./eventBus.js";
 import { resetGameState } from "./gameState.js";
 import { loadGame } from "./cartridgeManager.js";
 
+/**
+ * Listen to system events
+ * Control pause
+ * Handle game over
+ * Restart games
+ * Manage cartridges
+ */
+
 let currentIndex = 0;
 
 export function initSystem() {
