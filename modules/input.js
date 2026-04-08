@@ -1,6 +1,6 @@
 /* //snesUILab/modules/input.js */
 
-import { togglePause } from "./gameState";
+import { togglePause } from "./gameState.js";
 
 /**
  * export const keys
@@ -104,10 +104,6 @@ export function updateGamepad() {
     if (gamepadIndex === null)
     return;
 
-    if (key === "p") {
-      togglePause();
-    }
-
     const gp =
     navigator.getGamepads()
     [gamepadIndex];
@@ -148,7 +144,12 @@ function toggleEvent(key, pressed) {
                 pressed
             );
 
-            if (pressed) {
+            if (pressed && !keys[key]) {
+
+              if (key === "p") {
+                togglePause();
+              }
+
                 handleSystemInput(key);
                 handleKonami(key);
             }
