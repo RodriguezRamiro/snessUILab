@@ -38,12 +38,13 @@ export const STATES = {
     " RodriguezTech Studios",
     "████████████████████████",
     "",
-    "Memory Check........OK",
-    "Video Interface.....OK",
-    "Controller Port 1...OK",
-    "Controller Port 2...OK",
+    "Memory Check..........OK",
+    "Video Interface.......OK",
+    "Controller Port 1.....OK",
+    "Controller Port 2.....OK",
+    "Nostalgia Feel..Imminent",
     "",
-    "Loading Console OS...",
+    "Loading Console OS.....",
     ""
   ];
 
