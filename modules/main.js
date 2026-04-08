@@ -39,6 +39,19 @@ function render() {
     ctx.fillStyle = "#000";
     ctx.fillRect(0,0,320,180);
 
+    // Pause overlay Visual Confirmation
+    if (getStateValue("paused")) {
+
+        ctx.fillStyle = "white";
+        ctx.font = "10px monospace";
+
+        ctx.fillText(
+            "paused",
+            130,
+            90
+        );
+    }
+
     renderGame(ctx);
 }
 
