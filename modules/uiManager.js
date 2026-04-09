@@ -28,8 +28,8 @@ export const STATES = {
 
   // Silent Runtime crashes safeguard
   if (!display || !bootText) {
-    console.error("UI element missing");
-    return;
+    throw new Error("UI element missing");
+
   }
 
   const bootLines = [
