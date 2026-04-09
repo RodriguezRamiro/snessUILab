@@ -1,4 +1,4 @@
-/* //snesUILab/modules/systemManage.js */
+/* //snesUILab/modules/systemManager.js */
 
 import { on } from "./eventBus.js";
 import { resetGameState } from "./gameState.js";
@@ -15,6 +15,15 @@ import { loadGame } from "./cartridgeManager.js";
 let currentIndex = 0;
 
 export function initSystem() {
+
+    on("gameLoaded", index => {
+        currentIndex = index;
+
+        console.log(
+            "SYESTEM: Active cartridge",
+            index
+        );
+    });
 
     // Game Over
 

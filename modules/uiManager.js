@@ -117,6 +117,8 @@ export const STATES = {
 
   function startMenu() {
 
+    selectedGame = 0;
+    
     lineIndex = 0;
 
     currentState = STATES.MENU;
