@@ -8,14 +8,12 @@
  */
 
 import { startLoop, ctx } from "./engine.js";
-import { initInput, updateGamepad } from "./input.js";
+import { initInput, } from "./input.js";
 import { initSystem } from "./systemManager.js";
-import { flightSim } from "./games/flightSim.js";
 
-import { initInput } from "./input.js";
+import { initUI, triggerGameOver } from './uiManger.js";
+
 import { on } from "./eventBus.js";
-import { triggerGameOver } from "./uiManager.js";
-
 import {
     getGameList,
     loadGame,
@@ -25,14 +23,8 @@ import {
 import { getStateValue } from "./gameState.js";
 
 
-let currentGame = null;
-
 // Engine Loop
 function update(dt){
-
-    if (getStateValue("paused")) {
-        return;
-    }
     updateGame(dt);
 }
 
@@ -47,13 +39,11 @@ function render() {
         ctx.font = "10px monospace";
 
         ctx.fillText(
-            "paused",
+            "PAUSED",
             130,
-            90
+            90,
         );
     }
-
-    renderGame(ctx);
 }
 
 // System Initialization
@@ -75,6 +65,8 @@ on(
 );
 
 
+// Load first cartridge
+loadGame(0);
 
 // Start Engine
 startLoop(

@@ -122,8 +122,11 @@ export function updateGamepad() {
     toggleEvent("j", gp.buttons[2].pressed);
     toggleEvent("i", gp.buttons[3].pressed);
 
-    // Start / Select
+    // Start / Pause / Select
     toggleEvent("enter",
+    gp.buttons[9].pressed);
+
+    toggleEvent("p",
     gp.buttons[9].pressed);
 
     toggleEvent("shift",
