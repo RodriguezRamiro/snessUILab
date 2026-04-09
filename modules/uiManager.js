@@ -174,6 +174,8 @@ export const STATES = {
 
     currentState = STATES.LOADING;
 
+    display.classList.remove("active");
+
     bootText.innerHTML =
       "INSERTING CARTRIDGE...";
 
@@ -213,6 +215,8 @@ export const STATES = {
         setTimeout(() => {
 
           currentState = STATES.GAME;
+
+          display.classList.add("active");
 
           if (onGameStart) {
             onGameStart(selectedGame);
