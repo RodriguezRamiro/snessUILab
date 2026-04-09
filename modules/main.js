@@ -21,6 +21,7 @@ import {
     renderGame
 } from "./cartridgeManager.js";
 import { getStateValue } from "./gameState.js";
+import { handleSystemInput } from "./uiManager.js";
 
 
 // Engine Loop
@@ -48,7 +49,9 @@ function render() {
 
 // System Initialization
 
-initInput();
+initInput(
+    handleSystemInput
+);
 
 initSystem();
 
