@@ -26,6 +26,11 @@ import { handleSystemInput } from "./uiManager.js";
 
 // Engine Loop
 function update(dt){
+
+    if (getState() !== STATES.GAME) {
+        return;
+    }
+    
     updateGame(dt);
 }
 
