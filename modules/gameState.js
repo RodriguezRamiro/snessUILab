@@ -64,6 +64,7 @@ export function loseLife() {
 }
 
 export function damagePlayer(amount) {
+
     state.health -= amount;
 
     emit("healthChanged", state.health);
@@ -72,7 +73,9 @@ export function damagePlayer(amount) {
 
         loseLife();
 
-        state.health = 100;
+        state.health = DEFAULT_STATE.health;
+
+        emit("healthChanged", state.health);
     }
 }
 
