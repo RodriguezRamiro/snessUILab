@@ -55,5 +55,14 @@ export function updateGame(dt) {
 export function renderGame(ctx) {
     if (currentGame && currentGame.render) {
         currentGame.render(ctx);
-    }
+    } else
+
+    ctx.fillStyle = "#00ff88";
+    ctx.font = "8px monospace";
+
+    ctx.fillText(
+        "NO CARTRIDGE",
+        110,
+        90,
+    );
 }
