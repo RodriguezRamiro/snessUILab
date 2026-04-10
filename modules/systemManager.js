@@ -3,6 +3,7 @@
 import { on } from "./eventBus.js";
 import { resetGameState } from "./gameState.js";
 import { loadGame } from "./cartridgeManager.js";
+import { getState, STATES } from "./uiManager.js";
 
 /**
  * Listen to system events
@@ -16,7 +17,10 @@ let currentIndex = 0;
 
 export function initSystem() {
 
+    // Track active cartridge
+
     on("gameLoaded", index => {
+
         currentIndex = index;
 
         console.log(
@@ -33,12 +37,19 @@ export function initSystem() {
 
         setTimeout(() => {
 
-            console.log("SYSTEM: restarting game");
+            if (
+                getState() === STATES.GAME
+            ){ console.log(
+                "SYSTEM: restarting game"
+                );
 
             resetGameState();
             loadGame(currentIndex);
+            }
         }, 2000);
     });
+
+    // Pause Status
 
     on("pausedChanged", paused => {
 
@@ -47,5 +58,14 @@ export function initSystem() {
             ? "SYSTEM: paused"
             : "SYSTEM: Resumed"
         );
+    });
+
+    // System Reset
+
+    on("systemReset", () => {
+        console.log("SYSTEM: Reset");
+
+        resetGameState();
+        loadGame(currentIndex);
     });
 }
