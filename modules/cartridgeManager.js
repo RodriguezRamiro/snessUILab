@@ -28,9 +28,7 @@ export function getGameList() {
 }
 
 export function loadGame(index) {
-    if (currentGame && currentGame.destroy) {
-        currentGame.destroy();
-    }
+    safeDestroy(currentGame)
 
     if (!cartridges[index]) {
         console.error("Invalid cartridge index:", index);
@@ -65,4 +63,19 @@ export function renderGame(ctx) {
         110,
         90,
     );
+};
+
+function safeDestroy(game) {
+
+    try {
+
+        if (game && game.destroy) {
+            game.destroy();
+        }
+    } catch (err) {
+        console.error(
+            "Cartridge destroy failed:",
+            err
+        );
+    }
 }
