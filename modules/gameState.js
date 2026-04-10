@@ -29,6 +29,12 @@ export function resetGameState() {
 
     emit("stateChanged", state);
 
+    emit("scoreChanged", state.score);
+    emit("livesChanged", state.lives);
+    emit("healthChanged", state.health);
+    emit("pausedChanged", state.paused);
+
+
 }
 
 export function getStateValue(key) {
