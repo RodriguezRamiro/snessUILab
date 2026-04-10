@@ -49,14 +49,16 @@ export function updateScore(amount) {
 }
 
 export function loseLife() {
-    state.lives = Math.max(0, state.lives);
-    
+    if (state.lives <= 0) {
+        return;
+    }
+
     state.lives--;
 
 
     emit("livesChanged", state.lives);
 
-    if (state.lives <= 0) {
+    if (state.lives === 0) {
         emit("gameOver");
     }
 }
