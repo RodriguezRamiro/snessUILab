@@ -27,6 +27,21 @@ export function getGameList() {
     return cartridges.map(game => game.name);
 }
 
+function safeDestroy(game) {
+
+    try {
+
+        if (game && game.destroy) {
+            game.destroy();
+        }
+    } catch (err) {
+        console.error(
+            "Cartridge destroy failed:",
+            err
+        );
+    }
+}
+
 export function loadGame(index) {
     safeDestroy(currentGame)
 
@@ -64,18 +79,3 @@ export function renderGame(ctx) {
         90,
     );
 };
-
-function safeDestroy(game) {
-
-    try {
-
-        if (game && game.destroy) {
-            game.destroy();
-        }
-    } catch (err) {
-        console.error(
-            "Cartridge destroy failed:",
-            err
-        );
-    }
-}
