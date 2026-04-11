@@ -99,6 +99,15 @@ function initGamepad() {
             );
         }
     );
+
+    window.addEventListener(
+      "gamepaddisconnected",
+      () => {
+        console.log("gamepad disconnected");
+
+        gamepadIndex = null;
+      }
+    );
 }
 
 export function updateGamepad() {
