@@ -11,7 +11,7 @@ import { startLoop, ctx } from "./engine.js";
 import { initInput, } from "./input.js";
 import { initSystem } from "./systemManager.js";
 
-import { initUI, triggerGameOver } from './uiManger.js";
+import { initUI, triggerGameOver, handleSystemInput } from "./uiManager.js";
 
 import { on } from "./eventBus.js";
 import {
@@ -21,22 +21,23 @@ import {
     renderGame
 } from "./cartridgeManager.js";
 import { getStateValue } from "./gameState.js";
-import { handleSystemInput } from "./uiManager.js";
 
 
 // Engine Loop
 function update(dt){
 
-    if (getState() !== STATES.GAME) {
+    if (getStateValue("paused")) {
         return;
     }
-    
+
     updateGame(dt);
 }
 
 function render() {
     ctx.fillStyle = "#000";
     ctx.fillRect(0,0,320,180);
+
+    renderGame(ctx);
 
     // Pause overlay Visual Confirmation
     if (getStateValue("paused")) {
@@ -54,26 +55,28 @@ function render() {
 
 // System Initialization
 
-initInput(
-    handleSystemInput
-);
-
+// Core Systems
 initSystem();
 
+// Input Devices
+initInput({
+    handleSystemInput
+});
+
+//  UI
 initUI(
     getGameList(),
     loadGame
 );
 
 // System Events
-
 on(
     "gameOver",
     triggerGameOver
 );
 
 
-// Load first cartridge
+// Load first game
 loadGame(0);
 
 // Start Engine
