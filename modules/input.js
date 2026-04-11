@@ -53,7 +53,7 @@ function initKeyboard() {
 
         keys[key] = true;
 
-        if (["w", "a", "s", "d", "p", " "]. includes(key)) {
+        if (["w", "a", "s", "d", "p", " "].includes(key)) {
           e.preventDefault();
         }
 
@@ -73,7 +73,7 @@ function initKeyboard() {
 
         const key = e.key.toLowerCase();
 
-        keys[key] = false;
+        delete keys[key];
 
         const btn =
             document.querySelector(
@@ -147,7 +147,10 @@ function toggleEvent(key, pressed) {
                 pressed
             );
 
-            if (pressed && !keys[key]) {
+            // Sync key State
+            keys[key] = pressed;
+
+            if (pressed) {
 
               if (key === "p") {
                 togglePause();
