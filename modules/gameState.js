@@ -42,14 +42,30 @@ export function getStateValue(key) {
 }
 
 export function setStateValue(key, value) {
+
+    if (!(key in state)) {
+
+        console.warn(
+            "Invalid state key:",
+            key
+        );
+
+        return;
+
+    }
+
     state[key] = value;
 
     emit("stateChanged", state);
+
 }
 
 export function updateScore(amount) {
 
-    state.score += amount;
+    state.score = Math.max(
+        0,
+        state.score + amount
+    );
 
     emit("scoreChanged", state.score);
 }
@@ -89,3 +105,8 @@ export function togglePause() {
     state.paused = !state.paused;
     emit("pausedChanged", state.paused);
 }
+
+export function getFullState() {
+    return { ...state };
+}
+
