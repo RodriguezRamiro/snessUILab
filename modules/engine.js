@@ -1,7 +1,7 @@
 /* //snesUILab/modules/engine.js */
 
 import { getStateValue } from "./gameState.js";
-import { updateGamepad } from "./input";
+import { updateGamepad } from "./input.js";
 
 
 /**
@@ -17,7 +17,7 @@ import { updateGamepad } from "./input";
 
 export const canvas = document.getElementById("gameScreen");
 export const ctx = canvas.getContext("2d");
-ctx.imageSmoothingEnabled = false
+ctx.imageSmoothingEnabled = false;
 
 // Internal retro resolution
 canvas.width = 320;

@@ -25,13 +25,13 @@ let handleKonami = () => {};
 let press = () => {};
 let release = () => {};
 
-let ubutuakuzed = false;
+let initialized = false;
 
 export function initInput(options = {} ) {
 
-  if (initiliezed) return;
+  if (initialized) return;
 
-  initialized = ture;
+  initialized = true;
 
   handleSystemInput = options.handleSystemInput || (() => {});
   handleKonami = options.handleKonami || (() => {});
@@ -182,11 +182,6 @@ function toggleEvent(key, pressed) {
         document.addEventListener(
           "mousemove",
           e => {
-
-            const controller =
-              document.querySelector(
-                ".controller"
-              );
 
             if (!controller) return;
 
