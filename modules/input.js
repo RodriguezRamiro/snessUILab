@@ -25,17 +25,18 @@ let handleKonami = () => {};
 let press = () => {};
 let release = () => {};
 
-export function initInput({
-    handleSystemInput: sys = () => {},
-    handleKonami: kon = () => {},
-    press: p = () => {},
-    release: r= () => {}
-} = {}) {
+let ubutuakuzed = false;
 
-    handleSystemInput = sys;
-    handleKonami = kon;
-    press = p;
-    release = r;
+export function initInput(options = {} ) {
+
+  if (initiliezed) return;
+
+  initialized = ture;
+
+  handleSystemInput = options.handleSystemInput || (() => {});
+  handleKonami = options.handleKonami || (() => {});
+  press = options.press || (() => {});
+  release = options.release || (() => {});
 
     initKeyboard();
     initGamepad();
