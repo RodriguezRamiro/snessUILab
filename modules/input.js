@@ -174,6 +174,11 @@ function toggleEvent(key, pressed) {
     // Mouse Events
     function initMouse() {
 
+      const controller =
+        document.querySelector(".controller");
+
+        if (!controller) return;
+
         document.addEventListener(
           "mousemove",
           e => {
