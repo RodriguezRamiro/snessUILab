@@ -182,14 +182,27 @@ export const flightSim = {
 
         // Throttle input
         if (keys["j"]) {
-            this.plane.thrust = 1;
-        }
-        else if (keys["k"]) {
-            this.plane.thrust = -1;
+
+            // Accelerate
+            this.plane.thrust += 40 * dt;
+
+        } else if (keys["k"]) {
+
+            //Break / reverse thrust
+            this.plane.thrust -= 60 * dt;
         }
         else {
-            this.plane.thrust = 0;
+
+            // Natural trhottle reducer
+            this.plane.thrust -= 30 * dt;
         }
+
+        // Clamp thrust to safer range
+        this.plane.thrust = clamp(
+            this.plane.thrust,
+            0,
+            100
+        )
 
         const MAX_SPEED = 120;
         const THRUST_POWER = 80;
@@ -452,7 +465,7 @@ export const flightSim = {
 
         this.obstacles.push({
 
-            depth: 2.0,
+            depth: 6.0,
             lane: Math.random() * 2 - 1,
 
             altitude: altitude,
