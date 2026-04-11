@@ -217,8 +217,7 @@ export const flightSim = {
 
         const lift = this.plane.speed * LIFT_FACTOR;
 
-        this.plane.verticalSpeed += lift * dt;
-        this.plane.verticalSpeed -= GRAVITY * dt;
+        this.plane.verticalSpeed += (lift - GRAVITY) * dt;
 
         if (this.plane.speed < 25) {
             this.plane.verticalSpeed -= 40 * dt;
