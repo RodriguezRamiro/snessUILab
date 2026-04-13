@@ -213,10 +213,11 @@ export const flightSim = {
 
         // Lift / Gravity
         const LIFT_FACTOR = 0.06;
-        const GRAVITY = 28;
+        const GRAVITY = 2;
 
         const lift = this.plane.speed * LIFT_FACTOR;
 
+        // Apply forces
         this.plane.verticalSpeed += (lift - GRAVITY) * dt;
 
         if (this.plane.speed < 25) {
@@ -268,7 +269,7 @@ export const flightSim = {
         if (this.plane.altitude <= 10) {
             this.plane.altitude = 10;
 
-            if (this.plane.speed > 20) {
+            if (this.plane.speed > 40) {
                 this.crash();
             }
         }
