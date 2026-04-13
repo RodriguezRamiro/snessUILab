@@ -285,7 +285,7 @@ export const flightSim = {
         // Plane collision
         this.obstacles.forEach(o => {
 
-            const hitDepth = o.depth < 0.04;
+            const hitDepth = o.depth < 0.08;
 
             const hitAlt = Math.abs(
                 o.altitude - this.plane.altitude
@@ -329,6 +329,14 @@ export const flightSim = {
         console.log("GAME OVER");
         this.isCrashed = false;
         emit("gameOver");
+
+        console.log("SPD:",
+        this.plane.speed.toFixed(1),
+        "ALT:",
+        this.plane.altitude.toFixed(1),
+        "VSOD:",
+        this.plane.verticalSpeed.toFixed(1)
+        );
     },
 
     render() {
