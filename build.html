@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="global.css">
+  <title>SNES UI Lab — Build Documentation</title>
+</head>
+
+<body class="build">
+
+  <!-- ===================== NAVBAR ===================== -->
+  <nav class="navbar">
+    <div class="logo">SNES UI LAB</div>
+    <ul class="nav-links">
+      <li><a href="./index.html">Console</a></li>
+      <li><a href="./about.html">About</a></li>
+      <li><a href="./controls.html">Controls</a></li>
+      <li><a href="./games.html">Games</a></li>
+      <li><a href="./build.html">Build</a></li>
+      <li><a href="./changelog.html">Version History</a></li>
+    </ul>
+  </nav>
+
+  <!-- ===================== PAGE HEADER ===================== -->
+  <header class="page-header">
+    <h1>SNES UI Lab — System Build Documentation</h1>
+    <p>
+      This document describes the internal architecture of the SNES UI Lab runtime.
+      It outlines how the engine operates, how games integrate into the system,
+      and how core systems interact during execution.
+    </p>
+  </header>
+
+  <!-- ===================== ENGINE OVERVIEW ===================== -->
+  <section class="section">
+    <h2>Engine Overview</h2>
+
+    <p>
+      SNES UI Lab is a modular browser-based console runtime built using
+      JavaScript and HTML5 canvas rendering. The system is designed to simulate
+      a cartridge-based console environment where individual games operate as
+      isolated modules connected to a shared runtime engine.
+    </p>
+
+    <ul>
+      <li>Fixed-timestep update loop</li>
+      <li>Canvas-based rendering pipeline</li>
+      <li>Modular game cartridge loading</li>
+      <li>Deterministic execution behavior</li>
+      <li>Shared runtime state management</li>
+    </ul>
+  </section>
+
+  <!-- ===================== ENGINE LOOP ===================== -->
+  <section class="section">
+    <h2>Runtime Execution Flow</h2>
+
+    <p>
+      The engine operates using a continuous frame loop driven by
+      <strong>requestAnimationFrame</strong>. Each frame processes input,
+      updates game logic, and renders the current state to the screen.
+    </p>
+
+    <pre>
+Engine Loop
+    ↓
+Input System
+    ↓
+Game Logic Update
+    ↓
+Collision Detection
+    ↓
+State Management
+    ↓
+Rendering Pipeline
+    </pre>
+
+    <p>
+      This predictable execution order ensures consistent physics behavior,
+      reliable input handling, and stable rendering output.
+    </p>
+  </section>
+
+  <!-- ===================== RUNTIME SYSTEMS ===================== -->
+  <section class="section">
+    <h2>Core Runtime Systems</h2>
+
+    <p>
+      The runtime includes several shared systems that support all games
+      running inside the console environment.
+    </p>
+
+    <ul>
+      <li>Score tracking system</li>
+      <li>Pause state handling</li>
+      <li>Game over signaling</li>
+      <li>Shared system memory</li>
+      <li>Input state monitoring</li>
+      <li>Frame timing control</li>
+    </ul>
+
+    <p>
+      These systems operate independently of individual games, allowing
+      new cartridges to be added without modifying the core engine.
+    </p>
+  </section>
+
+  <!-- ===================== CARTRIDGE SYSTEM ===================== -->
+  <section class="section">
+    <h2>Cartridge Architecture</h2>
+
+    <p>
+      Each game in the SNES UI Lab environment functions as a self-contained
+      module referred to as a <strong>cartridge</strong>. Cartridges interact
+      with the console through a standardized interface.
+    </p>
+
+    <h3>Required Cartridge Interface</h3>
+
+    <pre>
+GameCartridge
+
+Properties:
+- name
+- version
+
+Methods:
+- init()
+- update(deltaTime)
+- render(context)
+- destroy()
+    </pre>
+
+    <p>
+      The Cartridge Manager is responsible for loading, switching, and
+      unloading games while preserving system stability.
+    </p>
+
+    <ul>
+      <li>Game initialization</li>
+      <li>Active game switching</li>
+      <li>Resource cleanup</li>
+      <li>Memory isolation</li>
+    </ul>
+  </section>
+
+  <!-- ===================== PHYSICS & COLLISION ===================== -->
+  <section class="section">
+    <h2>Physics and Collision Handling</h2>
+
+    <p>
+      Movement and collision detection are processed during the update phase
+      of the engine loop. The physics system calculates object motion using
+      velocity, acceleration, and positional updates per frame.
+    </p>
+
+    <ul>
+      <li>Position updates based on velocity</li>
+      <li>Boundary collision detection</li>
+      <li>Ground and horizon detection</li>
+      <li>Crash state triggering</li>
+    </ul>
+
+    <p>
+      Collision logic is executed before rendering to ensure accurate
+      visual feedback and consistent gameplay behavior.
+    </p>
+  </section>
+
+  <!-- ===================== RENDERING PIPELINE ===================== -->
+  <section class="section">
+    <h2>Rendering Pipeline</h2>
+
+    <p>
+      The rendering system is responsible for drawing all visual elements
+      to the screen using the HTML5 Canvas API.
+    </p>
+
+    <ul>
+      <li>Screen clearing</li>
+      <li>Background rendering</li>
+      <li>Object drawing</li>
+      <li>HUD display updates</li>
+      <li>Frame presentation</li>
+    </ul>
+
+    <p>
+      Rendering occurs after all physics and game logic updates have been
+      completed for the current frame.
+    </p>
+  </section>
+
+  <!-- ===================== SYSTEM STATUS ===================== -->
+  <section class="section">
+    <h2>Runtime Status</h2>
+
+    <p>
+      The console runtime is currently stable and operational. The system
+      supports modular expansion and predictable execution behavior across
+      multiple game cartridges.
+    </p>
+
+    <p>
+      New games can be integrated into the environment without modifying
+      the core engine architecture.
+    </p>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <p>
+        RodriguezTech Studios © 2026 RamTech LLC • SNES UI Lab
+        </p>
+  </footer>
+
+</body>
+</html>

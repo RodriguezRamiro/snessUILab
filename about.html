@@ -6,124 +6,143 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="global.css">
-    <title>SNES UI Lab - About</title>
-
+    <title>SNES UI Lab — About</title>
 </head>
+
 <body class="about">
 
-    <!-- Nav Bar -->
+    <!-- ===================== NAV BAR ===================== -->
     <nav class="navbar">
         <div class="logo">
             SNES UI LAB
         </div>
         <ul class="nav-links">
-            <li>
-                <a href="./index.html">
-                    Console
-                </a>
-            </li>
-            <li>
-                <a href="./about.html">
-                    About
-                </a>
-            </li>
-            <li>
-                <a href="./controls.html">
-                    Controls
-                </a>
-            </li>
-            <li>
-                <a href="./games.html">
-                    Games
-                </a>
-            </li>
-            <li>
-                <a href="./build.html">
-                    Build
-                </a>
-            </li>
-            <li>
-                <a href="./changelog.html">
-                    Version History
-                </a>
-            </li>
+            <li><a href="./index.html">Console</a></li>
+            <li><a href="./about.html">About</a></li>
+            <li><a href="./controls.html">Controls</a></li>
+            <li><a href="./games.html">Games</a></li>
+            <li><a href="./build.html">Build</a></li>
+            <li><a href="./changelog.html">Version History</a></li>
         </ul>
     </nav>
 
+    <!-- ===================== PAGE HEADER ===================== -->
 
-  <h1>SNES UI Lab v1.0</h1>
-  <li>Score tracking</li>
-  <li>Pause state handling</li>
-  <li>Game over signaling</li>
-  <li>Shared system memory</li>
-</ul>
+    <header class="page-header">
+        <h1>SNES UI Lab v1.0</h1>
 
-<h3>modules/games/flightSim.js</h3>
+        <p>
+        SNES UI Lab is a modular browser-based console simulation designed to
+        demonstrate structured game engine architecture, cartridge-based game
+        loading, and real-time input handling within a controlled runtime
+        environment.
+        </p>
+    </header>
 
-<ul>
-  <li>Self-contained game cartridge</li>
-  <li>Movement physics system</li>
-  <li>Collision detection</li>
-  <li>Obstacle spawning</li>
-  <li>Difficulty scaling</li>
-  <li>Rendering pipeline</li>
-  <li>Game over logic</li>
-</ul>
+    <hr>
 
-</div>
+    <!-- ===================== SYSTEM PURPOSE ===================== -->
 
-<hr>
+    <section class="section">
 
-<div class="section">
-<h2>Version History / Change Log</h2>
+        <h2>System Purpose</h2>
 
-<h3>Version 1.0 — Initial Public Demo</h3>
+        <p>
+        The SNES UI Lab project was created as an experimental development
+        platform to explore console-style runtime design using modern web
+        technologies. The system focuses on clarity of structure, predictable
+        execution behavior, and modular expansion through independent game
+        cartridges.
+        </p>
 
-<ul>
-  <li>Core console architecture established</li>
-  <li>Boot sequence and system menu implemented</li>
-  <li>Cartridge loading system operational</li>
-  <li>Stable engine loop with delta time control</li>
-  <li>Keyboard input system integrated</li>
-  <li>Event-driven communication between modules</li>
-  <li>Game state management system implemented</li>
-  <li>Flight Simulator cartridge completed and playable</li>
-  <li>Obstacle spawning and collision detection functional</li>
-  <li>Game Over state and restart cycle verified</li>
-  <li>Retro rendering pipeline stabilized (320x180 resolution)</li>
-</ul>
+    </section>
 
-<h3>Planned for Version 1.1 (Future Updates)</h3>
+    <hr>
 
-<ul>
-  <li>Additional playable cartridges (Snake, Pong, Survival Arena)</li>
-  <li>Improved collision tuning and gameplay polish</li>
-  <li>Optional HUD enhancements</li>
-  <li>Performance monitoring tools</li>
-  <li>Expanded input device support</li>
-</ul>
+    <!-- ===================== CORE OBJECTIVES ===================== -->
 
-<hr>
+    <section class="section">
 
-<div class="section">
-<h2>System Status</h2>
+        <h2>Core Objectives</h2>
 
-<p>
-  The console runtime is currently stable and operational.
-  The architecture supports multiple games, modular expansion,
-  and predictable execution behavior.
-</p>
+        <ul>
+            <li>Demonstrate modular game engine design</li>
+            <li>Simulate a retro console runtime environment</li>
+            <li>Provide a platform for expandable game cartridges</li>
+            <li>Showcase structured system architecture</li>
+            <li>Maintain predictable runtime behavior</li>
+        </ul>
 
-<p>
-  Additional games and features can be integrated without modifying
-  the core engine structure.
-</p>
-</div>
+    </section>
 
-<!-- Footer -->
-<footer class="footer">
-    <p>RodriguezTech Studios © 2026 RamTech LLC • SNES UI Lab</p>
-  </footer>
+    <hr>
+
+    <!-- ===================== SYSTEM CAPABILITIES ===================== -->
+
+    <section class="section">
+
+        <h2>System Capabilities</h2>
+
+        <ul>
+            <li>Boot sequence and system initialization</li>
+            <li>Cartridge loading and switching</li>
+            <li>Stable engine loop with delta timing</li>
+            <li>Keyboard and input device handling</li>
+            <li>Event-driven communication between modules</li>
+            <li>Real-time rendering pipeline</li>
+        </ul>
+
+    </section>
+
+    <hr>
+
+    <!-- ===================== DESIGN PHILOSOPHY ===================== -->
+
+    <section class="section">
+
+        <h2>Design Philosophy</h2>
+
+        <p>
+        The architecture of SNES UI Lab emphasizes modularity, separation of
+        responsibilities, and predictable execution flow. Each system component
+        operates independently while communicating through clearly defined
+        interfaces. This design allows the console runtime to expand without
+        introducing instability into the core engine.
+        </p>
+
+        <ul>
+            <li>Modular system structure</li>
+            <li>Clear system boundaries</li>
+            <li>Deterministic runtime behavior</li>
+            <li>Expandable cartridge ecosystem</li>
+        </ul>
+
+    </section>
+
+    <hr>
+
+    <!-- ===================== CURRENT RELEASE ===================== -->
+
+    <section class="section">
+
+        <h2>Current Release</h2>
+
+        <p>
+        Version 1.0 represents the first stable public runtime of the SNES UI
+        Lab console system. The core engine, rendering pipeline, and cartridge
+        framework have been validated through functional gameplay testing and
+        controlled runtime execution.
+        </p>
+
+    </section>
+
+    <!-- ===================== FOOTER ===================== -->
+
+    <footer class="footer">
+        <p>
+        RodriguezTech Studios © 2026 RamTech LLC • SNES UI Lab
+        </p>
+    </footer>
 
 </body>
 </html>
