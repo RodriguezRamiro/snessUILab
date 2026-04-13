@@ -1,5 +1,7 @@
 /* snesUILab/global.css */
 
+
+
 * {
   box-sizing: border-box;
   font-family: system-ui, sans-serif;
@@ -487,15 +489,97 @@
 
 /* ========= SNES Retro Theme (Controls Optimized) ============ */
 
-body.contols {
-  /* override global layout */
+
+body.controls {
+  margin: 0 auto;
+  background: #0a0a0a;
+  color: #e6e6e6;
+  font-family: "Courier New", monospace;
+
+}
+
+.controls .container {
+  max-height: 900px;
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 24px;
+}
+
+.controls h1 {
+  text-align: center;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
+
+.controls h2 {
+  margin-top: 30px;
+  border-bottom: 1px solid #444;
+  padding-bottom: 6px;
+}
+
+.controls .section {
+  margin-bottom: 28px;
+}
+
+.controls table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+
+.controls th,
+.controls td {
+  border: 1px solid #444;
+  padding: 10px;
+  text-align: left;
+}
+
+.controls th {
+  background: #1a1a1a;
+}
+
+.controls tr:nth-child(even) {
   background: #111;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            font-family: 'Courier New', Courier, monospace;
-            color: var(--system-green);
-            overflow-x: hidden;
+}
+
+.controls .key-cap {
+  display: inline-block;
+  padding: 4px 8px;
+  border: 1px solid #888;
+  border-radius: 4px;
+  background: #222;
+  font-weight: bold;
+  min-width: 32px;
+  text-align: center;
+}
+
+/* Diagram block */
+
+.controls .diagram {
+  background: #111;
+  border: 1px solid #444;
+  padding: 16px;
+  margin-top: 12px;
+  font-family: monospace;
+  line-height: 1.6;
+}
+
+/* Code block */
+
+.controls .code-block {
+  background: #111;
+  border: 1px solid #444;
+  padding: 14px;
+  margin-top: 10px;
+}
+
+/* Links */
+
+.controls a {
+  color: #7fd4ff;
+  text-decoration: none;
+}
+
+.controls a:hover {
+  text-decoration: underline;
 }
