@@ -1,4 +1,4 @@
-/* snesUILab/style.css */
+/* snesUILab/global.css */
 
 * {
   box-sizing: border-box;
@@ -440,3 +440,62 @@
     letter-spacing: 0.5px;
     box-shadow: 0 -6px 20px rgba(0,0,0,0.6);
   }
+
+
+  /* ========= About.html theme ============ */
+  body.about {
+    /* override global layout */
+
+    display: block;
+    height: auto;
+    align-items: initial;
+    justify-content: initial;
+    perspective: none;
+
+    /* page styling */
+
+    font-family: monospace;
+    background-color: #000;
+    color: #00ff88;
+
+    padding: 90px 20px 40px; /* space for navbar */
+    line-height: 1.6;
+
+}
+
+        .about h1,
+        .about h2,
+        .about h3 {
+            color: #00ffff;
+        }
+
+        .about hr {
+            border: 1px solid #00ff88;
+            margin: 20px 0;
+        }
+
+        .about .section {
+            margin-bottom: 30px;
+        }
+
+        .about ul {
+            margin-left: 20px;
+        }
+
+
+
+
+/* ========= SNES Retro Theme (Controls Optimized) ============ */
+
+body.contols {
+  /* override global layout */
+  background: #111;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Courier New', Courier, monospace;
+            color: var(--system-green);
+            overflow-x: hidden;
+}
