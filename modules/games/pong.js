@@ -39,8 +39,8 @@ export const pong = {
     update(dt) {
 
         // Move ball
-        this.ball.x =+ this.ball.vx * dt;
-        this.ball.y =+ this.ball.vy * dt;
+        this.ball.x += this.ball.vx * dt;
+        this.ball.y += this.ball.vy * dt;
 
         // Bounce Top - Bottom
         if (this.ball.y < 0 || this.ball.y >= this.HEIGHT -6)
@@ -69,20 +69,8 @@ export const pong = {
         if (this.ai.y > this.HEIGHT - 40)
             this.ai.y = this.HEIGHT - 40;
 
-        // Paddle collisions
-        if (this.ball.x < 20 &&
-            this.ball.y > this.player.y &&
-            this.ball.y < this.player.y + 40) {
-                this.ball.vx *= -1;
-            }
 
-            if (this.ball.x > 300 &&
-                this.ball.y > this.ai.y &&
-                this.ball < this.ai.y + 40) {
-                    this.ball.y *= -1;
-                }
-
-                // Player paddle collision
+        // Player paddle collision
         if (
             this.ball.x < 20 &&
             this.ball.y > this.player.y &&
@@ -107,7 +95,7 @@ export const pong = {
         }
 
         // Score — Player point
-        if (this.ball.x > this.width) {
+        if (this.ball.x > this.WIDTH) {
             this.score.player++;
             this.reset();
         }
