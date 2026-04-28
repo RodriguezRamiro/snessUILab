@@ -1,9 +1,11 @@
 /* //snesUILab/modules/games/pong.js */
 
+import { keys } from "../input.js";
+
 export const pong = {
     name: "Pong",
-    width: 320,
-    height: 180,
+    WIDTH: 320,
+    HEIGHT: 180,
 
     ball: {x: 160, y: 90, vx: 100, vy: 80},
 
@@ -23,15 +25,15 @@ export const pong = {
     },
 
     reset() {
-        this.this.ball = {
-            x: this.width / 2,
-            y: this.this.height / 2,
+        this.ball = {
+            x: this.WIDTH / 2,
+            y: this.HEIGHT / 2,
             vx: 100,
             vy: 80
         };
 
-        this.this.player.y = 70;
-        this.this.ai.y = 70;
+        this.player.y = 70;
+        this.ai.y = 70;
     },
 
     update(dt) {
@@ -40,10 +42,15 @@ export const pong = {
         this.ball.x =+ this.ball.vx * dt;
         this.ball.y =+ this.ball.vy * dt;
 
-        // Top - Bottom Bounce
-        if (this.ball.y < 0 || this.ball.y > this.heght) {
+        // Bounce Top - Bottom
+        if (this.ball.y < 0 || this.ball.y >= this.HEIGHT -6)
         this.ball.vy *= -1;
-        }
+
+
+        // Bounce Horizontal
+        if (this.ball.x <= 0 || this.ball.x >= this.WIDTH - 6)
+        this.ball.vx *= -1;
+
 
         // Player Movement
         if(keys["w"]) this.player.y -= 120 * dt;
@@ -51,16 +58,16 @@ export const pong = {
 
         // Clamp Player
         if (this.player.y < 0) this.player.y = 0;
-        if (this.player.y > this.height - 40)
-            this.player.y = this.height - 40;
+        if (this.player.y > this.HEIGHT - 40)
+            this.player.y = this.HEIGHT - 40;
 
         // Simple Ai Tracking
         this.ai.y += (this.ball.y - this.ai.y) * dt;
 
         // Clamp AI
         if (this.ai.y < 0) this.ai.y = 0;
-        if (this.ai.y > this.height - 40)
-            this.ai.y = this.height - 40;
+        if (this.ai.y > this.HEIGHT - 40)
+            this.ai.y = this.HEIGHT - 40;
 
         // Paddle collisions
         if (this.ball.x < 20 &&
@@ -107,6 +114,7 @@ export const pong = {
     },
 
     render(ctx) {
+        console.log("Ball:", this.ball.x, this.ball.y);
 
         ctx.fillStyle = "white";
 
