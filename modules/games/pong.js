@@ -47,10 +47,6 @@ export const pong = {
         this.ball.vy *= -1;
 
 
-        // Bounce Horizontal
-        if (this.ball.x <= 0 || this.ball.x >= this.WIDTH - 6)
-        this.ball.vx *= -1;
-
 
         // Player Movement
         if(keys["w"]) this.player.y -= 120 * dt;
