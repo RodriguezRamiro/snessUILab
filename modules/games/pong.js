@@ -66,14 +66,24 @@ export const pong = {
             this.ball.y < this.player.y + 40
         ) {
             this.ball.vx *= -1;
+            // Increase speed on collision
+            this.speedMultiplier *= 0.1
+            // Reset speed on reset
+            this.speedMultiplier = 1
+
         }
 
+        // Ai Paddle Collision
         if (
             this.ball.x > 300 &&
             this.ball.y > this.ai.y &&
             this.ball.y < this.ai.y + 40
         ) {
             this.ball.vx *= -1;
+            // Increase speed on collision
+            this.speedMultiplier *= 0.1
+            // Reset speed on reset
+            this.speedMultiplier = 1
         }
 
         // Score — AI point
@@ -102,24 +112,6 @@ export const pong = {
         if (this.ai.y > this.HEIGHT - 40)
             this.ai.y = this.HEIGHT - 40;
 
-
-        // Player paddle collision
-        if (
-            this.ball.x < 20 &&
-            this.ball.y > this.player.y &&
-            this.ball.y < this.player.y + 40
-        ) {
-            this.ball.vx *= -1;
-        }
-
-        // AI paddle collision
-        if (
-            this.ball.x > 300 &&
-            this.ball.y > this.ai.y &&
-            this.ball.y < this.ai.y + 40
-        ) {
-            this.ball.vx *= -1;
-        }
 
 
         // Score — Player point
