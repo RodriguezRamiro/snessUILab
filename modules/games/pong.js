@@ -7,7 +7,7 @@ export const pong = {
     WIDTH: 320,
     HEIGHT: 180,
 
-    state: "playing", // "playing" | "gameover"
+    state: "playing", // "playing" | | "paused" "gameover"
     winner: null,
     WIN_SCORE: 5,
 
@@ -54,10 +54,14 @@ export const pong = {
     },
 
     update(dt) {
-        // Stop updates if game is over
+        // Pause toggle
+        if (keys["p"]) {
+        this.state = this.state === "paused" ? "playing" : "paused";
+        }
+
+        // Stop updates if paused or gameover
         if (this.state !== "playing") {
-            // Restart on key press (Enter)
-            if (keys["Enter"]) {
+            if (this.state === "gameover" && keys["Enter"]) {
                 this.resetGame();
             }
             return;
@@ -68,7 +72,13 @@ export const pong = {
         this.ball.y += this.ball.vy * dt * this.speedMultiplier;
 
         // Wall bounce
-        if (this.ball.y < 0 || this.ball.y > this.HEIGHT - 6) {
+        if (this.ball.y < 0) {
+            this.ball.y = 0;
+            this.ball.vy *= -1;
+        }
+
+        if (this.ball.y > this.HEIGHT - 6) {
+            this.ball.y = this.HEIGHT - 6;
             this.ball.vy *= -1;
         }
 
@@ -82,6 +92,7 @@ export const pong = {
             this.ball.x = 16; // prevent sticking
 
             this.speedMultiplier += 0.1;
+            if (this.speedMultiplier > 2.5) this.speedMultiplier = 2.5;
         }
 
         // AI paddle collision
@@ -104,14 +115,14 @@ export const pong = {
         if (this.ball.x < 0) {
             this.score.ai++;
             this.checkWin();
-            this.resetRound();
+            if (this.state === "playing") this.resetRound();
         }
 
          // Player score
          if (this.ball.x > this.WIDTH) {
             this.score.player++;
             this.checkWin();
-            this.resetRound();
+            if (this.state === "playing") this.resetRound();
         }
 
         // Player Movement
@@ -122,7 +133,11 @@ export const pong = {
         this.player.y = Math.max(0, Math.min(this.HEIGHT - 40, this.player.y));
 
         // AI movement
-        this.ai.y += (this.ball.y - this.ai.y) * dt * this.aiSpeed;
+        const error = 10; // tweak this
+
+        const target = this.ball.y + (Math.random() * error - error / 2);
+
+        this.ai.y += (target - this.ai.y) * dt * this.aiSpeed;
 
         // Clamp AI
         this.ai.y = Math.max(0, Math.min(this.HEIGHT - 40, this.ai.y));
@@ -151,6 +166,11 @@ export const pong = {
         ctx.font = "12px monospace";
         ctx.fillText(this.score.player, 80, 15);
         ctx.fillText(this.score.ai, 230, 15);
+
+        // Render pause text
+        if (this.state === "paused") {
+            ctx.fillText("PAUSED", 120, 90);
+        }
 
         // Game over
         if (this.state === "gameover") {
