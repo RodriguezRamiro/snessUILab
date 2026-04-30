@@ -23,6 +23,7 @@ export const pong = {
     },
 
     speedMultiplier: 1,
+    aiSpeed: 2,
 
 
 
@@ -105,7 +106,7 @@ export const pong = {
             this.player.y = this.HEIGHT - 40;
 
         // Simple Ai Tracking
-        this.ai.y += (this.ball.y - this.ai.y) * dt;
+        this.ai.y += (this.ball.y - this.ai.y) * dt * this.aiSpeed;
 
         // Clamp AI
         if (this.ai.y < 0) this.ai.y = 0;
