@@ -73,6 +73,7 @@ export const pong = {
         // Score — AI point
         if (this.ball.x < 0) {
             this.score.ai++;
+            this.checkWin();
             this.reset();
         }
 
@@ -114,15 +115,11 @@ export const pong = {
             this.ball.vx *= -1;
         }
 
-        // Score — AI point
-        if (this.ball.x < 0) {
-            this.score.ai++;
-            this.reset();
-        }
 
         // Score — Player point
         if (this.ball.x > this.WIDTH) {
             this.score.player++;
+            this.checkWin();
             this.reset();
         }
     },
