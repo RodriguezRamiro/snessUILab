@@ -71,6 +71,7 @@ export const pong = {
             this.speedMultiplier *= 0.1
             // Reset speed on reset
             this.speedMultiplier = 1
+            //Scale Difficutly
 
         }
 
@@ -85,7 +86,12 @@ export const pong = {
             this.speedMultiplier *= 0.1
             // Reset speed on reset
             this.speedMultiplier = 1
+            // Scale difficulty
+            this.aiSpeed += 0.1;
+
         }
+        // Speed Cap
+        if (this.aiSpeed > 6) this.aiSpeed = 6;
 
         // Score — AI point
         if (this.ball.x < 0) {
