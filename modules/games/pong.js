@@ -43,8 +43,33 @@ export const pong = {
         this.ball.y += this.ball.vy * dt;
 
         // Bounce Top - Bottom
-        if (this.ball.y < 0 || this.ball.y >= this.HEIGHT -6)
+        if (this.ball.y < 0 || this.ball.y >= this.HEIGHT -6){
         this.ball.vy *= -1;
+        }
+
+
+        // Paddle Collisisons
+        if (
+            this.ball.x < 20 &&
+            this.ball.y > this.player.y &&
+            this.ball.y < this.player.y + 40
+        ) {
+            this.ball.vx *= -1;
+        }
+
+        if (
+            this.ball.x > 300 &&
+            this.ball.y > this.ai.y &&
+            this.ball.y < this.ai.y + 40
+        ) {
+            this.ball.vx *= -1;
+        }
+
+        // Score — AI point
+        if (this.ball.x < 0) {
+            this.score.ai++;
+            this.reset();
+        }
 
 
 
@@ -141,6 +166,21 @@ export const pong = {
             15
         );
     },
+
+    reset() {
+        const direction = Math.random() < 0.5 ? -1 : 1;
+
+        this.ball = {
+            x: this.WIDTH / 2,
+            y: this.HEIGHT / 2,
+            vx: 120 * direction,
+            vy: 80
+        };
+
+        this.player.y = 70;
+        this.ai.y = 70;
+    },
+
 
     destroy() {
         console.log("Pong destroyed");
