@@ -169,6 +169,18 @@ export const pong = {
         );
     },
 
+    checkWin() {
+        if (this.score.player >= this.WIN_SCORE) {
+            this.state = "gameover";
+            this.winner = "PLAYER";
+        }
+
+        if (this.score.ai >= this.WIN_SCORE) {
+            this.state = "gameover";
+            this.winner = "AI";
+        }
+    },
+
     reset() {
         const direction = Math.random() < 0.5 ? -1 : 1;
 
