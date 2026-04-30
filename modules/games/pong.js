@@ -6,15 +6,14 @@ export const pong = {
     name: "Pong",
     WIDTH: 320,
     HEIGHT: 180,
-    state: playing, // "playing | "gameover"
+
+    state: "playing", // "playing" | "gameover"
     winner: null,
     WIN_SCORE: 5,
-
 
     ball: {x: 160, y: 90, vx: 100, vy: 80},
 
     player: {y: 70},
-
     ai: {y: 70},
 
     score: {
@@ -25,19 +24,28 @@ export const pong = {
     speedMultiplier: 1,
     aiSpeed: 2,
 
-
-
     init() {
         console.log( "Pong starting...");
-
-        this.reset();
+        this.resetGame();
     },
 
-    reset() {
+    resetGame() {
+        this.score.player = 0;
+        this.score.ai = 0;
+        this.state = "playing";
+        this.winner = null;
+        this.aiSpeed = 2;
+        this.speedMultiplier = 1;
+        this.resetRound();
+    },
+
+    resetRound() {
+        const direction = Math.random() < 0.5 ? -1 : 1;
+
         this.ball = {
             x: this.WIDTH / 2,
             y: this.HEIGHT / 2,
-            vx: 100,
+            vx: 120 * direction,
             vy: 80
         };
 
@@ -46,135 +54,108 @@ export const pong = {
     },
 
     update(dt) {
-
         // Stop updates if game is over
-        if (this.state !== "playing") return;
+        if (this.state !== "playing") {
+            // Restart on key press (Enter)
+            if (keys["Enter"]) {
+                this.resetGame();
+            }
+            return;
+        }
 
         // Move ball
         this.ball.x += this.ball.vx * dt * this.speedMultiplier;
         this.ball.y += this.ball.vy * dt * this.speedMultiplier;
 
-        // Bounce Top - Bottom
-        if (this.ball.y < 0 || this.ball.y >= this.HEIGHT -6){
-        this.ball.vy *= -1;
+        // Wall bounce
+        if (this.ball.y < 0 || this.ball.y > this.HEIGHT - 6) {
+            this.ball.vy *= -1;
         }
 
-
-        // Paddle Collisisons
+        // Player paddle collision
         if (
-            this.ball.x < 20 &&
+            this.ball.x < 16 &&
             this.ball.y > this.player.y &&
             this.ball.y < this.player.y + 40
         ) {
             this.ball.vx *= -1;
-            // Increase speed on collision
-            this.speedMultiplier *= 0.1
-            // Reset speed on reset
-            this.speedMultiplier = 1
-            //Scale Difficutly
+            this.ball.x = 16; // prevent sticking
 
+            this.speedMultiplier += 0.1;
         }
 
-        // Ai Paddle Collision
+        // AI paddle collision
         if (
-            this.ball.x > 300 &&
+            this.ball.x > 298 &&
             this.ball.y > this.ai.y &&
             this.ball.y < this.ai.y + 40
         ) {
             this.ball.vx *= -1;
-            // Increase speed on collision
-            this.speedMultiplier *= 0.1
-            // Reset speed on reset
-            this.speedMultiplier = 1
-            // Scale difficulty
-            this.aiSpeed += 0.1;
+            this.ball.x = 298;
 
+            this.speedMultiplier += 0.1;
+            this.aiSpeed += 0.1;
         }
-        // Speed Cap
+
+        // Cap AI difficulty
         if (this.aiSpeed > 6) this.aiSpeed = 6;
 
-        // Score — AI point
+        // AI score
         if (this.ball.x < 0) {
             this.score.ai++;
             this.checkWin();
-            this.reset();
+            this.resetRound();
         }
 
-
+         // Player score
+         if (this.ball.x > this.WIDTH) {
+            this.score.player++;
+            this.checkWin();
+            this.resetRound();
+        }
 
         // Player Movement
         if(keys["w"]) this.player.y -= 120 * dt;
         if(keys["s"]) this.player.y += 120 * dt;
 
-        // Clamp Player
-        if (this.player.y < 0) this.player.y = 0;
-        if (this.player.y > this.HEIGHT - 40)
-            this.player.y = this.HEIGHT - 40;
+        // Clamp player
+        this.player.y = Math.max(0, Math.min(this.HEIGHT - 40, this.player.y));
 
-        // Simple Ai Tracking
+        // AI movement
         this.ai.y += (this.ball.y - this.ai.y) * dt * this.aiSpeed;
 
         // Clamp AI
-        if (this.ai.y < 0) this.ai.y = 0;
-        if (this.ai.y > this.HEIGHT - 40)
-            this.ai.y = this.HEIGHT - 40;
-
-
-
-        // Score — Player point
-        if (this.ball.x > this.WIDTH) {
-            this.score.player++;
-            this.checkWin();
-            this.reset();
-        }
+        this.ai.y = Math.max(0, Math.min(this.HEIGHT - 40, this.ai.y));
     },
 
-    render(ctx) {
-        console.log("Ball:", this.ball.x, this.ball.y);
 
+
+    render(ctx) {
         ctx.fillStyle = "white";
 
+        // Center line
+        for (let y = 0; y < this.HEIGHT; y += 10) {
+            ctx.fillRect(this.WIDTH / 2 - 1, y, 2, 5);
+        }
+
         // Player paddle
-        ctx.fillRect(
-            10,
-            this.player.y,
-            6,
-            40
-        );
+        ctx.fillRect(10, this.player.y, 6, 40);
 
         // AI paddle
-        ctx.fillRect(
-            304,
-            this.ai.y,
-            6,
-            40
-        );
+        ctx.fillRect(304, this.ai.y, 6, 40);
 
         // Ball
-        ctx.fillRect(
-            this.ball.x,
-            this.ball.y,
-            6,
-            6
-        );
+        ctx.fillRect(this.ball.x, this.ball.y, 6, 6);
 
-        // Score display
+        // Score
         ctx.font = "12px monospace";
+        ctx.fillText(this.score.player, 80, 15);
+        ctx.fillText(this.score.ai, 230, 15);
 
-        ctx.fillText(
-            this.score.player,
-            80,
-            15
-        );
-
-        ctx.fillText(
-            this.score.ai,
-            230,
-            15
-        );
-
+        // Game over
         if (this.state === "gameover") {
-            ctx.fillText(`${this.winner} WINS`, 120, 90);
+            ctx.fillText(`${this.winner} WINS`, 110, 80);
+            ctx.fillText("Press Enter", 105, 100);
         }
     },
 
@@ -189,23 +170,4 @@ export const pong = {
             this.winner = "AI";
         }
     },
-
-    reset() {
-        const direction = Math.random() < 0.5 ? -1 : 1;
-
-        this.ball = {
-            x: this.WIDTH / 2,
-            y: this.HEIGHT / 2,
-            vx: 120 * direction,
-            vy: 80
-        };
-
-        this.player.y = 70;
-        this.ai.y = 70;
-    },
-
-
-    destroy() {
-        console.log("Pong destroyed");
-    }
-};
+}
