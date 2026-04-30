@@ -43,6 +43,9 @@ export const pong = {
 
     update(dt) {
 
+        // Stop updates if game is over
+        if (this.state !== "playing") return;
+
         // Move ball
         this.ball.x += this.ball.vx * dt;
         this.ball.y += this.ball.vy * dt;
@@ -167,6 +170,10 @@ export const pong = {
             230,
             15
         );
+
+        if (this.state === "gameover") {
+            ctx.fillText(`${this.winner} WINS`, 120, 90);
+        }
     },
 
     checkWin() {
