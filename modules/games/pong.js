@@ -10,6 +10,7 @@ export const pong = {
     winner: null,
     WIN_SCORE: 5,
 
+
     ball: {x: 160, y: 90, vx: 100, vy: 80},
 
     player: {y: 70},
@@ -20,6 +21,8 @@ export const pong = {
         player: 0,
         ai: 0
     },
+
+    speedMultiplier: 1,
 
 
 
@@ -47,8 +50,8 @@ export const pong = {
         if (this.state !== "playing") return;
 
         // Move ball
-        this.ball.x += this.ball.vx * dt;
-        this.ball.y += this.ball.vy * dt;
+        this.ball.x += this.ball.vx * dt * this.speedMultiplier;
+        this.ball.y += this.ball.vy * dt * this.speedMultiplier;
 
         // Bounce Top - Bottom
         if (this.ball.y < 0 || this.ball.y >= this.HEIGHT -6){
