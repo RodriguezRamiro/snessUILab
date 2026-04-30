@@ -6,6 +6,9 @@ export const pong = {
     name: "Pong",
     WIDTH: 320,
     HEIGHT: 180,
+    state: playing, // "playing | "gameover"
+    winner: null,
+    WIN_SCORE: 5,
 
     ball: {x: 160, y: 90, vx: 100, vy: 80},
 
@@ -17,6 +20,8 @@ export const pong = {
         player: 0,
         ai: 0
     },
+
+
 
     init() {
         console.log( "Pong starting...");
