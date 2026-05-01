@@ -179,6 +179,35 @@ export const pong = {
         }
     },
 
+    // Paddle Collsion helper function
+
+    handlePaddleCollsion(paddleY, isPlayer) {
+        const paddleCenter = paddleY + 20;
+        const ballCenter = this.ball.y + 3;
+
+        // Distance from center (-1 to 1)
+        let relative = (ballCenter - paddleCenter) / 20;
+
+        // Clamp just in case
+        relative = Math.max(-1, Math.min(1, relative));
+
+        const maxAngle = Math.PI / 4; //45 degress
+        const angle = relative * maxAngle;
+
+        const speed = math.sqrt(this.ball.vx ** 2 + this.ball.vy ** 2);
+
+        // Direciton depends on which paddle
+        const direction = isPlayer ? 1 : -1;
+
+        this.ball.vx = Math.cos(angle) * speed * direction;
+        this.ball.vy = Math.sin(angle) * speed;
+
+        // Prevent "too vertical" boring loops
+        if (Math.abs(this.ball.vx) < 50) {
+            this.ball.vx = 50 * direction;
+        }
+    }
+
     checkWin() {
         if (this.score.player >= this.WIN_SCORE) {
             this.state = "gameover";
