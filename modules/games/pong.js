@@ -88,8 +88,9 @@ export const pong = {
             this.ball.y > this.player.y &&
             this.ball.y < this.player.y + 40
         ) {
-            this.ball.vx *= -1;
             this.ball.x = 16; // prevent sticking
+
+            this.handlePaddleCollision(this.player.y, true);
 
             this.speedMultiplier += 0.1;
             if (this.speedMultiplier > 2.5) this.speedMultiplier = 2.5;
@@ -101,8 +102,9 @@ export const pong = {
             this.ball.y > this.ai.y &&
             this.ball.y < this.ai.y + 40
         ) {
-            this.ball.vx *= -1;
             this.ball.x = 298;
+
+            this.handlePaddleCollision(this.ai.y, false);
 
             this.speedMultiplier += 0.1;
             this.aiSpeed += 0.1;
@@ -179,9 +181,9 @@ export const pong = {
         }
     },
 
-    // Paddle Collsion helper function
+    // Paddle Collision helper function
 
-    handlePaddleCollsion(paddleY, isPlayer) {
+    handlePaddleCollision(paddleY, isPlayer) {
         const paddleCenter = paddleY + 20;
         const ballCenter = this.ball.y + 3;
 
@@ -194,7 +196,7 @@ export const pong = {
         const maxAngle = Math.PI / 4; //45 degress
         const angle = relative * maxAngle;
 
-        const speed = math.sqrt(this.ball.vx ** 2 + this.ball.vy ** 2);
+        const speed = Math.sqrt(this.ball.vx ** 2 + this.ball.vy ** 2);
 
         // Direciton depends on which paddle
         const direction = isPlayer ? 1 : -1;
@@ -203,10 +205,10 @@ export const pong = {
         this.ball.vy = Math.sin(angle) * speed;
 
         // Prevent "too vertical" boring loops
-        if (Math.abs(this.ball.vx) < 50) {
-            this.ball.vx = 50 * direction;
+        if (Math.abs(this.ball.vx) < 60) {
+            this.ball.vx = 60 * direction;
         }
-    }
+    },
 
     checkWin() {
         if (this.score.player >= this.WIN_SCORE) {
