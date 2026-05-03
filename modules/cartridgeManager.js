@@ -68,7 +68,7 @@ export function updateGame(dt) {
 export function renderGame(ctx) {
     if (currentGame && currentGame.render) {
         currentGame.render(ctx);
-    } else
+    } else {
 
     ctx.fillStyle = "#00ff88";
     ctx.font = "8px monospace";
@@ -78,4 +78,5 @@ export function renderGame(ctx) {
         110,
         90,
     );
+    }
 };
