@@ -1,6 +1,7 @@
 /* //snesUILab/modules/games/pong.js */
 
 import { keys } from "../input.js";
+import { emit } from "../eventBus.js";
 
 export const pong = {
     name: "Pong",
@@ -214,11 +215,15 @@ export const pong = {
         if (this.score.player >= this.WIN_SCORE) {
             this.state = "gameover";
             this.winner = "PLAYER";
+
+            emit("gameOver", this.winner);
         }
 
         if (this.score.ai >= this.WIN_SCORE) {
             this.state = "gameover";
             this.winner = "AI";
+
+            emit("gameOver", this.winner);
         }
     },
 }
