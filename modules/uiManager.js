@@ -118,7 +118,7 @@ export const STATES = {
   function startMenu() {
 
     selectedGame = 0;
-    
+
     lineIndex = 0;
 
     currentState = STATES.MENU;
@@ -217,6 +217,8 @@ export const STATES = {
         setTimeout(() => {
 
           currentState = STATES.GAME;
+
+          bootText.innerHTML = "";
 
           display.classList.add("active");
 
