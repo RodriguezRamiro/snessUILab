@@ -123,6 +123,7 @@ export const STATES = {
 
     currentState = STATES.MENU;
 
+
     renderMenu();
 
   }
