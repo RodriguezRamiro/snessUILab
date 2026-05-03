@@ -16,6 +16,8 @@ import { togglePause } from "./gameState.js";
  * Smooth movement
  * Multiple simultaneous controls */
 
+const SHOW_INPUT_DEBUG = false
+
 export const keys = {};
 
 let gamepadIndex = null;
@@ -66,7 +68,7 @@ function initKeyboard() {
                 `[data-key="${key}"]`
             );
 
-        if (btn) press(btn);
+        if (btn && SHOW_INPUT_DEBUG) press(btn);
     });
 
     // Keyboard Release
@@ -81,7 +83,7 @@ function initKeyboard() {
                 `[data-key="${key}"]`
             );
 
-        if (btn) release(btn);
+        if (btn && SHOW_INPUT_DEBUG) release(btn);
     });
 }
 
@@ -150,7 +152,7 @@ function toggleEvent(key, pressed) {
             `[data-key="${key}"]`
             );
 
-            if(!el) return;
+            if(!el || !SHOW_INPUT_DEBUG) return;
 
             el.classList.toggle(
                 "active",
