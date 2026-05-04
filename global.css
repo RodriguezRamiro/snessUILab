@@ -116,6 +116,13 @@
 
   /* Display / CTR */
 
+  .display,
+  .crt:before,
+  .crt:after,
+  .controller {
+    will-change: transform, opacity;
+  }
+
   .display {
     position: relative;
     width: 280px;
