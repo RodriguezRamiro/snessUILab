@@ -225,7 +225,7 @@ export const STATES = {
 
           currentState = STATES.GAME;
 
-          bootText.class = "gameover-screen";
+          bootText.className = "none";
 
           display.classList.add("active");
 
