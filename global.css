@@ -285,8 +285,8 @@
 
   .controller {
   animation: consoleIdle 9s ease-in-out infinite;
-  width: 700px;
-  height: 260px;
+  width: min(700px, 90vw);
+  height: auto;
 
   background:
   radial-gradient(circle at 20% 30%, rgba(255,255,255,0.06) 0%, transparent 3%),
@@ -349,6 +349,7 @@
     border-radius: 6px;
     }
 
+
     .btn.center {
     background: var(--color-bg);
     box-shadow: none;
@@ -377,7 +378,7 @@
     content: '';
     position: absolute;
     top: -10%;
-    left: 15%;
+    left: 50%;
     width: 70%;
     height: 40%;
     background: radial-gradient(ellipse at center,
