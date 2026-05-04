@@ -225,7 +225,7 @@ export const STATES = {
 
           currentState = STATES.GAME;
 
-          bootText.innerHTML = "";
+          bootText.class = "gameover-screen";
 
           display.classList.add("active");
 
@@ -282,7 +282,7 @@ export const STATES = {
           document.createElement("div");
 
         startPrompt.textContent =
-          "> PRESS START";
+          "> PRESS ENTER";
 
         startPrompt.classList.add("blink");
 
