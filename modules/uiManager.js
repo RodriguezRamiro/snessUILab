@@ -241,7 +241,7 @@ export const STATES = {
 
   }
 
-  export function triggerGameOver() {
+  export function triggerGameOver(winner) {
 
     currentState = STATES.GAME_OVER;
 
