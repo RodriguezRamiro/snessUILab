@@ -81,7 +81,7 @@
 
 
   .nav-links a:hover {
-  color: #4cc3ff;
+  color: var(--color-accent);
   }
 
 
