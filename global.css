@@ -3,9 +3,20 @@
 
 /*Root variables */
 :root {
-  --accent-border: rgba(193, 0, 18, 0.31);
-  --panel-bg: #111;
+  --color-bg: #1c1c1c;
+  --color-surface: #111;
+
+  --color-text: #00ffd5;
+  --color-text-muted: #aaa;
+
   --panel-border: #444;
+
+  --color-accent: #4cc3ff;
+  --color-border: #444;
+
+  --accent-border: rgba(193, 0, 18, 0.31);
+
+  --panel-bg: #111;
 }
 
 /* Global Reset */
@@ -19,13 +30,16 @@
   body {
   margin: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  background: #1c1c1c;
+  background: var(--color-bg);
+  }
+
+.app-layout {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   perspective: 900px;
-  }
+}
 
   /* Navbar */
 
@@ -39,7 +53,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 40px;
-  color: white;
+  color: var(--color-text);
   z-index: 1000;
   box-shadow: 0 6px 20px rgba(0,0,0,0.8);
   border: 1px solid var(--accent-border);
@@ -58,7 +72,7 @@
   }
 
   .nav-links a {
-  color: #ddd;
+    color: var(--color-text);
   text-decoration: none;
   font-size: 0.95rem;
   transition: 0.2s ease;
@@ -78,7 +92,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 70px;
+  padding-top: 70px 0;
   padding-bottom: 70px;
   }
 
@@ -106,7 +120,7 @@
     position: relative;
     width: 280px;
     height: 180px;
-    background: #000;
+    background: var(--color-bg);
     border: 1px solid  var(--accent-border);
     border-radius: 10px;
     box-shadow:
@@ -118,7 +132,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #00ffd5;
+    color: var(--color-text);
     font-family: monospace;
     font-size: 0.9rem;
     letter-spacing: 1px;
@@ -155,7 +169,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: #00ffd5;
+    color: var(--color-text);
     font-family: monospace;
     font-size: 0.7rem;
     text-align: center;
@@ -329,7 +343,7 @@
     }
 
     .btn.center {
-    background: #111;
+    background: var(--color-bg);
     box-shadow: none;
     }
 
@@ -411,7 +425,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: var(--color-text);
   border: 1px solid var(--accent-border);
   box-shadow:
   inset 0 5px 10px rgba(255,255,255,0.35),
@@ -473,7 +487,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #aaa;
+  color: var(--color-text-muted);
   font-size: 0.85rem;
   letter-spacing: 0.5px;
   box-shadow: 0 -6px 20px rgba(0,0,0,0.6);
@@ -500,8 +514,8 @@
     perspective: none;
 
     font-family: monospace;
-    background-color: #000;
-    color: #00ff88;
+    background-color: var(--color-bg);
+    color: var(--color-text);
 
     padding: 90px 20px 40px;
     line-height: 1.6;
@@ -548,8 +562,8 @@
   .build pre,
   .games pre,
   .changelog pre {
-  background: #111;
-  border: 1px solid #444;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
   padding: 14px;
   margin-top: 10px;
   font-family: monospace;
@@ -560,8 +574,8 @@
   .build code,
   .games code,
   .changelog code {
-  background: #111;
-  border: 1px solid #333;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
   padding: 2px 6px;
   }
 
@@ -576,19 +590,19 @@
 
   /* Status Colors */
   .status-stable {
-  background: #003300;
-  color: #00ff88;
+  background: var(--color-bg);
+  color: var(--color-text);
   border: 1px solid #00ff88;
   }
 
   .status-dev {
-  background: #332200;
+  background: var(--color-bg);
   color: #ffaa00;
   border: 1px solid #ffaa00;
   }
 
   .status-exp {
-  background: #330000;
+  background: var(--color-bg);
   color: #ff5555;
   border: 1px solid #ff5555;
   }
@@ -600,8 +614,8 @@
 
   body.controls {
   margin: 0 auto;
-  background: #0a0a0a;
-  color: #e6e6e6;
+  background: var(--color-bg);
+  color: var(--color-text);
   font-family: "Courier New", monospace;
   }
 
@@ -631,11 +645,11 @@
   }
 
   .controls th {
-  background: #1a1a1a;
+  background: var(--color-bg);
   }
 
   .controls tr:nth-child(even) {
-  background: #111;
+  background: var(--color-bg);
   }
 
 
@@ -644,7 +658,7 @@
   padding: 4px 8px;
   border: 1px solid #888;
   border-radius: 4px;
-  background: #222;
+  background: var(--color-bg);
   font-weight: bold;
   min-width: 32px;
   text-align: center;
@@ -653,7 +667,7 @@
 
   /* Diagram block */
   .controls .diagram {
-  background: #111;
+  background:var(--color-bg);
   border: 1px solid #444;
   padding: 16px;
   margin-top: 12px;
@@ -665,7 +679,7 @@
 
   /* Code block */
   .controls .code-block {
-  background: #111;
+  background: var(--color-bg);
   border: 1px solid #444;
   padding: 14px;
   margin-top: 10px;
