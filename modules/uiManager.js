@@ -1,5 +1,6 @@
 /* //snesUILab/modules/uiManager.js */
 
+import { on } from "./eventBus.js";
 
 /**
  * HUD
@@ -9,6 +10,11 @@
  * Score Display
  * Lives Display
  */
+
+
+on("gameOver", (winner) => {
+  triggerGameOver(winner);
+});
 
 export const STATES = {
     BOOT: "boot",
@@ -239,10 +245,12 @@ export const STATES = {
 
     currentState = STATES.GAME_OVER;
 
+    bootText.style.display = "block";
+
     bootText.innerHTML = `
-      <div>*** GAME OVER ***</div>
+      <div>***${winner} GAME OVER ***</div>
       <br>
-      <div>PRESS START</div>
+      <div>PRESS ENTER</div>
     `;
 
   }
