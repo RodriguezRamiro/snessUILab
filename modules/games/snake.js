@@ -16,12 +16,20 @@ let moveInterval = 0.1; // controls speed
 export const snake = {
     name: "Snake",
 
-    init() {
-        console.log( "Snake staring..." );
+    init(canvas) {
+        console.log("Snake staring...");
+
+        cols = Math.floor(canvas.width / tileSize);
+        rows = Math.floor(canvas.height / tileSize);
+
+        snakeBody = [{ x: 10, y: 10 }];
+        direction = { x: 1, y: 0 };
+        nextDirection = { x: 1, y: 0 };
+
+        spawnFood();
     },
 
     update(dt) {
-        // game logic here later
     },
 
     render(ctx) {
