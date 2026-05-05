@@ -30,6 +30,21 @@ export const snake = {
     },
 
     update(dt) {
+        handleInput();
+
+        moveTimer += dt;
+
+        if (moveTimer < moveInterval) return;
+        moveTimer = 0;
+
+        direction = nextDirection;
+
+        const head = {
+            x: snakeBody[0].x + direction.x,
+            y: snakeBody[0].y + direction.y
+        };
+
+        //
     },
 
     render(ctx) {
