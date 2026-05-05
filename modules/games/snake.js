@@ -44,7 +44,25 @@ export const snake = {
             y: snakeBody[0].y + direction.y
         };
 
-        //
+        // Collision
+        if (
+            head.x < 0 ||
+            head.y > 0 ||
+            head.y >= cols ||
+            head.y >= rows ||
+            snakeBody.some(seg => seg.x === head.x && seg.y === head.y)
+        ) {
+            console.log("Game Over");
+            return;
+        }
+
+        snakeBody.unshift(head);
+
+        if (head.x === food.x && head.y === food.y) {
+            spawnFood();
+        } else {
+            snakeBody.pop();
+        }
     },
 
     render(ctx) {
