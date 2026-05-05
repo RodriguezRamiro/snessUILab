@@ -66,11 +66,58 @@ export const snake = {
     },
 
     render(ctx) {
+
+        // Clear
+        clearfillStyle = "black";
+        ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
+        // Snake
         ctx.fillStyle = "lime";
-        ctx.fillRect(50, 50, 10, 10);
+        snakeBody.forEach( seg => {
+            ctx.fillRect(
+            seg.x * tileSize,
+            seg.y * tileSize,
+            tileSize,
+            tileSize
+        );
+    });
+
+    // Food
+    ctx.fillStyle = "red";
+    ctx.fillRect(
+        food.x * tileSize,
+        food.y * tileSize,
+        tileSize,
+        tileSize
+    );
     },
 
     destroy() {
         console.log("Snake shutting down...");
     }
 };
+
+// Input (uses your system)
+
+function handleInput() {
+    if (keys["w"] || keys["arrowup"]) {
+        if (direction.y !== 1)
+        nextDirection = {x: 0, y: -1 };
+    }
+
+    if (keys["s"] || keys["arrowdown"]) {
+        if (direction.y !== -1)
+        nextDirection = { x: 0, y: 1 };
+    }
+
+    if(keys[a] || keys["arrowdown"]) {
+        if(direction.x !== 1)
+        nextDirection = { x: -1, y: 0};
+    }
+
+    if (keys["d"] || keys["arrowright"]) {
+
+        if(direction.x !== -1)
+        nextDirection = { x: 1, y: 0};
+    }
+}
