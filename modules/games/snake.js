@@ -121,3 +121,12 @@ function handleInput() {
         nextDirection = { x: 1, y: 0};
     }
 }
+
+// Helper
+
+function spawnFood() {
+    food = {
+        x: Math.floor(Math.random() * cols),
+        y: Math.floor(Math.random() * rows)
+    };
+}
