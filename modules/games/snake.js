@@ -110,7 +110,7 @@ function handleInput() {
         nextDirection = { x: 0, y: 1 };
     }
 
-    if(keys["a"] || keys["arrowdown"]) {
+    if(keys["a"] || keys["arrowleft"]) {
         if(direction.x !== 1)
         nextDirection = { x: -1, y: 0};
     }
