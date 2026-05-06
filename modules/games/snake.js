@@ -1,11 +1,13 @@
 /* //snesUILab/modules/games/snake.js */
 
 import { keys } from "../input.js";
+import { emit } from "../eventBus.js";
 
 let snakeBody;
 let direction;
 let nextDirection;
 let food;
+let score = 0;
 
 let tileSize = 10;
 let cols, rows;
@@ -13,18 +15,26 @@ let cols, rows;
 let moveTimer = 0;
 let moveInterval = 0.1; // controls speed
 
+let isGameOver = false
+
 export const snake = {
     name: "Snake",
 
     init(canvas) {
         console.log("Snake staring...");
 
+        isGameOver = false;
+        
         cols = Math.floor(canvas.width / tileSize);
         rows = Math.floor(canvas.height / tileSize);
 
         snakeBody = [{ x: 10, y: 10 }];
         direction = { x: 1, y: 0 };
         nextDirection = { x: 1, y: 0 };
+
+        score = 0;
+        moveInterval = 0.1;
+        moveTimer = 0;
 
         spawnFood();
     },
@@ -52,13 +62,18 @@ export const snake = {
             head.y >= rows ||
             snakeBody.some(seg => seg.x === head.x && seg.y === head.y)
         ) {
-            console.log("Game Over");
+            if (!isGameOver) {
+                isGameOver = true;
+                emit("gameOver", { score });
+            }
             return;
         }
 
         snakeBody.unshift(head);
 
         if (head.x === food.x && head.y === food.y) {
+            score++;
+            moveInterval *= 0.95;
             spawnFood();
         } else {
             snakeBody.pop();
