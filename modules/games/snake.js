@@ -47,8 +47,8 @@ export const snake = {
         // Collision
         if (
             head.x < 0 ||
-            head.y > 0 ||
-            head.y >= cols ||
+            head.y < 0 ||
+            head.x >= cols ||
             head.y >= rows ||
             snakeBody.some(seg => seg.x === head.x && seg.y === head.y)
         ) {
@@ -68,7 +68,7 @@ export const snake = {
     render(ctx) {
 
         // Clear
-        clearfillStyle = "black";
+        ctx.fillStyle = "black";
         ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
         // Snake

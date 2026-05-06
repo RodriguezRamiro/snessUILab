@@ -12,7 +12,7 @@ import { snake } from "./games/snake.js";
 import { flightSim } from "./games/flightSim.js";
 import { pong } from "./games/pong.js";
 import { survivalArena } from "./games/survivalArena.js";
-import { canvas } from "./engine.js";
+import { canvas, ctx} from "./engine.js";
 import { emit } from "./eventBus.js";
 
 export const cartridges = [
@@ -54,7 +54,7 @@ export function loadGame(index) {
     currentGame = cartridges[index];
 
     if (currentGame.init) {
-        currentGame.init(canvas);
+        currentGame.init({ canvas, ctx });
     }
 
     emit("gameLoaded", index);
