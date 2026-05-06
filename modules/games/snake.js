@@ -24,7 +24,7 @@ export const snake = {
         console.log("Snake staring...");
 
         isGameOver = false;
-        
+
         cols = Math.floor(canvas.width / tileSize);
         rows = Math.floor(canvas.height / tileSize);
 
@@ -105,6 +105,7 @@ export const snake = {
         tileSize,
         tileSize
     );
+    console.log("FOOD:", food);
     },
 
     destroy() {
@@ -140,8 +141,21 @@ function handleInput() {
 // Helper
 
 function spawnFood() {
-    food = {
+    let valid = false;
+
+    while (!valid) {
+        const newFood = {
         x: Math.floor(Math.random() * cols),
         y: Math.floor(Math.random() * rows)
     };
+
+    const onSnake = snakeBody.some(
+        seg => seg.x === newFood.x && seg.y === newFood.y
+    );
+
+    if (!onSnake) {
+        food = newFood;
+        valid = true;
+    }
+}
 }
