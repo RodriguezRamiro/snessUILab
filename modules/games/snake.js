@@ -22,7 +22,7 @@ export const snake = {
 
     init({ canvas, ctx }) {
         console.log("Snake staring...");
-        console.log("Canvas:", canvas);
+
 
         isGameOver = false;
 
@@ -155,16 +155,16 @@ function spawnFood() {
 
     while (!valid) {
         const newFood = {
-        x: Math.floor(Math.random() * cols),
-        y: Math.floor(Math.random() * rows)
-    };
+            x: Math.floor(Math.random() * cols),
+            y: Math.floor(Math.random() * rows)
+        };
 
-    const onSnake = snakeBody.some(
-        seg => seg.x === newFood.x && seg.y === newFood.y
-    );
+        const onSnake = snakeBody.some(
+            seg => seg.x === newFood.x && seg.y === newFood.y
+            );
 
-    if (!onSnake) {
-        food = newFood;
+            if (!onSnake) {
+                food = newFood;
         valid = true;
     }
 }
