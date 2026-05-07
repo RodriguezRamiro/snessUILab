@@ -106,7 +106,6 @@ export const snake = {
         tileSize,
         tileSize
     );
-    console.log("FOOD:", food);
 
     // add border
     ctx.strokeStyle = "white";

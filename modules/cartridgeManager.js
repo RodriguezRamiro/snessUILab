@@ -23,6 +23,7 @@ export const cartridges = [
 ];
 
 let currentGame = null;
+let currentIndex = 0;
 
 export function getGameList() {
     return cartridges.map(game => game.name);
