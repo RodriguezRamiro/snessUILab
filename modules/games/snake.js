@@ -106,6 +106,15 @@ export const snake = {
         tileSize
     );
     console.log("FOOD:", food);
+
+    // add border
+    ctx.strokeStyle = "white";
+    ctx.strokeRect(
+        food.x * tileSize,
+        food.y * tileSize,
+        tileSize,
+        tileSize
+    );
     },
 
     destroy() {
