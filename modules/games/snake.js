@@ -20,8 +20,9 @@ let isGameOver = false
 export const snake = {
     name: "Snake",
 
-    init(canvas) {
+    init({ canvas, ctx }) {
         console.log("Snake staring...");
+        console.log("Canvas:", canvas);
 
         isGameOver = false;
 
