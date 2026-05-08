@@ -43,7 +43,7 @@ export const snake = {
 
     update(dt) {
 
-        if (isGameOver) return;
+        if (isGameOver)  return;
 
         handleInput();
 
@@ -79,7 +79,7 @@ export const snake = {
 
         if (head.x === food.x && head.y === food.y) {
             score++;
-            moveInterval *= 0.95;
+            moveInterval = Math.max(0.03, moveInterval *= 0.95);
             spawnFood();
         } else {
             snakeBody.pop();
@@ -125,6 +125,15 @@ export const snake = {
     ctx.fillStyle = "white";
     ctx.font = "16px monospace";
     ctx.fillText(`Score: ${score}`, 10, 20);
+    },
+
+    if (isGameOver) {
+        ctx.fillStyle = "white";
+        ctx.font = "24px monospace";
+        ctx.fillText("GAME OVER", 80, 120);
+
+        ctx.font = "16px monospace";
+        ctx.fillText(`Final Score: ${score}`, 80, 150);
     },
 
     destroy() {
