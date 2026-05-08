@@ -41,7 +41,11 @@ export const snake = {
     },
 
     update(dt) {
+        
+        if (isGameOver) return;
+
         handleInput();
+
 
         moveTimer += dt;
 
