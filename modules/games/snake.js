@@ -41,11 +41,10 @@ export const snake = {
     },
 
     update(dt) {
-        
+
         if (isGameOver) return;
 
         handleInput();
-
 
         moveTimer += dt;
 
@@ -119,6 +118,11 @@ export const snake = {
         tileSize,
         tileSize
     );
+
+    // Score Rendering
+    ctx.fillStyle = "white";
+    ctx.font = "16px monospace";
+    ctx.fillText(`Score: ${score}`, 10, 20);
     },
 
     destroy() {
