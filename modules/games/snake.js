@@ -6,6 +6,7 @@ import { emit } from "../eventBus.js";
 let snakeBody;
 let direction;
 let nextDirection;
+let canTurn = true;
 let food;
 let score = 0;
 
@@ -52,6 +53,7 @@ export const snake = {
         moveTimer = 0;
 
         direction = nextDirection;
+        canTurn = true
 
         const head = {
             x: snakeBody[0].x + direction.x,
@@ -133,9 +135,12 @@ export const snake = {
 // Input (uses your system)
 
 function handleInput() {
+    if (!canTurn) return;
+
     if (keys["w"] || keys["arrowup"]) {
         if (direction.y !== 1)
         nextDirection = {x: 0, y: -1 };
+        canTurn = false;
     }
 
     if (keys["s"] || keys["arrowdown"]) {
