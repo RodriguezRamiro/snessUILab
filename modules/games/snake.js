@@ -127,19 +127,33 @@ export const snake = {
     ctx.fillText(`Score: ${score}`, 10, 20);
     },
 
+    // Game Overlay
     if (isGameOver) {
+
+        ctx.fillStyle = "rgba(0,0,0,0.7)";
+        ctx.fillRect(
+            0,
+            0,
+            ctx.canvas.width,
+            ctx.canvas.height
+        );
+
         ctx.fillStyle = "white";
         ctx.font = "24px monospace";
-        ctx.fillText("GAME OVER", 80, 120);
+
+        ctx.fillText("GAME OVER", 70, 120);
 
         ctx.font = "16px monospace";
-        ctx.fillText(`Final Score: ${score}`, 80, 150);
+        ctx.fillText(`Final Score: ${score}`, 70, 150);
     },
 
+
     destroy() {
-        console.log("Snake shutting down...");
+    console.log("Snake shutting down...");
+
     }
 };
+
 
 // Input (uses your system)
 
