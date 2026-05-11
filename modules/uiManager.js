@@ -12,9 +12,7 @@ import { on } from "./eventBus.js";
  */
 
 
-on("gameOver", (winner) => {
-  triggerGameOver(winner);
-});
+
 
 export const STATES = {
     BOOT: "boot",
