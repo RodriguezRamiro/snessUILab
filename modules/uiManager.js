@@ -245,10 +245,14 @@ export const STATES = {
 
     currentState = STATES.GAME_OVER;
 
+
+    bootText.className = "";
     bootText.style.display = "block";
 
     bootText.innerHTML = `
-      <div>***${winner} GAME OVER ***</div>
+      <div>*** GAME OVER ***</div>
+      <br>
+      <div>Score: ${winner?.score ?? 0}</div>
       <br>
       <div>PRESS ENTER</div>
     `;

@@ -16,14 +16,13 @@ let cols, rows;
 let moveTimer = 0;
 let moveInterval = 0.1; // controls speed
 
-let isGameOver = false
+let isGameOver = false;
 
 export const snake = {
     name: "Snake",
 
-    init({ canvas, ctx }) {
+    init({ canvas }) {
         console.log("Snake staring...");
-
 
         isGameOver = false;
 
@@ -34,6 +33,8 @@ export const snake = {
         direction = { x: 1, y: 0 };
         nextDirection = { x: 1, y: 0 };
 
+        canTurn = true;
+
         score = 0;
         moveInterval = 0.1;
         moveTimer = 0;
@@ -43,6 +44,7 @@ export const snake = {
 
     update(dt) {
 
+        //Freeze Game after collsion
         if (isGameOver)  return;
 
         handleInput();
@@ -61,24 +63,28 @@ export const snake = {
         };
 
         // Collision
-        if (
+        const collided = (
             head.x < 0 ||
             head.y < 0 ||
             head.x >= cols ||
             head.y >= rows ||
             snakeBody.some(seg => seg.x === head.x && seg.y === head.y)
-        ) {
-            if (!isGameOver) {
+        )
+            if (collided) {
                 isGameOver = true;
                 emit("gameOver", { score });
-            }
+
             return;
         }
 
+        // Move Snake
         snakeBody.unshift(head);
 
+        // Food Collision
         if (head.x === food.x && head.y === food.y) {
             score++;
+
+            // Speed Increase
             moveInterval = Math.max(0.03, moveInterval *= 0.95);
             spawnFood();
         } else {
@@ -112,7 +118,7 @@ export const snake = {
         tileSize
     );
 
-    // add border
+    // Food Border
     ctx.strokeStyle = "white";
     ctx.strokeRect(
         food.x * tileSize,
@@ -125,26 +131,6 @@ export const snake = {
     ctx.fillStyle = "white";
     ctx.font = "16px monospace";
     ctx.fillText(`Score: ${score}`, 10, 20);
-    },
-
-    // Game Overlay
-    if (isGameOver) {
-
-        ctx.fillStyle = "rgba(0,0,0,0.7)";
-        ctx.fillRect(
-            0,
-            0,
-            ctx.canvas.width,
-            ctx.canvas.height
-        );
-
-        ctx.fillStyle = "white";
-        ctx.font = "24px monospace";
-
-        ctx.fillText("GAME OVER", 70, 120);
-
-        ctx.font = "16px monospace";
-        ctx.fillText(`Final Score: ${score}`, 70, 150);
     },
 
 
@@ -172,14 +158,20 @@ function handleInput() {
     }
 
     if(keys["a"] || keys["arrowleft"]) {
-        if(direction.x !== 1)
+        if(direction.x !== 1) {
         nextDirection = { x: -1, y: 0};
+
+        canTurn = false;
     }
+}
 
     if (keys["d"] || keys["arrowright"]) {
 
-        if(direction.x !== -1)
+        if(direction.x !== -1) {
         nextDirection = { x: 1, y: 0};
+
+        canTurn = false;
+        }
     }
 }
 
