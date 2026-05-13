@@ -123,13 +123,21 @@ export const STATES = {
 
 }
 
+function setState(newState) {
+  currentState = newState;
+  console.log(
+    "UI STATE:",
+    currentState
+  );
+}
+
   function startMenu() {
 
     selectedGame = 0;
 
     lineIndex = 0;
 
-    currentState = STATES.MENU;
+    setState(STATES.MENU);
 
 
     renderMenu();
@@ -183,7 +191,7 @@ export const STATES = {
 
   function launchGame() {
 
-    currentState = STATES.LOADING;
+    setState(STATES.LOADING);
 
     display.classList.remove("active");
 
@@ -225,7 +233,7 @@ export const STATES = {
 
         setTimeout(() => {
 
-          currentState = STATES.GAME;
+          setState(STATES.GAME);
 
           bootText.className = "none";
 
@@ -245,7 +253,7 @@ export const STATES = {
 
   export function triggerGameOver(winner) {
 
-    currentState = STATES.GAME_OVER;
+    setState(STATES.GAME_OVER);
 
 
     bootText.className = "";
