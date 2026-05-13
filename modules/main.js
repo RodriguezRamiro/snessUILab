@@ -11,7 +11,11 @@ import { startLoop, ctx } from "./engine.js";
 import { initInput, } from "./input.js";
 import { initSystem } from "./systemManager.js";
 
-import { initUI, triggerGameOver, handleSystemInput } from "./uiManager.js";
+import { initUI,
+        triggerGameOver,
+        handleSystemInput,
+        getState,
+        STATES } from "./uiManager.js";
 
 import { on } from "./eventBus.js";
 import {
@@ -34,6 +38,12 @@ function update(dt){
 }
 
 function render() {
+
+    // Dont render game while in active state
+    if (getState() !== STATES>GAME) {
+        return;
+    }
+    
     ctx.fillStyle = "#000";
     ctx.fillRect(0,0,320,180);
 
