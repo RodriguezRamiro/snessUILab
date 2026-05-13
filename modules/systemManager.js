@@ -34,19 +34,6 @@ export function initSystem() {
     on("gameOver", () => {
 
         console.log("SYSTEM: Game Over received");
-
-        setTimeout(() => {
-
-            if (
-                getState() === STATES.GAME
-            ){ console.log(
-                "SYSTEM: restarting game"
-                );
-
-            resetGameState();
-            loadGame(currentIndex);
-            }
-        }, 2000);
     });
 
     // Pause Status
