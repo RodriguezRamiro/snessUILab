@@ -69,7 +69,7 @@ export const snake = {
             head.x >= cols ||
             head.y >= rows ||
             snakeBody.some(seg => seg.x === head.x && seg.y === head.y)
-        )
+        );
             if (collided) {
                 isGameOver = true;
                 emit("gameOver", { score });
