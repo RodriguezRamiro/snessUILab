@@ -65,6 +65,10 @@ export const STATES = {
       setTimeout(typeLine, 600);
     });
 
+    on("gameOver", data => {
+      triggerGameOver(data);
+    });
+
   }
 
   export function getState() {
