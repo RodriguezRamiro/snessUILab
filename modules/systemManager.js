@@ -2,8 +2,7 @@
 
 import { on } from "./eventBus.js";
 import { resetGameState } from "./gameState.js";
-import { loadGame } from "./cartridgeManager.js";
-import { getState, STATES } from "./uiManager.js";
+import { triggerGameOver } from "./uiManager.js";
 
 /**
  * Listen to system events
@@ -13,15 +12,10 @@ import { getState, STATES } from "./uiManager.js";
  * Manage cartridges
  */
 
-let currentIndex = 0;
-
 export function initSystem() {
 
-    // Track active cartridge
-
+    // Cartridge tracking
     on("gameLoaded", index => {
-
-        currentIndex = index;
 
         console.log(
             "SYESTEM: Active cartridge",
@@ -29,15 +23,7 @@ export function initSystem() {
         );
     });
 
-    // Game Over
-
-    on("gameOver", () => {
-
-        console.log("SYSTEM: Game Over received");
-    });
-
-    // Pause Status
-
+    // Pause Tracking
     on("pausedChanged", paused => {
 
         console.log(
@@ -47,12 +33,19 @@ export function initSystem() {
         );
     });
 
-    // System Reset
-
+    // System Reset runtime only
     on("systemReset", () => {
         console.log("SYSTEM: Reset");
 
         resetGameState();
-        loadGame(currentIndex);
+    });
+
+    // Game over logging only
+    on("gameOver", data => {
+
+        console.log(
+            "SYSTEM: Game Over",
+            data
+        );
     });
 }
