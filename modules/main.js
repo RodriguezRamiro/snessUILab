@@ -40,10 +40,10 @@ function update(dt){
 function render() {
 
     // Dont render game while in active state
-    if (getState() !== STATES>GAME) {
+    if (getState() !== STATES.GAME) {
         return;
     }
-    
+
     ctx.fillStyle = "#000";
     ctx.fillRect(0,0,320,180);
 
