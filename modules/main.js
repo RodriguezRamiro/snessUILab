@@ -86,8 +86,6 @@ on(
 );
 
 
-// Load first game
-loadGame(0);
 
 // Start Engine
 startLoop(
