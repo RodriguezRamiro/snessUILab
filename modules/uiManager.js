@@ -235,7 +235,7 @@ function setState(newState) {
 
           setState(STATES.GAME);
 
-          bootText.className = "none";
+          bootText.classList.add("none");
 
           display.classList.add("active");
 
@@ -256,7 +256,8 @@ function setState(newState) {
     setState(STATES.GAME_OVER);
 
 
-    bootText.className = "";
+    bootText.classList.remove("none");
+
     bootText.style.display = "block";
 
     bootText.innerHTML = `
