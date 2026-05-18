@@ -193,7 +193,7 @@ function setState(newState) {
 
     setState(STATES.LOADING);
 
-    display.classList.remove("active");
+    display.classList.remove("game-active");
 
     bootText.innerHTML =
       "INSERTING CARTRIDGE...";
@@ -235,9 +235,9 @@ function setState(newState) {
 
           setState(STATES.GAME);
 
-          bootText.classList.add("none");
+          bootText.classList.add("hidden");
 
-          display.classList.add("active");
+          display.classList.add("game-active");
 
           if (onGameStart) {
             onGameStart(selectedGame);
@@ -256,7 +256,7 @@ function setState(newState) {
     setState(STATES.GAME_OVER);
 
 
-    bootText.classList.remove("none");
+    bootText.classList.remove("hidden");
 
     bootText.style.display = "block";
 
