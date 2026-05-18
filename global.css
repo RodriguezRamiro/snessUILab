@@ -92,7 +92,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 70px 0;
+  padding-top: 70px 0 70px;
   padding-bottom: 70px;
   }
 
