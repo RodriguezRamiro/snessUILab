@@ -124,9 +124,13 @@
   }
 
   /* dedicated display state class */
-  
+
   .game-active .boot-text {
     display: none;
+  }
+
+  .hidden {
+    display: none !important;
   }
 
   .display {
