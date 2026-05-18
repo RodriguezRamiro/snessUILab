@@ -155,6 +155,7 @@ function handleInput() {
     if (keys["s"] || keys["arrowdown"]) {
         if (direction.y !== -1)
         nextDirection = { x: 0, y: 1 };
+        canTurn = false;
     }
 
     if(keys["a"] || keys["arrowleft"]) {
