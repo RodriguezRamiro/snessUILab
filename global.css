@@ -123,6 +123,12 @@
     will-change: transform, opacity;
   }
 
+  /* dedicated display state class */
+  
+  .game-active .boot-text {
+    display: none;
+  }
+
   .display {
     position: relative;
     width: 280px;
