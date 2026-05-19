@@ -52,9 +52,12 @@ export const snake = {
         moveTimer += dt;
 
         if (moveTimer < moveInterval) return;
+
+        // Preserve leftover timing percision
         moveTimer -= moveInterval;
 
         direction = nextDirection;
+
         canTurn = true
 
         const head = {
@@ -62,7 +65,7 @@ export const snake = {
             y: snakeBody[0].y + direction.y
         };
 
-        // Collision
+        // Collision detection
         const collided = (
             head.x < 0 ||
             head.y < 0 ||
@@ -138,17 +141,20 @@ export const snake = {
 };
 
 
-// Input (uses your system)
+// Input (uses defined system)
 
 function handleInput() {
     if (!canTurn) return;
 
+    // Up
     if (keys["w"] || keys["arrowup"]) {
-        if (direction.y !== 1)
+        if (direction.y !== 1) {
         nextDirection = {x: 0, y: -1 };
         canTurn = false;
     }
+}
 
+    // Down
     if (keys["s"] || keys["arrowdown"]) {
         if (direction.y !== -1)
         nextDirection = { x: 0, y: 1 };
