@@ -22,7 +22,7 @@ export const snake = {
     name: "Snake",
 
     init({ canvas }) {
-        console.log("Snake staring...");
+        console.log("Snake starting...");
 
         isGameOver = false;
 
@@ -94,7 +94,7 @@ export const snake = {
 
     render(ctx) {
 
-        
+
         // Snake
         ctx.fillStyle = "lime";
         snakeBody.forEach( seg => {
