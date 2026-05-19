@@ -94,10 +94,7 @@ export const snake = {
 
     render(ctx) {
 
-        // Clear
-        ctx.fillStyle = "black";
-        ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-
+        
         // Snake
         ctx.fillStyle = "lime";
         snakeBody.forEach( seg => {
