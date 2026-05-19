@@ -156,11 +156,13 @@ function handleInput() {
 
     // Down
     if (keys["s"] || keys["arrowdown"]) {
-        if (direction.y !== -1)
+        if (direction.y !== -1) {
         nextDirection = { x: 0, y: 1 };
         canTurn = false;
     }
+}
 
+    // Left
     if(keys["a"] || keys["arrowleft"]) {
         if(direction.x !== 1) {
         nextDirection = { x: -1, y: 0};
@@ -169,6 +171,7 @@ function handleInput() {
     }
 }
 
+    // Right
     if (keys["d"] || keys["arrowright"]) {
 
         if(direction.x !== -1) {
