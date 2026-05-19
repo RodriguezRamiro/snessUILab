@@ -52,7 +52,7 @@ export const snake = {
         moveTimer += dt;
 
         if (moveTimer < moveInterval) return;
-        moveTimer = 0;
+        moveTimer -= moveInterval;
 
         direction = nextDirection;
         canTurn = true
