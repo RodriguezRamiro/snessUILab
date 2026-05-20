@@ -11,7 +11,7 @@
 import { snake } from "./games/snake.js";
 import { flightSim } from "./games/flightSim.js";
 import { pong } from "./games/pong.js";
-import { survivalArena } from "./games/survivalArena.js";
+import { tetris } from "./games/tetris.js";
 import { canvas, ctx} from "./engine.js";
 import { emit } from "./eventBus.js";
 
@@ -19,7 +19,7 @@ export const cartridges = [
     snake,
     flightSim,
     pong,
-    survivalArena
+    tetris
 ];
 
 let currentGame = null;

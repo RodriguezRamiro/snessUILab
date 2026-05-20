@@ -1,10 +1,10 @@
 /* //snesUILab/modules/games/survivalArena.js */
 
-export const survivalArena = {
-    name: "Survival Arena",
+export const tetris = {
+    name: "Tetris"
 
     init() {
-        console.log(" Survival Arena starting...");
+        console.log(" Tetris starting...");
     },
 
     update(dt) {
