@@ -21,7 +21,7 @@ export const tetris = {
         // Create Empty Board
         board = [];
 
-        for (let y = 0; y < ROWS; y++)
+        for (let y = 0; y < ROWS; y++) {
 
         board[y] = [];
 
@@ -32,23 +32,15 @@ export const tetris = {
     }
 
     spawnBlock();
-
-    flassTimer = 0;
-
-        block = {
-            x: 15,
-            y: 0
-        };
-
-        fallTimer = 0;
-    },
+},
 
     update(dt) {
 
         fallTimer += dt;
 
         if (fallTimer >= fallInterval) {
-            block.y++;
+
+            moveBlockDown();
 
             fallTimer = 0;
         }
