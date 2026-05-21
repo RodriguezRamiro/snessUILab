@@ -32,6 +32,8 @@ export const tetris = {
     }
 
     spawnBlock();
+
+    fallTimer = 0;
 },
 
     update(dt) {
@@ -58,14 +60,24 @@ export const tetris = {
             ctx.canvas.height
         );
 
-        // Draw Falling block
-        ctx.fillStyle = "cyan";
+        // Draw Board
+        for (let y = 0; y < ROWS; y++) {
 
-        ctx.fillRect(
-            block.x* tileSize,
-            block.y * tileSize,
-            tileSize,
-            tileSize
+            for (let x = 0; x < COLS; x++) {
+
+                if (board[y][x]) {
+
+                    ctx.fillStyle = "cyan",
+
+                    ctx.fillRect(
+                        x * TILE_SIZE,
+                        y * TILE_SIZE,
+                        TILE_SIZE,
+                        TILE_SIZE
+                }
+            }
+        }
+
         );
     },
 
