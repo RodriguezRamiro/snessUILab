@@ -1,8 +1,14 @@
 /* //snesUILab/modules/games/survivalArena.js */
 
-let block ;
+const COLS = 10
+const ROWS = 18
+const TILE_SIZE = 10;
 
-let tileSize = 10;
+let board = [];
+
+
+let currentBlock = null;
+
 let fallTimer = 0;
 let fallInterval = 0.5;
 
@@ -36,7 +42,7 @@ export const tetris = {
         // Clear Screen
         ctx.fillStyle = "black";
 
-        ctxRect(
+        ctx.fillRect(
             0,
             0,
             ctx.canvas.width,
