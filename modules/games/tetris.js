@@ -18,6 +18,23 @@ export const tetris = {
     init() {
         console.log("Tetris starting...");
 
+        // Create Empty Board
+        board = [];
+
+        for (let y = 0; y < ROWS; y++)
+
+        board[y] = [];
+
+        for (let x = 0; x < COLS; x++) {
+
+            board[y][x] = 0
+        }
+    }
+
+    spawnBlock();
+
+    flassTimer = 0;
+
         block = {
             x: 15,
             y: 0
