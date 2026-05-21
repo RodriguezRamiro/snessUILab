@@ -74,16 +74,39 @@ export const tetris = {
                         y * TILE_SIZE,
                         TILE_SIZE,
                         TILE_SIZE
-                }
+                    );
             }
-        }
 
+        // Grid Lines
+        ctx.strokeStyle = "#111";
+
+        ctx.strokeRect(
+            x * TILE_SIZE,
+            y * TILE_SIZE,
+            TILE_SIZE,
+            TILE_SIZE
         );
+    }
+},
+    // Draw Active Block
+    if (currentBlock) {
+
+        ctx.fillStyle = "cyan";
+
+        ctx.fillRect(
+            currentBlock.x * TILE_SIZE,
+            currentBlock.y * TILE_SIZE,
+            TILE_SIZE,
+            TILE_SIZE
+        );
+
     },
+}
 
     destroy() {
 
         console.log("Tetris shutting down...");
     }
-
 };
+
+/* Block System */
