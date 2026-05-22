@@ -120,3 +120,15 @@ function spawnblock() {
         y: 0
     };
 }
+
+function moveBlockDown() {
+
+    // Colission with floor
+
+    if (currentBlock.y >= ROWS - 1) {
+
+        lockBlock();
+
+        return;
+    }
+}
