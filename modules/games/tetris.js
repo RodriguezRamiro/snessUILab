@@ -110,3 +110,13 @@ export const tetris = {
 };
 
 /* Block System */
+
+function spawnblock() {
+
+    currentBlock = {
+
+        x: Math.floor(COLS / 2),
+
+        y: 0
+    };
+}
