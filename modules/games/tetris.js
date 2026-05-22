@@ -111,7 +111,7 @@ export const tetris = {
 
 /* Block System */
 
-function spawnblock() {
+function spawnBlock() {
 
     currentBlock = {
 
@@ -143,4 +143,10 @@ function moveBlockDown() {
     }
 
     currentBlock.y++;
+}
+
+function lockBlock() {
+    board[currentBlock.y][currentBlock.x] = 1;
+
+    spawnBlock();
 }
