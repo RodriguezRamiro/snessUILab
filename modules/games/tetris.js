@@ -87,7 +87,7 @@ export const tetris = {
             TILE_SIZE
         );
     }
-},
+}
     // Draw Active Block
     if (currentBlock) {
 
@@ -100,8 +100,8 @@ export const tetris = {
             TILE_SIZE
         );
 
-    },
-}
+    }
+},
 
     destroy() {
 
