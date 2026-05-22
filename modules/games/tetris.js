@@ -131,4 +131,16 @@ function moveBlockDown() {
 
         return;
     }
+
+    // Collision with settled blocks
+
+    if (
+        board[currentBlock.y + 1][currentBlock.x]
+    ){
+        lockBlock();
+
+        return;
+    }
+
+    currentBlock.y++;
 }
